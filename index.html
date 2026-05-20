@@ -17,16 +17,17 @@
     --ink:#0B121C;
     --ink-soft:#2A3242;
     --muted:#6E6A60;
-    --line:#DDD4BF;
-    --accent:#B5894A;
-    --accent-dark:#8E6932;
+    --line:#D6CCB4;
+    --line-soft:#E4DBC4;
+    --accent:#8E6932;
+    --accent-dark:#6E5125;
     --sage:#3A554B;
-    --gold:#B5894A;
+    --gold:#8E6932;
     --white:#FFFFFF;
-    --radius:8px;
-    --radius-lg:14px;
-    --shadow-sm:0 1px 2px rgba(11,18,28,.03), 0 2px 8px rgba(11,18,28,.04);
-    --shadow-md:0 6px 24px rgba(11,18,28,.06);
+    --radius:3px;
+    --radius-lg:4px;
+    --shadow-sm:0 1px 2px rgba(11,18,28,.04);
+    --shadow-md:0 8px 32px rgba(11,18,28,.08);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -69,38 +70,30 @@
   .nav-links a:hover{color:var(--ink)}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
-    padding:11px 20px;border-radius:999px;
-    font-family:'Inter',sans-serif;font-size:14.5px;font-weight:600;
-    cursor:pointer;border:none;transition:transform .12s ease, background .15s, box-shadow .15s;
-    line-height:1;letter-spacing:-0.005em;
+    padding:12px 22px;border-radius:2px;
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;
+    cursor:pointer;border:none;transition:background .18s ease, color .18s ease, border-color .18s ease;
+    line-height:1;letter-spacing:.2px;text-transform:uppercase;
   }
   .btn-primary{background:var(--ink);color:var(--bg);}
-  .btn-primary:hover{background:#1c2a44;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
-  .btn-accent{background:var(--accent);color:#fff;}
-  .btn-accent:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(181,137,74,.22)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-  .btn-ghost:hover{background:var(--white)}
-  .btn-lg{padding:15px 28px;font-size:15.5px}
+  .btn-primary:hover{background:#1f2738;color:var(--bg)}
+  .btn-accent{background:var(--ink);color:var(--bg);}
+  .btn-accent:hover{background:#1f2738}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn-lg{padding:15px 28px;font-size:13.5px}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink)}
 
   /* ===== HERO ===== */
-  .hero{padding:120px 0 140px;position:relative;overflow:hidden}
-  .hero::before{
-    content:"";position:absolute;
-    top:-260px;right:-260px;
-    width:620px;height:620px;border-radius:50%;
-    background:radial-gradient(circle,rgba(181,137,74,.10) 0%,transparent 70%);
-    pointer-events:none;
-  }
+  .hero{padding:140px 0 160px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
   .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center}
   .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--white);border:1px solid var(--line);
-    padding:7px 14px;border-radius:999px;
-    font-size:13px;color:var(--ink-soft);font-weight:500;
-    margin-bottom:24px;box-shadow:var(--shadow-sm);
+    display:inline-flex;align-items:center;gap:10px;
+    padding:0;margin-bottom:32px;
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
   }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(233,107,71,.18)}
+  .eyebrow .dot{width:24px;height:1px;border-radius:0;background:var(--accent);box-shadow:none}
   .hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
   .hero-sub{font-size:19px;line-height:1.55;margin:24px 0 36px;max-width:520px;color:var(--ink-soft)}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
@@ -110,17 +103,17 @@
 
   .hero-card{
     background:var(--white);
-    border-radius:var(--radius-lg);
-    padding:32px;
-    box-shadow:var(--shadow-md);
+    border-radius:0;
+    padding:40px 36px;
+    box-shadow:none;
     border:1px solid var(--line);
+    border-top:3px solid var(--ink);
     position:relative;
   }
   .hero-card-tag{
-    position:absolute;top:-12px;left:32px;
-    background:var(--ink);color:var(--bg);
-    padding:6px 14px;border-radius:999px;
-    font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+    display:block;
+    font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:14px;
   }
   .hero-card h3{font-size:24px;margin-bottom:6px}
   .hero-card .price{display:flex;align-items:baseline;gap:6px;margin:18px 0 24px}
@@ -149,25 +142,29 @@
   section{padding:130px 0}
   .section-head{max-width:680px;margin-bottom:56px}
   .section-tag{
-    display:inline-block;font-size:11.5px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--accent);font-weight:600;margin-bottom:18px;
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:22px;
+  }
+  .section-tag::before{
+    content:"";width:24px;height:1px;background:var(--accent);
   }
   .section-head p{font-size:18px;margin-top:18px;line-height:1.6}
 
   /* ===== AREAS GRID ===== */
   .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   .area{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:28px;
-    transition:transform .2s ease, box-shadow .2s ease, border-color .2s;
+    background:transparent;
+    border:none;border-top:1px solid var(--line);
+    border-radius:0;
+    padding:32px 0 28px;
+    transition:none;
   }
-  .area:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d6cdb9}
+  .area:hover{transform:none;box-shadow:none;border-color:var(--ink)}
   .area-icon{
-    width:44px;height:44px;border-radius:10px;
-    background:var(--bg-warm);
-    display:grid;place-items:center;
+    width:auto;height:24px;border-radius:0;
+    background:transparent;
+    display:flex;align-items:center;
     margin-bottom:18px;color:var(--accent);
   }
   .area h3{font-size:19px;margin-bottom:8px}
@@ -498,21 +495,17 @@
 
   /* ===== CHATBOT ===== */
   .chat-fab{
-    position:fixed;bottom:24px;right:24px;z-index:60;
-    background:var(--accent);color:#fff;
-    border:none;border-radius:999px;padding:14px 22px;
-    display:flex;align-items:center;gap:10px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;
-    box-shadow:0 8px 24px rgba(233,107,71,.35);
-    cursor:pointer;transition:transform .15s, box-shadow .15s;
+    position:fixed;bottom:20px;right:20px;z-index:60;
+    background:var(--ink);color:var(--bg);
+    border:none;border-radius:2px;padding:10px 16px;
+    display:flex;align-items:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:500;font-size:11.5px;
+    letter-spacing:1.5px;text-transform:uppercase;
+    box-shadow:0 4px 16px rgba(11,18,28,.12);
+    cursor:pointer;transition:background .18s ease;
   }
-  .chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(233,107,71,.45)}
-  .chat-fab .pulse{width:8px;height:8px;border-radius:50%;background:#fff;position:relative}
-  .chat-fab .pulse::after{
-    content:"";position:absolute;inset:-2px;border-radius:50%;
-    background:#fff;opacity:.5;animation:chatPulse 1.8s ease-out infinite;
-  }
-  @keyframes chatPulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.4);opacity:0}}
+  .chat-fab:hover{background:#1f2738}
+  .chat-fab .pulse{display:none}
   .chat-fab.hidden{display:none}
   .chat-panel{
     position:fixed;bottom:24px;right:24px;z-index:61;
@@ -878,8 +871,8 @@
         </ul>
         <a href="#book" class="btn btn-ghost btn-lg" style="border:1px solid var(--ink)">Discuss hourly</a>
       </div>
-      <div class="hero-card" style="border:2px solid var(--accent);position:relative">
-        <span class="hero-card-tag" style="background:var(--accent)">Most-requested</span>
+      <div class="hero-card" style="border-top:3px solid var(--accent);position:relative">
+        <span class="hero-card-tag">Most-requested</span>
         <h3>Per-matter quote</h3>
         <p style="font-size:14px;margin-top:6px">Fixed fee against a defined scope. Ideal for DD, bundles, and drafting projects.</p>
         <div class="price"><strong>Fixed fee</strong><span>scoped per brief</span></div>
