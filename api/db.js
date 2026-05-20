@@ -7,10 +7,14 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dataDir = resolve(__dirname, '..', 'data');
-mkdirSync(dataDir, { recursive: true });
+const defaultDir = resolve(__dirname, '..', 'data');
+const dbPath = process.env.DB_PATH || resolve(defaultDir, 'leads.db');
 
-const dbPath = process.env.DB_PATH || resolve(dataDir, 'leads.db');
+// Make sure the directory the SQLite file lives in actually exists.
+// On Railway/Fly with DB_PATH=/data/leads.db, this creates /data on first boot
+// if the volume mount doesn't already provide it.
+mkdirSync(dirname(dbPath), { recursive: true });
+
 export const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
