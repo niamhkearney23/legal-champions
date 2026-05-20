@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legal Champions — Paralegal capacity for Malaysian law firms</title>
+<title>Legal Champions · Est. 2026 — Paralegal capacity for Malaysian law firms</title>
 <meta name="description" content="Senior-supervised paralegal support for Malaysian law firms. Litigation, corporate, real estate, commercial — engaged by the hour, the matter, or on retainer.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +57,8 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--ink)}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:500;font-size:19px;color:var(--ink);letter-spacing:-0.005em}
+  .logo-est{font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-left:2px}
   .logo-mark{
     width:32px;height:32px;border-radius:8px;
     background:var(--ink);
@@ -150,6 +151,53 @@
     content:"";width:24px;height:1px;background:var(--accent);
   }
   .section-head p{font-size:18px;margin-top:18px;line-height:1.6}
+
+  /* ===== NUMBERED SERVICES (01 / 02 / 03) ===== */
+  .services-numbered{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:64px}
+  .service-card{
+    background:var(--white);border:1px solid var(--line);padding:40px 32px 32px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:border-color .18s ease, background .18s ease;
+  }
+  .service-card:hover{border-color:var(--ink);background:var(--white)}
+  .service-card .service-num{
+    font-family:'Fraunces',serif;font-weight:500;font-size:34px;
+    color:var(--accent);line-height:1;letter-spacing:-0.02em;
+    margin-bottom:8px;
+  }
+  .service-card h3{
+    font-family:'Fraunces',serif;font-weight:500;font-size:22px;
+    line-height:1.2;letter-spacing:-0.012em;color:var(--ink);
+  }
+  .service-card p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);flex:1;margin:0}
+  .service-link{
+    display:inline-block;margin-top:8px;
+    font-size:11.5px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--ink);font-weight:600;
+    border-bottom:1px solid var(--ink);padding-bottom:4px;align-self:flex-start;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .service-link:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+  .services-soon{
+    border-top:1px solid var(--line);padding-top:32px;
+  }
+  .services-soon-label{
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .services-soon-label::before{content:"";width:24px;height:1px;background:var(--accent)}
+  .services-soon-list{
+    list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 32px;
+    font-size:14px;line-height:1.55;color:var(--ink-soft);
+  }
+  .services-soon-list li{
+    padding-left:18px;position:relative;
+  }
+  .services-soon-list li::before{
+    content:"·";position:absolute;left:4px;top:0;color:var(--accent);font-weight:700;
+  }
 
   /* ===== AREAS GRID ===== */
   .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -353,6 +401,24 @@
     text-align:center;margin-top:36px;
     font-size:13px;color:rgba(244,239,227,.55);font-style:italic;letter-spacing:.1px;
   }
+
+  /* ===== TRAINING GRID (lives inside .principals dark section) ===== */
+  .training-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+    border-top:1px solid rgba(244,239,227,.15);padding-top:48px;
+  }
+  .training-item{display:flex;flex-direction:column}
+  .training-item .training-num{
+    font-family:'Fraunces',serif;font-size:13px;letter-spacing:2px;
+    color:var(--accent);font-weight:500;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .training-item .training-num::after{content:"";flex:1;height:1px;background:rgba(244,239,227,.15)}
+  .training-item h3{
+    font-family:'Fraunces',serif;font-size:20px;font-weight:500;line-height:1.2;letter-spacing:-0.012em;
+    color:var(--bg);margin-bottom:10px;
+  }
+  .training-item p{font-size:13.5px;line-height:1.6;color:rgba(244,239,227,.7);margin:0}
 
   /* ===== PRE-LAUNCH ===== */
   .prelaunch{
@@ -605,6 +671,8 @@
     .hero{padding:48px 0 64px}
     .hero-grid,.who-grid,.book-grid{grid-template-columns:1fr;gap:48px}
     .areas-grid,.paralegal-grid,.principal-grid{grid-template-columns:repeat(2,1fr)}
+    .training-grid,.services-numbered{grid-template-columns:repeat(2,1fr);gap:28px}
+    .services-soon-list{grid-template-columns:1fr}
     .principals{padding:80px 0}
     .prelaunch{grid-template-columns:1fr;padding:32px 24px;gap:32px}
     .steps{grid-template-columns:1fr;gap:36px}
@@ -629,7 +697,7 @@
     .chat-fab{bottom:16px;right:16px;padding:12px 18px;font-size:13.5px}
   }
   @media (max-width:560px){
-    .areas-grid,.paralegal-grid,.principal-grid{grid-template-columns:1fr}
+    .areas-grid,.paralegal-grid,.principal-grid,.training-grid,.services-numbered{grid-template-columns:1fr}
     .form-row{grid-template-columns:1fr;gap:0;margin-bottom:0}
     .form-card{padding:28px 22px}
     .trust-stats{gap:28px}
@@ -646,15 +714,13 @@
   <div class="container nav-inner">
     <a href="#" class="logo">
       <span class="logo-mark"></span>
-      Legal Champions
+      <span class="logo-text">Legal Champions <span class="logo-est">· Est. 2026</span></span>
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#areas">Practice support</a>
-      <a href="#principals">Principals</a>
-      <a href="#pricing">Engagement</a>
-      <a href="#paralegals">Paralegals</a>
+      <a href="#areas">Service</a>
+      <a href="#principals">Team</a>
       <a href="#faq">FAQ</a>
-      <a href="#book" class="btn btn-primary">Brief a paralegal</a>
+      <a href="#book" class="btn btn-primary">Book now</a>
     </nav>
     <button class="menu-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -666,12 +732,12 @@
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="eyebrow"><span class="dot"></span> Waiting list open · Engagements from Q1 2027</span>
+      <span class="eyebrow"><span class="dot"></span> Coming soon · January 2027</span>
       <h1>Paralegal capacity, on your firm's terms.</h1>
-      <p class="hero-sub">Vetted, senior-supervised paralegal support for Malaysian law firms — engaged by the hour, by the matter, or as a dedicated resource embedded with your team.</p>
+      <p class="hero-sub">Trained, senior-supervised paralegal support for Malaysian law firms — engaged by the hour, by the matter, or as a dedicated resource embedded with your team.</p>
       <div class="hero-cta">
-        <a href="#book" class="btn btn-accent btn-lg">Brief a paralegal</a>
-        <a href="#paralegals" class="btn btn-ghost btn-lg">View our paralegals</a>
+        <a href="#book" class="btn btn-accent btn-lg">Book now →</a>
+        <a href="#principals" class="btn btn-ghost btn-lg">Meet the team</a>
       </div>
       <div class="hero-meta">
         <span>
@@ -703,7 +769,7 @@
         <li><span class="check"></span> Final review by senior counsel before delivery</li>
         <li><span class="check"></span> Itemised monthly statement</li>
       </ul>
-      <a href="#paralegals" class="btn btn-accent btn-lg">Join the waiting list</a>
+      <a href="#book" class="btn btn-accent btn-lg">Book now →</a>
       <p class="small-print">Larger or ongoing engagement? <a href="#pricing" style="color:var(--accent);text-decoration:underline">See retainer options</a></p>
     </aside>
   </div>
@@ -713,43 +779,41 @@
 <section id="areas">
   <div class="container">
     <div class="section-head">
-      <span class="section-tag">Practice support</span>
-      <h2>The work your associates shouldn't be doing.</h2>
-      <p>We handle the leverage-heavy paralegal work — research, drafting, due diligence, bundles — so your fee-earners can focus on counsel, client and court.</p>
+      <span class="section-tag">Service</span>
+      <h2>What we do.</h2>
+      <p>Launching with litigation support — the leverage-heavy work that takes your associates off counsel, client and court.</p>
     </div>
-    <div class="areas-grid">
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <h3>Legal research &amp; memoranda</h3>
-        <p>Case law, statutory interpretation and comparative analysis, structured into memos written to your house style.</p>
-      </div>
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
-        <h3>Document review &amp; disclosure</h3>
-        <p>Data-room reviews, e-disclosure, privilege review and structured findings — discreet teams scaled to your matter.</p>
-      </div>
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3>Court bundles &amp; litigation support</h3>
-        <p>Pleadings, indexed bundles to court directions, chronologies and witness statements — to filing standards.</p>
-      </div>
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-        <h3>Due diligence</h3>
-        <p>Legal, corporate, IP and real-estate DD for M&amp;A and financing transactions — reports your partners can sign off.</p>
-      </div>
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <h3>Drafting &amp; redlines</h3>
-        <p>Contracts, agreements, SPAs, NDAs and comparative redlines, prepared in your precedent format with a final senior review.</p>
-      </div>
-      <div class="area">
-        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
-        <h3>Corporate secretarial &amp; SSM</h3>
-        <p>Resolutions, statutory registers, SSM filings, AGM &amp; EGM preparation — quietly handled to deadline.</p>
-      </div>
+
+    <div class="services-numbered">
+      <article class="service-card">
+        <div class="service-num">01</div>
+        <h3>Reconstruct the facts</h3>
+        <p>Chronologies, witness statements and disclosure mapping built from your file — accurate, source-linked, and reviewed before delivery.</p>
+        <a href="#book" class="service-link">Book now →</a>
+      </article>
+      <article class="service-card">
+        <div class="service-num">02</div>
+        <h3>Build a defensible timeline</h3>
+        <p>Research, authority and statutory analysis structured into memoranda your partners can adopt directly into their work.</p>
+        <a href="#book" class="service-link">Book now →</a>
+      </article>
+      <article class="service-card">
+        <div class="service-num">03</div>
+        <h3>Court-ready format</h3>
+        <p>Pleadings, indexed bundles, written submissions and witness statements — prepared to court directions, to filing standard.</p>
+        <a href="#book" class="service-link">Book now →</a>
+      </article>
     </div>
-    <p style="margin-top:32px;font-size:14.5px;color:var(--muted);text-align:center">Have an unusual brief? <a href="#book" style="color:var(--accent);text-decoration:underline">Submit it anyway</a> — we'll tell you within four hours if it's something we can scope.</p>
+
+    <div class="services-soon">
+      <div class="services-soon-label">Coming soon</div>
+      <ul class="services-soon-list">
+        <li>Corporate &amp; M&amp;A — due diligence, data-room review, signing packs</li>
+        <li>Real estate &amp; conveyancing — SPA drafting, completion, land-office filings</li>
+        <li>Commercial — contract drafting, redlines, NDAs &amp; SPAs</li>
+        <li>Regulatory &amp; corporate secretarial — submissions, resolutions, SSM filings</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -820,33 +884,37 @@
   </div>
 </section>
 
-<!-- ===== PRINCIPALS ===== -->
+<!-- ===== TRAINING ===== -->
 <section class="principals" id="principals">
   <div class="container">
     <div class="section-head principals-head">
-      <span class="section-tag">Under the supervision of</span>
-      <h2>Principals &amp; supervising counsel.</h2>
-      <p>Every brief is supervised end-to-end by an admitted Advocate &amp; Solicitor of the High Court of Malaya. Members of the Malaysian Bar; carrying professional indemnity cover applicable to the engagement.</p>
+      <span class="section-tag">Our people</span>
+      <h2>Not just any paralegal — we train them ourselves.</h2>
+      <p>Every paralegal on the roster is recruited, trained and reviewed in-house. The brief that lands with your firm is the work of someone who has been taught, mentored and held to a standard before they ever picked up your matter.</p>
     </div>
 
-    <div class="principal-solo">
-      <article class="principal principal-wide">
-        <div class="lc-mark">Founding principal &amp; supervising counsel</div>
-        <h3>Thomas Philip</h3>
-        <div class="credentials">Advocate &amp; Solicitor of the High Court of Malaya · Founding Partner, Messrs Thomas Philip, Advocates &amp; Solicitors · LLB (Hons)</div>
-        <div class="principal-areas">
-          <span class="principal-tag">Civil litigation</span>
-          <span class="principal-tag">Commercial dispute resolution</span>
-          <span class="principal-tag">Constitutional &amp; public-interest matters</span>
-        </div>
-        <div class="supervises">
-          <strong>Direct supervision of all paralegal work</strong>
-          Every brief is reviewed by Mr Philip or by a senior solicitor at Messrs Thomas Philip nominated by him, before it is delivered to the engaging firm. Engagement letters name the reviewing solicitor and the cover applicable to the matter.
-        </div>
+    <div class="training-grid">
+      <article class="training-item">
+        <span class="training-num">01</span>
+        <h3>Vetted on entry</h3>
+        <p>Applicants are screened on academic credentials, sample writing and reasoning under pressure. A small intake is accepted each cohort.</p>
+      </article>
+      <article class="training-item">
+        <span class="training-num">02</span>
+        <h3>Trained, not just hired</h3>
+        <p>A structured onboarding covers Malaysian court procedure, drafting conventions, conflicts handling and the standards we expect on every file.</p>
+      </article>
+      <article class="training-item">
+        <span class="training-num">03</span>
+        <h3>Mentored throughout</h3>
+        <p>Briefs are reviewed before they reach the engaging firm. Weekly clinics with senior counsel keep the work calibrated and the team learning.</p>
+      </article>
+      <article class="training-item">
+        <span class="training-num">04</span>
+        <h3>Quarterly review</h3>
+        <p>Performance is reviewed each quarter. Standards are kept by quiet conversation, not by exception.</p>
       </article>
     </div>
-
-    <p class="principal-foot">As the practice grows, additional supervising counsel will be named here.</p>
   </div>
 </section>
 
@@ -904,9 +972,9 @@
 <section class="paralegals" id="paralegals">
   <div class="container">
     <div class="section-head" style="text-align:center;margin:0 auto 40px">
-      <span class="section-tag">Pre-launch · Q1 2027</span>
+      <span class="section-tag">Pre-launch · January 2027</span>
       <h2>A founding paralegal team, being assembled.</h2>
-      <p>We are recruiting our founding paralegal cohort now and accepting engagements from Q1 2027. Waiting-list firms will be the first briefed.</p>
+      <p>We are recruiting our founding paralegal cohort now and accepting engagements from January 2027. Waiting-list firms will be the first briefed.</p>
     </div>
 
     <div class="prelaunch">
@@ -1100,8 +1168,8 @@
   <div class="container">
     <div class="cta-card">
       <h2>Be among the first firms briefed.</h2>
-      <p>We open engagements in Q1 2027. Founding waiting-list firms receive priority intake and a pricing concession on their first three briefs.</p>
-      <a href="#paralegals" class="btn btn-accent btn-lg">Join the waiting list</a>
+      <p>Opening January 2027. Founding firms receive priority intake and a pricing concession on their first three briefs.</p>
+      <a href="#book" class="btn btn-accent btn-lg">Book now →</a>
     </div>
   </div>
 </section>
@@ -1266,7 +1334,7 @@
         <div style="text-align:center;padding:32px 8px">
           <div style="width:56px;height:56px;border-radius:50%;background:var(--sage);color:#fff;display:grid;place-items:center;font-size:24px;margin:0 auto 16px">✓</div>
           <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--ink);margin-bottom:8px">You're on the list</h4>
-          <p style="color:var(--muted);font-size:14px;line-height:1.55;max-width:300px;margin:0 auto">We'll write once, when engagements open in Q1 2027.</p>
+          <p style="color:var(--muted);font-size:14px;line-height:1.55;max-width:300px;margin:0 auto">We'll write once, when engagements open in January 2027.</p>
         </div>
       `;
     } catch (err){
