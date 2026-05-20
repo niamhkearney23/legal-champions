@@ -17,7 +17,9 @@ COPY index.html demo.html firm.html dashboard.html ./
 ENV NODE_ENV=production
 ENV PORT=4040
 ENV DB_PATH=/data/leads.db
-VOLUME ["/data"]
+# Note: Railway provides persistent storage via its own Volumes feature
+# (Settings → Volumes, mount at /data). Don't add a Docker VOLUME directive
+# here — Railway rejects Dockerfiles that contain one.
 
 EXPOSE 4040
 WORKDIR /app/api
