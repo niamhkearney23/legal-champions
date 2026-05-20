@@ -315,43 +315,46 @@
     flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(250,247,242,.55);
   }
 
-  /* ===== PRINCIPALS ===== */
-  .principals{background:var(--bg-warm);padding:120px 0}
+  /* ===== PRINCIPALS (dark) ===== */
+  .principals{background:var(--ink);padding:120px 0;color:rgba(244,239,227,.85)}
+  .principals .section-tag{color:var(--accent)}
+  .principals h2{color:var(--bg)}
   .principals-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .principals-head p{color:rgba(244,239,227,.7);font-size:18px;line-height:1.6;margin-top:18px}
   .principal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .principal-solo{max-width:780px;margin:0 auto}
   .principal-wide h3{font-size:34px}
   .principal-wide{padding:40px 36px}
   .principal{
-    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:32px 28px;display:flex;flex-direction:column;
-    transition:transform .15s, box-shadow .15s, border-color .15s;
+    background:rgba(244,239,227,.04);border:1px solid rgba(244,239,227,.10);
+    border-radius:var(--radius-lg);padding:32px 28px;display:flex;flex-direction:column;
+    transition:background .15s, border-color .15s, transform .15s;
   }
-  .principal:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#cdc1a4}
+  .principal:hover{background:rgba(244,239,227,.06);border-color:rgba(181,137,74,.4);transform:translateY(-2px)}
   .principal .lc-mark{
     font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
     color:var(--accent);font-weight:600;margin-bottom:18px;
     display:flex;align-items:center;gap:10px;
   }
   .principal .lc-mark::before{content:"";width:28px;height:1px;background:var(--accent)}
-  .principal h3{font-family:'Fraunces',serif;font-size:26px;font-weight:500;line-height:1.15;letter-spacing:-0.015em;margin-bottom:10px;color:var(--ink)}
-  .principal .credentials{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:20px}
+  .principal h3{font-family:'Fraunces',serif;font-size:26px;font-weight:500;line-height:1.15;letter-spacing:-0.015em;margin-bottom:10px;color:var(--bg)}
+  .principal .credentials{font-size:13px;color:rgba(244,239,227,.65);line-height:1.6;margin-bottom:20px}
   .principal .principal-areas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
   .principal .principal-tag{
-    background:var(--bg-warm);color:var(--ink-soft);
+    background:rgba(244,239,227,.08);color:rgba(244,239,227,.85);
     font-size:11.5px;font-weight:500;padding:5px 11px;border-radius:999px;
   }
   .principal .supervises{
-    margin-top:auto;padding-top:18px;border-top:1px solid var(--line);
-    font-size:13px;color:var(--ink-soft);line-height:1.55;
+    margin-top:auto;padding-top:18px;border-top:1px solid rgba(244,239,227,.10);
+    font-size:13px;color:rgba(244,239,227,.7);line-height:1.55;
   }
   .principal .supervises strong{
     display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;
-    color:var(--muted);font-weight:700;margin-bottom:5px;
+    color:var(--accent);font-weight:700;margin-bottom:5px;
   }
   .principal-foot{
     text-align:center;margin-top:36px;
-    font-size:13px;color:var(--muted);font-style:italic;letter-spacing:.1px;
+    font-size:13px;color:rgba(244,239,227,.55);font-style:italic;letter-spacing:.1px;
   }
 
   /* ===== PRE-LAUNCH ===== */
@@ -653,10 +656,10 @@
       Legal Champions
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#principals">Principals</a>
       <a href="#areas">Practice support</a>
-      <a href="#paralegals">Paralegals</a>
+      <a href="#principals">Principals</a>
       <a href="#pricing">Engagement</a>
+      <a href="#paralegals">Paralegals</a>
       <a href="#faq">FAQ</a>
       <a href="#book" class="btn btn-primary">Brief a paralegal</a>
     </nav>
@@ -710,36 +713,6 @@
       <a href="#paralegals" class="btn btn-accent btn-lg">Join the waiting list</a>
       <p class="small-print">Larger or ongoing engagement? <a href="#pricing" style="color:var(--accent);text-decoration:underline">See retainer options</a></p>
     </aside>
-  </div>
-</section>
-
-<!-- ===== PRINCIPALS ===== -->
-<section class="principals" id="principals">
-  <div class="container">
-    <div class="section-head principals-head">
-      <span class="section-tag">Under the supervision of</span>
-      <h2>Principals &amp; supervising counsel.</h2>
-      <p>Every brief is supervised end-to-end by an admitted Advocate &amp; Solicitor of the High Court of Malaya. Members of the Malaysian Bar; carrying professional indemnity cover applicable to the engagement.</p>
-    </div>
-
-    <div class="principal-solo">
-      <article class="principal principal-wide">
-        <div class="lc-mark">Founding principal &amp; supervising counsel</div>
-        <h3>Thomas Philip</h3>
-        <div class="credentials">Advocate &amp; Solicitor of the High Court of Malaya · Founding Partner, Messrs Thomas Philip, Advocates &amp; Solicitors · LLB (Hons)</div>
-        <div class="principal-areas">
-          <span class="principal-tag">Civil litigation</span>
-          <span class="principal-tag">Commercial dispute resolution</span>
-          <span class="principal-tag">Constitutional &amp; public-interest matters</span>
-        </div>
-        <div class="supervises">
-          <strong>Direct supervision of all paralegal work</strong>
-          Every brief is reviewed by Mr Philip or by a senior solicitor at Messrs Thomas Philip nominated by him, before it is delivered to the engaging firm. Engagement letters name the reviewing solicitor and the cover applicable to the matter.
-        </div>
-      </article>
-    </div>
-
-    <p class="principal-foot">As the practice grows, additional supervising counsel will be named here.</p>
   </div>
 </section>
 
@@ -851,6 +824,36 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== PRINCIPALS ===== -->
+<section class="principals" id="principals">
+  <div class="container">
+    <div class="section-head principals-head">
+      <span class="section-tag">Under the supervision of</span>
+      <h2>Principals &amp; supervising counsel.</h2>
+      <p>Every brief is supervised end-to-end by an admitted Advocate &amp; Solicitor of the High Court of Malaya. Members of the Malaysian Bar; carrying professional indemnity cover applicable to the engagement.</p>
+    </div>
+
+    <div class="principal-solo">
+      <article class="principal principal-wide">
+        <div class="lc-mark">Founding principal &amp; supervising counsel</div>
+        <h3>Thomas Philip</h3>
+        <div class="credentials">Advocate &amp; Solicitor of the High Court of Malaya · Founding Partner, Messrs Thomas Philip, Advocates &amp; Solicitors · LLB (Hons)</div>
+        <div class="principal-areas">
+          <span class="principal-tag">Civil litigation</span>
+          <span class="principal-tag">Commercial dispute resolution</span>
+          <span class="principal-tag">Constitutional &amp; public-interest matters</span>
+        </div>
+        <div class="supervises">
+          <strong>Direct supervision of all paralegal work</strong>
+          Every brief is reviewed by Mr Philip or by a senior solicitor at Messrs Thomas Philip nominated by him, before it is delivered to the engaging firm. Engagement letters name the reviewing solicitor and the cover applicable to the matter.
+        </div>
+      </article>
+    </div>
+
+    <p class="principal-foot">As the practice grows, additional supervising counsel will be named here.</p>
   </div>
 </section>
 
