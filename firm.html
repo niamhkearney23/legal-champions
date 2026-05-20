@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firm portal — Legal Champions</title>
+<meta name="description" content="Browse, brief and manage paralegal engagements.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FAF7F2; --bg-warm:#F2EDE3; --surface:#FFFFFF;
+  --ink:#0F1A2E; --ink-soft:#3F4A5E; --muted:#6B7280;
+  --line:#E6DFD2; --line-soft:#EFEAE0;
+  --accent:#E96B47; --accent-dark:#C7522F; --accent-soft:#FCE9E0;
+  --sage:#3F6B5E; --sage-soft:#E6EFE9;
+  --blue:#3F77AB; --blue-soft:#E4EDF5;
+  --gold:#C8973F; --gold-soft:#F6EDD7;
+  --red:#C73E3E; --red-soft:#F8E0E0;
+  --grey:#94918A; --grey-soft:#EEEAE0;
+  --radius:10px; --radius-lg:16px;
+  --shadow-sm:0 1px 2px rgba(15,26,46,.04), 0 2px 6px rgba(15,26,46,.04);
+  --shadow-md:0 4px 16px rgba(15,26,46,.06);
+  --shadow-lg:0 20px 60px rgba(15,26,46,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.01em;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ===== LAYOUT ===== */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+
+/* ===== SIDEBAR ===== */
+.sidebar{background:var(--ink);color:rgba(250,247,242,.85);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sb-brand{padding:20px 22px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(250,247,242,.08)}
+.sb-brand .mark{width:30px;height:30px;border-radius:8px;background:var(--accent);display:grid;place-items:center;color:#fff;font-family:'Fraunces',serif;font-weight:600;font-size:16px}
+.sb-brand .mark::before{content:"L"}
+.sb-brand .name{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:#fff;line-height:1.1}
+.sb-brand .sub{font-size:10px;letter-spacing:1.5px;color:rgba(250,247,242,.45);text-transform:uppercase;margin-top:2px;font-family:'Inter',sans-serif;font-weight:600}
+.sb-nav{padding:16px 12px;flex:1;display:flex;flex-direction:column;gap:2px}
+.sb-section{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,247,242,.4);padding:14px 10px 6px;font-weight:600}
+.sb-link{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;font-size:14px;color:rgba(250,247,242,.7);font-weight:500;cursor:pointer;transition:background .12s, color .12s}
+.sb-link:hover{background:rgba(250,247,242,.06);color:#fff}
+.sb-link.active{background:rgba(233,107,71,.16);color:#fff}
+.sb-link.active svg{color:var(--accent)}
+.sb-link svg{flex-shrink:0;color:rgba(250,247,242,.55)}
+.sb-link .badge{margin-left:auto;background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;line-height:1.4}
+.sb-link .badge.muted{background:rgba(250,247,242,.12);color:rgba(250,247,242,.75)}
+.sb-me{border-top:1px solid rgba(250,247,242,.08);padding:14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .12s}
+.sb-me:hover{background:rgba(250,247,242,.05)}
+.sb-me .ava{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#1F3A5F,#0F1A2E);color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:13px;flex-shrink:0}
+.sb-me .info{flex:1;line-height:1.2;min-width:0}
+.sb-me .info strong{display:block;font-size:13.5px;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-me .info span{font-size:11.5px;color:rgba(250,247,242,.55);display:block;margin-top:2px}
+.sb-me .chev{color:rgba(250,247,242,.4)}
+
+/* ===== TOPBAR ===== */
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:0 28px;height:64px;display:flex;align-items:center;gap:18px;position:sticky;top:0;z-index:5}
+.topbar .title{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink)}
+.search{flex:1;max-width:420px;margin:0 auto 0 12px;position:relative}
+.search input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 14px 9px 36px;font-size:13.5px;font-family:inherit;color:var(--ink);outline:none;transition:border-color .15s, box-shadow .15s}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(233,107,71,.12);background:#fff}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10.5px;color:var(--muted);font-family:inherit;font-weight:500}
+.tb-actions{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;transition:all .12s;line-height:1}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#1c2a44}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:var(--accent-dark)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--bg)}
+.btn-lg{padding:11px 18px;font-size:14px}
+.icon-btn{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;color:var(--ink-soft);position:relative;transition:background .12s}
+.icon-btn:hover{background:var(--bg)}
+.icon-btn .dot{position:absolute;top:9px;right:9px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid var(--surface)}
+
+/* ===== VIEW AREA ===== */
+.view-area{padding:28px;flex:1;overflow-x:hidden}
+.view{display:none;animation:viewIn .25s ease}
+.view.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.greet{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.greet h1{font-size:30px;letter-spacing:-0.02em;line-height:1.2}
+.greet .meta{font-size:13.5px;color:var(--muted);margin-top:6px}
+.greet .right{display:flex;gap:8px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+.card-head{padding:18px 22px;border-bottom:1px solid var(--line-soft);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-head h3{font-size:16px;letter-spacing:-0.005em}
+.card-head .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.card-head a, .card-head button{font-size:12.5px;color:var(--accent);font-weight:600}
+.card-head a:hover{text-decoration:underline}
+
+/* ===== OVERVIEW STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px 22px;display:flex;align-items:center;gap:16px;transition:transform .15s, box-shadow .15s}
+.stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.stat .ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.stat.s-engage .ico{background:var(--accent-soft);color:var(--accent-dark)}
+.stat.s-hours .ico{background:var(--sage-soft);color:var(--sage)}
+.stat.s-deliver .ico{background:var(--blue-soft);color:var(--blue)}
+.stat.s-spend .ico{background:var(--gold-soft);color:var(--gold)}
+.stat .body{min-width:0}
+.stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:600;margin-bottom:3px}
+.stat .num{font-family:'Fraunces',serif;font-size:24px;font-weight:600;line-height:1.1;color:var(--ink)}
+.stat .num small{font-family:'Inter',sans-serif;font-weight:500;font-size:13.5px;color:var(--muted);margin-left:4px}
+.stat .trend{font-size:11.5px;color:var(--sage);font-weight:600;margin-top:2px}
+.stat .trend.down{color:var(--red)}
+
+.row-2col{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-bottom:24px}
+
+/* ===== ENGAGEMENT TABLE ===== */
+.eng-row{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line-soft);transition:background .12s;cursor:pointer}
+.eng-row:last-child{border-bottom:none}
+.eng-row:hover{background:var(--bg)}
+.eng-row .ava{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'Fraunces',serif;font-weight:600;font-size:14px;flex-shrink:0}
+.eng-row .info{flex:1;min-width:0}
+.eng-row .info strong{display:block;font-size:13.5px;color:var(--ink);font-weight:600}
+.eng-row .info span{font-size:12px;color:var(--muted);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eng-row .hours{font-size:12.5px;color:var(--ink-soft);font-weight:500;font-variant-numeric:tabular-nums;text-align:right;flex-shrink:0;min-width:60px}
+
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.2px}
+.status-badge::before{content:"";width:6px;height:6px;border-radius:50%}
+.status-badge.in-progress{background:var(--accent-soft);color:var(--accent-dark)}
+.status-badge.in-progress::before{background:var(--accent)}
+.status-badge.in-review{background:var(--blue-soft);color:var(--blue)}
+.status-badge.in-review::before{background:var(--blue)}
+.status-badge.delivered{background:var(--sage-soft);color:var(--sage)}
+.status-badge.delivered::before{background:var(--sage)}
+.status-badge.proposed{background:var(--gold-soft);color:var(--gold)}
+.status-badge.proposed::before{background:var(--gold)}
+
+/* ===== FEED ===== */
+.feed-item{display:flex;gap:12px;padding:12px 22px;border-bottom:1px solid var(--line-soft)}
+.feed-item:last-child{border-bottom:none}
+.feed-item .dot-ico{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.feed-item.t-msg .dot-ico{background:var(--blue-soft);color:var(--blue)}
+.feed-item.t-delivered .dot-ico{background:var(--sage-soft);color:var(--sage)}
+.feed-item.t-proposed .dot-ico{background:var(--gold-soft);color:var(--gold)}
+.feed-item.t-invoice .dot-ico{background:var(--accent-soft);color:var(--accent-dark)}
+.feed-item .body{flex:1;font-size:13.5px;color:var(--ink-soft);line-height:1.4;min-width:0}
+.feed-item .body strong{color:var(--ink);font-weight:600}
+.feed-item .time{font-size:11.5px;color:var(--muted);flex-shrink:0;margin-top:1px}
+
+/* ===== PARALEGAL DIRECTORY ===== */
+.directory{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 0;position:sticky;top:84px}
+.filter-group{padding:14px 18px;border-bottom:1px solid var(--line-soft)}
+.filter-group:last-child{border-bottom:none}
+.filter-group h4{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin-bottom:12px;font-family:'Inter',sans-serif}
+.filter-opts{display:flex;flex-direction:column;gap:8px}
+.filter-opt{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-soft);cursor:pointer;line-height:1.3}
+.filter-opt input[type=checkbox],.filter-opt input[type=radio]{appearance:none;width:16px;height:16px;border:1.5px solid var(--line);border-radius:4px;cursor:pointer;position:relative;flex-shrink:0;transition:all .12s;background:var(--surface)}
+.filter-opt input[type=radio]{border-radius:50%}
+.filter-opt input:checked{background:var(--accent);border-color:var(--accent)}
+.filter-opt input[type=checkbox]:checked::after{content:"✓";position:absolute;color:#fff;font-size:11px;font-weight:700;top:50%;left:50%;transform:translate(-50%,-50%)}
+.filter-opt input[type=radio]:checked::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;background:#fff;border-radius:50%}
+.filter-opt .ct{margin-left:auto;color:var(--muted);font-size:12px;font-weight:500}
+.filter-opt:hover{color:var(--ink)}
+
+.dir-main{display:flex;flex-direction:column;gap:16px}
+.dir-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.dir-toolbar .count{font-size:13px;color:var(--muted)}
+.dir-toolbar .count strong{color:var(--ink);font-weight:600}
+.dir-sort{display:flex;align-items:center;gap:8px}
+.dir-sort select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 32px 8px 12px;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+.section-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.p-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.p-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s, border-color .15s;position:relative}
+.p-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#d6cdb9}
+.p-card.hidden{display:none}
+.p-card .fav{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--muted);transition:all .12s;border:1px solid transparent}
+.p-card .fav:hover{background:var(--bg);color:var(--accent)}
+.p-card .fav.on{color:var(--accent);background:var(--accent-soft)}
+.p-card .fav.on svg{fill:currentColor}
+.p-card-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding-right:38px}
+.p-card-ava{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#fff;flex-shrink:0}
+.p-card-name{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+.p-card-name h3{font-size:17px;line-height:1.2;margin:0}
+.verified{width:16px;height:16px;border-radius:50%;background:var(--sage);color:#fff;display:grid;place-items:center;font-size:9px;line-height:1}
+.verified::before{content:"✓"}
+.p-card-title{font-size:12.5px;color:var(--muted)}
+.p-rating{display:flex;align-items:center;gap:7px;margin-bottom:12px;font-size:12.5px}
+.stars{color:var(--accent);letter-spacing:1px}
+.p-rating .num{font-weight:700;color:var(--ink)}
+.p-rating .count{color:var(--muted)}
+.p-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.p-tag{background:var(--bg-warm);color:var(--ink-soft);font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px}
+.p-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:14px}
+.p-meta-block .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:3px}
+.p-meta-block .val{font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--ink);line-height:1.1}
+.p-meta-block .val small{font-family:'Inter',sans-serif;font-weight:500;font-size:12px;color:var(--muted);margin-left:2px}
+.p-capacity{margin-bottom:14px}
+.p-capacity .row1{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.p-capacity .label-cap{font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.p-capacity .pill-cap{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
+.p-capacity .pill-cap.high{background:var(--sage-soft);color:var(--sage)}
+.p-capacity .pill-cap.med{background:var(--gold-soft);color:var(--gold)}
+.p-capacity .pill-cap.low{background:var(--red-soft);color:var(--red)}
+.p-capacity .pill-cap.none{background:var(--grey-soft);color:var(--grey)}
+.p-capacity .track{height:6px;background:var(--bg-warm);border-radius:99px;overflow:hidden}
+.p-capacity .fill{height:100%;border-radius:99px;transition:width .2s}
+.p-capacity .fill.high{background:var(--sage)}
+.p-capacity .fill.med{background:var(--gold)}
+.p-capacity .fill.low{background:var(--red)}
+.p-capacity .fill.none{background:var(--grey)}
+.p-history{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sage);font-weight:600;margin-bottom:14px}
+.p-history svg{flex-shrink:0}
+.p-history.never{color:var(--muted);font-weight:500}
+.p-actions{display:flex;gap:8px;margin-top:auto}
+.p-actions button{flex:1;justify-content:center}
+
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:48px 24px;
+  background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-lg);
+  color:var(--muted);font-size:14px;
+}
+.empty-state strong{display:block;color:var(--ink);font-family:'Fraunces',serif;font-size:18px;margin-bottom:6px}
+
+/* ===== DRAWER ===== */
+.drawer-overlay{
+  position:fixed;inset:0;background:rgba(15,26,46,.4);
+  z-index:80;opacity:0;pointer-events:none;
+  transition:opacity .2s;
+}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100vh;width:560px;max-width:100vw;
+  background:var(--surface);z-index:81;
+  transform:translateX(100%);transition:transform .25s ease;
+  box-shadow:var(--shadow-lg);display:flex;flex-direction:column;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:24px 28px 20px;border-bottom:1px solid var(--line-soft);display:flex;gap:18px;align-items:flex-start}
+.drawer-head .ava{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:24px;color:#fff;flex-shrink:0}
+.drawer-head .name{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.drawer-head h2{font-size:22px;line-height:1.2}
+.drawer-head .title{font-size:13px;color:var(--muted);margin-bottom:8px}
+.drawer-head .stars{font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.drawer-head .stars .num{font-weight:700;color:var(--ink);font-size:13px}
+.drawer-head .stars .count{color:var(--muted);font-size:13px}
+.drawer-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;color:var(--muted);transition:background .12s, color .12s}
+.drawer-close:hover{background:var(--bg);color:var(--ink)}
+
+.drawer-tabs{display:flex;gap:0;padding:0 28px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:1}
+.drawer-tab{padding:13px 0;margin-right:24px;font-size:13.5px;color:var(--muted);font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.drawer-tab:hover{color:var(--ink)}
+.drawer-tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+
+.drawer-body{flex:1;overflow-y:auto;padding:24px 28px}
+.dr-section{margin-bottom:24px}
+.dr-section h4{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:700;margin-bottom:10px;font-family:'Inter',sans-serif}
+.dr-bio{font-size:14px;color:var(--ink-soft);line-height:1.6}
+.dr-quick{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:var(--bg-warm);border-radius:12px;padding:18px}
+.dr-quick .item .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:3px}
+.dr-quick .item .val{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--ink)}
+.dr-quick .item .val small{font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);font-weight:500;margin-left:3px}
+.dr-tags{display:flex;flex-wrap:wrap;gap:6px}
+.dr-tags .tag{background:var(--bg-warm);color:var(--ink-soft);font-size:12px;font-weight:500;padding:5px 12px;border-radius:999px}
+.dr-list{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--ink-soft)}
+.dr-list li{padding:10px 14px;background:var(--bg);border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+.dr-list li .date{font-size:12px;color:var(--muted)}
+.dr-review{background:var(--bg);border-left:3px solid var(--accent);border-radius:10px;padding:16px;margin-bottom:12px}
+.dr-review .stars{font-size:13px;margin-bottom:8px;display:block}
+.dr-review p{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--ink);line-height:1.55;margin-bottom:8px}
+.dr-review .src{font-size:12px;color:var(--muted)}
+.drawer-foot{
+  padding:18px 28px;border-top:1px solid var(--line-soft);background:var(--surface);
+  display:flex;gap:10px;
+}
+.drawer-foot .btn{flex:1;justify-content:center}
+
+/* ===== BRIEF MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,26,46,.5);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s;display:grid;place-items:center;padding:24px}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);border-radius:var(--radius-lg);width:100%;max-width:620px;max-height:90vh;display:flex;flex-direction:column;transform:scale(.96);transition:transform .2s;overflow:hidden}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal-head{padding:22px 28px 18px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.modal-head h3{font-size:20px;letter-spacing:-0.01em}
+.modal-head .sub{font-size:13px;color:var(--muted);margin-top:4px}
+.modal-close{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
+.modal-close:hover{background:var(--bg);color:var(--ink)}
+.modal-body{padding:20px 28px;overflow-y:auto;flex:1}
+.brief-target{
+  display:flex;align-items:center;gap:14px;background:var(--bg-warm);border-radius:12px;padding:14px 18px;margin-bottom:20px;
+}
+.brief-target .ava{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:#fff;flex-shrink:0}
+.brief-target .info strong{display:block;font-size:14px;color:var(--ink);font-weight:600}
+.brief-target .info span{font-size:12px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.field label{font-size:12px;font-weight:600;color:var(--ink);letter-spacing:.2px}
+.field input, .field select, .field textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 13px;font-family:inherit;font-size:13.5px;color:var(--ink);outline:none;transition:all .15s;width:100%}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(233,107,71,.12);background:#fff}
+.field textarea{resize:vertical;min-height:90px;line-height:1.5}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-foot{padding:16px 28px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--bg)}
+.modal-foot .note{font-size:11.5px;color:var(--muted)}
+
+/* ===== BRIEFS TABLE ===== */
+.briefs-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.briefs-table thead th{text-align:left;padding:14px 18px;font-size:11px;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);background:var(--bg-warm)}
+.briefs-table thead th:first-child{padding-left:22px}
+.briefs-table thead th:last-child{padding-right:22px;text-align:right}
+.briefs-table tbody td{padding:14px 18px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+.briefs-table tbody td:first-child{padding-left:22px}
+.briefs-table tbody td:last-child{padding-right:22px;text-align:right}
+.briefs-table tbody tr{transition:background .12s;cursor:pointer}
+.briefs-table tbody tr:hover{background:var(--bg)}
+.briefs-table tbody tr:last-child td{border-bottom:none}
+
+.placeholder{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-lg);padding:60px 24px;text-align:center}
+.placeholder h3{font-size:18px;margin-bottom:8px}
+.placeholder p{color:var(--muted);font-size:14px;max-width:380px;margin:0 auto}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1100px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .row-2col{grid-template-columns:1fr}
+  .directory{grid-template-columns:1fr}
+  .filters{position:static}
+}
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:fixed;top:0;left:-260px;width:240px;z-index:50;transition:left .25s;box-shadow:var(--shadow-md)}
+  .sidebar.open{left:0}
+  .topbar{padding:0 16px}
+  .search{max-width:none}
+  .view-area{padding:18px}
+  .p-grid{grid-template-columns:1fr}
+  .drawer{width:100vw}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <span class="mark"></span>
+      <div>
+        <div class="name">Legal Champions</div>
+        <div class="sub">Firm portal</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav">
+      <div class="sb-section">Engage</div>
+      <a class="sb-link active" data-view="overview">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        Overview
+      </a>
+      <a class="sb-link" data-view="paralegals">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Paralegals
+        <span class="badge muted">10</span>
+      </a>
+      <a class="sb-link" data-view="briefs">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        My briefs
+        <span class="badge muted">5</span>
+      </a>
+
+      <div class="sb-section">Manage</div>
+      <a class="sb-link" data-view="messages">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messages
+        <span class="badge">2</span>
+      </a>
+      <a class="sb-link" data-view="deliverables">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Deliverables
+      </a>
+      <a class="sb-link" data-view="billing">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Billing
+      </a>
+    </nav>
+
+    <div class="sb-me">
+      <div class="ava">TP</div>
+      <div class="info">
+        <strong>Aishah Kamarudin</strong>
+        <span>Tan &amp; Partners · Partner</span>
+      </div>
+      <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <header class="topbar">
+      <span class="title" id="pageTitle">Overview</span>
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search paralegals, briefs, matters…">
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="tb-actions">
+        <button class="btn btn-accent" onclick="openBrief(null)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Brief a paralegal
+        </button>
+        <button class="icon-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="view-area">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section id="view-overview" class="view active">
+
+        <div class="greet">
+          <div>
+            <h1>Selamat pagi, Aishah.</h1>
+            <div class="meta">Tuesday, 19 May 2026 · 4 live engagements · 2 deliverables awaiting your review</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat s-engage">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="body"><div class="label">Active engagements</div><div class="num">4</div><div class="trend">Across 4 paralegals</div></div>
+          </div>
+          <div class="stat s-hours">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="body"><div class="label">Hours this month</div><div class="num">87.5<small>h</small></div><div class="trend">↑ 12h vs April</div></div>
+          </div>
+          <div class="stat s-deliver">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="body"><div class="label">Pending review</div><div class="num">2</div><div class="trend">From Priya &amp; Jay</div></div>
+          </div>
+          <div class="stat s-spend">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="body"><div class="label">Spend this month</div><div class="num">RM 15.7k</div><div class="trend">Within budget</div></div>
+          </div>
+        </div>
+
+        <div class="row-2col">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>Active engagements</h3><div class="sub">Live matters with assigned paralegals</div></div>
+              <a href="#" onclick="showView('briefs');return false">All briefs →</a>
+            </div>
+            <div>
+              <div class="eng-row" onclick="openParalegal('priya-shah')">
+                <div class="ava" style="background:linear-gradient(135deg,#E96B47,#C7522F)">PS</div>
+                <div class="info"><strong>Priya Shah</strong><span>Court bundle — IP Holdings v Mahkota Mall</span></div>
+                <span class="status-badge in-progress">In progress</span>
+                <span class="hours">8.5h</span>
+              </div>
+              <div class="eng-row" onclick="openParalegal('jay-patel')">
+                <div class="ava" style="background:linear-gradient(135deg,#1F3A5F,#0F1A2E)">JP</div>
+                <div class="info"><strong>Jay Patel</strong><span>SPA review — Acquisition of NewCo Sdn Bhd</span></div>
+                <span class="status-badge in-review">In review</span>
+                <span class="hours">8.0h</span>
+              </div>
+              <div class="eng-row" onclick="openParalegal('hannah-lim')">
+                <div class="ava" style="background:linear-gradient(135deg,#C8973F,#A37926)">HL</div>
+                <div class="info"><strong>Hannah Lim</strong><span>Conveyancing — Mont Kiara unit (Block C, #08-12)</span></div>
+                <span class="status-badge in-progress">In progress</span>
+                <span class="hours">4.0h</span>
+              </div>
+              <div class="eng-row" onclick="openParalegal('aaron-chen')">
+                <div class="ava" style="background:linear-gradient(135deg,#3F77AB,#2A5A85)">AC</div>
+                <div class="info"><strong>Aaron Chen</strong><span>Banking facility — PalmCorp term loan documentation</span></div>
+                <span class="status-badge delivered">Delivered</span>
+                <span class="hours">16.0h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><div><h3>Recent activity</h3><div class="sub">Across your engagements</div></div></div>
+            <div>
+              <div class="feed-item t-delivered">
+                <div class="dot-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="body"><strong>Aaron Chen</strong> delivered the PalmCorp banking documentation</div>
+                <div class="time">2h</div>
+              </div>
+              <div class="feed-item t-msg">
+                <div class="dot-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                <div class="body">New message from <strong>Priya Shah</strong> re IP Holdings bundle</div>
+                <div class="time">3h</div>
+              </div>
+              <div class="feed-item t-proposed">
+                <div class="dot-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                <div class="body">Proposal received for new brief: <strong>research memo on Schedule 6 limitation</strong></div>
+                <div class="time">Yesterday</div>
+              </div>
+              <div class="feed-item t-invoice">
+                <div class="dot-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                <div class="body">May invoice issued: <strong>RM 15,700.00</strong> · due 14 days</div>
+                <div class="time">Mon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Recommended for your firm</h3><div class="sub">Litigation-strong paralegals with current capacity</div></div>
+            <a href="#" onclick="showView('paralegals');return false">Browse all paralegals →</a>
+          </div>
+          <div style="padding:18px 22px">
+            <div class="p-grid" id="recommendedGrid" style="grid-template-columns:repeat(3,1fr)"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PARALEGALS DIRECTORY ===== -->
+      <section id="view-paralegals" class="view">
+        <div class="greet">
+          <div>
+            <h1>Choose a paralegal.</h1>
+            <div class="meta">Filter by practice area, availability or rate. Tap any profile for full credentials, samples and references.</div>
+          </div>
+        </div>
+
+        <div class="directory">
+          <aside class="filters">
+            <div class="filter-group">
+              <h4>Practice area</h4>
+              <div class="filter-opts">
+                <label class="filter-opt"><input type="checkbox" name="area" value="litigation"> Litigation <span class="ct">5</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="corporate"> Corporate / M&amp;A <span class="ct">3</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="real-estate"> Real estate <span class="ct">2</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="commercial"> Commercial <span class="ct">4</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="research"> Research <span class="ct">2</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="regulatory"> Regulatory <span class="ct">2</span></label>
+                <label class="filter-opt"><input type="checkbox" name="area" value="corp-sec"> Corp sec / SSM <span class="ct">1</span></label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h4>Availability</h4>
+              <div class="filter-opts">
+                <label class="filter-opt"><input type="radio" name="avail" value="all" checked> All</label>
+                <label class="filter-opt"><input type="radio" name="avail" value="high"> Mostly available <span class="ct">3</span></label>
+                <label class="filter-opt"><input type="radio" name="avail" value="med"> Some capacity <span class="ct">4</span></label>
+                <label class="filter-opt"><input type="radio" name="avail" value="low"> Limited capacity <span class="ct">2</span></label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h4>Rate (RM/hr)</h4>
+              <div class="filter-opts">
+                <label class="filter-opt"><input type="radio" name="rate" value="all" checked> Any rate</label>
+                <label class="filter-opt"><input type="radio" name="rate" value="lt150"> Under 150</label>
+                <label class="filter-opt"><input type="radio" name="rate" value="150-200"> 150 – 200</label>
+                <label class="filter-opt"><input type="radio" name="rate" value="200-250"> 200 – 250</label>
+                <label class="filter-opt"><input type="radio" name="rate" value="gt250"> 250+</label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h4>History</h4>
+              <div class="filter-opts">
+                <label class="filter-opt"><input type="checkbox" name="history" value="worked"> Worked with us</label>
+                <label class="filter-opt"><input type="checkbox" name="history" value="favourites"> Favourites only</label>
+              </div>
+            </div>
+          </aside>
+
+          <div class="dir-main">
+            <div class="dir-toolbar">
+              <div class="count"><strong id="resultCount">10</strong> paralegals available</div>
+              <div class="dir-sort">
+                <select id="sortBy">
+                  <option value="recommended">Best match for your firm</option>
+                  <option value="rating">Highest rated</option>
+                  <option value="capacity">Most available</option>
+                  <option value="rate-low">Rate: low to high</option>
+                  <option value="rate-high">Rate: high to low</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="recentlyEngaged">
+              <div class="section-label">Recently engaged with your firm</div>
+              <div class="p-grid" id="recentGrid"></div>
+            </div>
+
+            <div>
+              <div class="section-label">All paralegals</div>
+              <div class="p-grid" id="allGrid"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MY BRIEFS ===== -->
+      <section id="view-briefs" class="view">
+        <div class="greet">
+          <div>
+            <h1>My briefs</h1>
+            <div class="meta">All briefs submitted by your firm, current and historic.</div>
+          </div>
+          <div class="right"><button class="btn btn-accent" onclick="openBrief(null)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New brief</button></div>
+        </div>
+
+        <div class="card">
+          <table class="briefs-table">
+            <thead>
+              <tr><th>Brief</th><th>Paralegal</th><th>Status</th><th>Hours</th><th>Last update</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--ink)">Court bundle — IP Holdings v Mahkota</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Litigation · LCB-2026-0512</div></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div class="eng-row .ava" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#E96B47,#C7522F);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:11px">PS</div>Priya Shah</div></td>
+                <td><span class="status-badge in-progress">In progress</span></td>
+                <td>8.5/12h</td>
+                <td>2h ago</td>
+                <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--ink)">SPA review — Acquisition of NewCo Sdn Bhd</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Corporate / M&amp;A · LCB-2026-0508</div></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1F3A5F,#0F1A2E);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:11px">JP</div>Jay Patel</div></td>
+                <td><span class="status-badge in-review">In review</span></td>
+                <td>8/10h</td>
+                <td>Yesterday</td>
+                <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--ink)">Conveyancing — Mont Kiara unit</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Real estate · LCB-2026-0501</div></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#C8973F,#A37926);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:11px">HL</div>Hannah Lim</div></td>
+                <td><span class="status-badge in-progress">In progress</span></td>
+                <td>4/18h</td>
+                <td>Mon</td>
+                <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--ink)">Banking facility — PalmCorp</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Commercial · LCB-2026-0427</div></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3F77AB,#2A5A85);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:11px">AC</div>Aaron Chen</div></td>
+                <td><span class="status-badge delivered">Delivered</span></td>
+                <td>16/16h</td>
+                <td>2h ago</td>
+                <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--ink)">Research memo — Schedule 6 limitation</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Research · LCB-2026-0517</div></td>
+                <td><div style="font-size:12.5px;color:var(--muted);font-style:italic">Awaiting your approval</div></td>
+                <td><span class="status-badge proposed">Proposal received</span></td>
+                <td>—</td>
+                <td>Yesterday</td>
+                <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== STUB VIEWS ===== -->
+      <section id="view-messages" class="view">
+        <div class="greet"><div><h1>Messages</h1><div class="meta">Conversations with paralegals and your account consultant.</div></div></div>
+        <div class="placeholder">
+          <h3>Messages</h3>
+          <p>Your conversations with engaged paralegals appear here. Wire this view to your messaging service.</p>
+        </div>
+      </section>
+
+      <section id="view-deliverables" class="view">
+        <div class="greet"><div><h1>Deliverables</h1><div class="meta">Work product delivered by paralegals, ready for your review.</div></div></div>
+        <div class="placeholder">
+          <h3>Deliverables</h3>
+          <p>Bundles, drafts, memos and reports delivered to your firm appear here — preview, download, or send back for revision.</p>
+        </div>
+      </section>
+
+      <section id="view-billing" class="view">
+        <div class="greet"><div><h1>Billing</h1><div class="meta">Invoices, payment history and engagement spend.</div></div></div>
+        <div class="placeholder">
+          <h3>Billing</h3>
+          <p>Itemised invoices issued in Ringgit Malaysia (MYR), payment status and your spend by paralegal/practice area.</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== PARALEGAL DETAIL DRAWER ===== -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer">
+  <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="drawer-head" id="drawerHead"></div>
+  <div class="drawer-tabs" id="drawerTabs">
+    <div class="drawer-tab active" data-tab="about">About</div>
+    <div class="drawer-tab" data-tab="reviews">Reviews</div>
+    <div class="drawer-tab" data-tab="work">Sample work</div>
+    <div class="drawer-tab" data-tab="history">With your firm</div>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot">
+    <button class="btn btn-ghost btn-lg" id="favBtn" onclick="toggleFavCurrent()">Add to favourites</button>
+    <button class="btn btn-accent btn-lg" onclick="openBrief(currentParalegalId)">Brief this paralegal →</button>
+  </div>
+</aside>
+
+<!-- ===== BRIEF MODAL ===== -->
+<div class="modal-overlay" id="briefOverlay" onclick="if(event.target===this)closeBrief()">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3>Brief a paralegal</h3>
+        <div class="sub">A senior consultant will respond with a proposal within four working hours.</div>
+      </div>
+      <button class="modal-close" onclick="closeBrief()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <form class="modal-body" id="briefForm" onsubmit="submitBrief(event)">
+      <div class="brief-target" id="briefTarget" style="display:none"></div>
+      <div class="field-row">
+        <div class="field">
+          <label for="bArea">Practice area</label>
+          <select id="bArea" required>
+            <option value="">Select…</option>
+            <option>Litigation &amp; dispute resolution</option>
+            <option>Corporate / M&amp;A</option>
+            <option>Real estate &amp; conveyancing</option>
+            <option>Commercial &amp; contracts</option>
+            <option>Regulatory</option>
+            <option>Research</option>
+            <option>Corp sec / SSM</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bEngage">Engagement</label>
+          <select id="bEngage" required>
+            <option value="">Select…</option>
+            <option>Hourly (RM 120+/hr)</option>
+            <option>Per-matter (fixed fee)</option>
+            <option>Retainer (RM 8,500+/mo)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="bMatter">Matter reference / title</label>
+        <input type="text" id="bMatter" required placeholder="e.g. Court bundle — IP Holdings v Mahkota Mall">
+      </div>
+      <div class="field">
+        <label for="bScope">Outline of brief</label>
+        <textarea id="bScope" required placeholder="Indicative scope, deliverables and key dates. Keep at general level until NDA is in place — no privileged detail or party names if not yet under NDA."></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="bDeadline">Target completion</label>
+          <input type="text" id="bDeadline" placeholder="e.g. by Friday 30 May">
+        </div>
+        <div class="field">
+          <label for="bPriority">Priority</label>
+          <select id="bPriority">
+            <option>Standard</option>
+            <option>Expedited</option>
+            <option>Court-driven deadline</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div class="modal-foot">
+      <span class="note">NDA &amp; conflicts check completed before any detail is shared.</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="closeBrief()">Cancel</button>
+        <button class="btn btn-accent" onclick="document.getElementById('briefForm').requestSubmit()">Submit brief</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== MOCK DATA =====
+  const PARALEGALS = [
+    {id:'priya-shah', name:'Priya Shah, LLB (Hons)', initials:'PS', gradient:'linear-gradient(135deg,#E96B47,#C7522F)', title:'Senior paralegal · Litigation · 6 yrs', practiceAreas:['litigation','research'], tags:['Civil litigation','Court bundles','Research'], rating:4.9, reviewCount:27, rate:180, capacityHours:12, languages:['English','Bahasa Malaysia','Tamil'], timesWorkedWithFirm:4, bio:"Six years' litigation support across dispute resolution practices in KL. Specialises in indexed bundles and contested winding-up matters. Particularly trusted on tight pre-trial timelines.", sampleWork:[{label:'600pp indexed court bundle (commercial)', date:'May 2026'},{label:'Witness chronology (matrimonial)', date:'Apr 2026'},{label:'Research memo on limitation in tort', date:'Mar 2026'}], reviews:[{quote:'Delivered a 600-page indexed bundle two working days ahead of trial. Excellent under pressure and exacting on detail.', src:'Partner, KL dispute resolution firm', stars:5},{quote:'Quietly indispensable on a complex contested winding-up. Bundle came back ready to file.', src:'Senior Associate, commercial litigation', stars:5},{quote:'Pleasant to work with, very organised. Slight learning curve on our house style but adapted within two briefs.', src:'Partner, boutique commercial firm', stars:4}]},
+    {id:'marcus-boateng', name:'Marcus Boateng, LLB', initials:'MB', gradient:'linear-gradient(135deg,#3F6B5E,#2A5048)', title:'Senior paralegal · Corporate / M&A · 5 yrs', practiceAreas:['corporate','commercial'], tags:['M&A due diligence','Data-room review','Closings'], rating:5.0, reviewCount:21, rate:200, capacityHours:8, languages:['English','Bahasa Malaysia'], timesWorkedWithFirm:2, bio:"Five years' transactional support across mid-market M&A. Comfortable running data rooms and DD reports straight to partner sign-off.", sampleWork:[{label:'DD report (cross-border tech acquisition)',date:'Apr 2026'},{label:'Closing checklist & signing pack',date:'Mar 2026'}], reviews:[{quote:'Identified a material misrepresentation in the data room our junior had missed. DD report needed minimal partner mark-up.', src:'Senior Associate, KL corporate practice', stars:5}]},
+    {id:'hannah-lim', name:'Hannah Lim, LLB (Hons)', initials:'HL', gradient:'linear-gradient(135deg,#C8973F,#A37926)', title:'Paralegal · Real estate & conveyancing · 4 yrs', practiceAreas:['real-estate','commercial'], tags:['Conveyancing','SPA drafting','Land registration'], rating:4.9, reviewCount:18, rate:160, capacityHours:16, languages:['English','Bahasa Malaysia','Mandarin'], timesWorkedWithFirm:1, bio:"Four years' conveyancing and real-estate support. Handles SPA drafting, completion accounts and land-office filings for developer clients.", sampleWork:[{label:'SPA + completion accounts (KL condo)',date:'May 2026'},{label:'Land office registration pack',date:'Apr 2026'}], reviews:[{quote:'Manages complex conveyancing chains with absolute precision. We trust her with our top developer files.', src:'Partner, real estate practice, KL', stars:5}]},
+    {id:'jay-patel', name:'Jay Patel, LLB, CLP', initials:'JP', gradient:'linear-gradient(135deg,#1F3A5F,#0F1A2E)', title:'Senior paralegal · Commercial · 8 yrs', practiceAreas:['commercial','corporate'], tags:['Contract drafting','Comparative redlines','SPAs & NDAs'], rating:4.8, reviewCount:34, rate:220, capacityHours:4, languages:['English','Bahasa Malaysia','Gujarati'], timesWorkedWithFirm:7, bio:"Eight years' commercial drafting and review. Quietly the person we hand precedent libraries to. Discreet, fast, accurate.", sampleWork:[{label:'SPA — cross-border tech acquisition',date:'May 2026'},{label:'NDA precedent library refresh',date:'Apr 2026'}], reviews:[{quote:"Knows our house style better than several of our junior associates. Redlines arrive ready to send to the other side.", src:'Managing Partner, boutique commercial firm', stars:5}]},
+    {id:'sofia-reyes', name:'Sofia Reyes, LLM', initials:'SR', gradient:'linear-gradient(135deg,#6B3F5F,#4A2A42)', title:'Research paralegal · Regulatory · 3 yrs', practiceAreas:['research','regulatory'], tags:['Legal research','Statutory analysis','Comparative jurisdictions'], rating:5.0, reviewCount:14, rate:170, capacityHours:20, languages:['English','Spanish','Bahasa Malaysia'], timesWorkedWithFirm:0, bio:"LLM with academic research background. The paralegal we route the most demanding research briefs to — particularly cross-jurisdictional work.", sampleWork:[{label:'Cross-jurisdictional limitation memo',date:'Apr 2026'},{label:'Statutory interpretation note (Companies Act)',date:'Mar 2026'}], reviews:[{quote:'Located three Malaysian Federal Court decisions that materially shifted our position. Rigorous research, professionally presented.', src:'Partner, regulatory practice', stars:5}]},
+    {id:'tom-obrien', name:"Tom O'Brien, LLB", initials:'TO', gradient:'linear-gradient(135deg,#2A6F65,#1A4F47)', title:'Paralegal · Litigation · 5 yrs', practiceAreas:['litigation','commercial'], tags:['Pleadings','Written submissions','Witness statements'], rating:4.9, reviewCount:19, rate:175, capacityHours:10, languages:['English'], timesWorkedWithFirm:1, bio:"Five years' commercial litigation support. Drafts pleadings and written submissions that come back ready to file.", sampleWork:[{label:'Statement of claim (commercial dispute)',date:'May 2026'},{label:'Written submissions (interlocutory)',date:'Apr 2026'}], reviews:[{quote:'Pleadings arrive at filing standard. Conservatively, saves our associates a working day per matter.', src:'Senior Associate, commercial litigation', stars:5}]},
+    {id:'nurul-iman', name:'Nurul Iman, LLB', initials:'NI', gradient:'linear-gradient(135deg,#3F77AB,#2A5A85)', title:'Paralegal · Corporate secretarial · 4 yrs', practiceAreas:['corp-sec','corporate'], tags:['SSM filings','Resolutions','AGM/EGM packs'], rating:4.8, reviewCount:22, rate:140, capacityHours:24, languages:['English','Bahasa Malaysia'], timesWorkedWithFirm:3, bio:"Four years' corporate secretarial and statutory compliance. Quietly handles your CCM filings, statutory register maintenance and meeting packs.", sampleWork:[{label:'AGM resolution & filing pack',date:'May 2026'},{label:'Annual return suite for 12 entities',date:'Apr 2026'}], reviews:[{quote:'Reliable on every filing deadline. Catches details a junior associate would miss.', src:'Partner, corporate practice', stars:5}]},
+    {id:'wei-ling-tan', name:'Wei Ling Tan, LLB', initials:'WT', gradient:'linear-gradient(135deg,#94918A,#6B6862)', title:'Paralegal · Real estate · 3 yrs', practiceAreas:['real-estate'], tags:['Conveyancing','SPAs','Tenancy'], rating:4.7, reviewCount:11, rate:150, capacityHours:18, languages:['English','Mandarin','Bahasa Malaysia'], timesWorkedWithFirm:0, bio:"Three years' conveyancing experience. Strong on residential SPAs and tenancy agreements; growing remit in commercial conveyancing.", sampleWork:[{label:'Tenancy agreement suite (office space)',date:'May 2026'}], reviews:[{quote:'Diligent and responsive. Some scope still to grow on more complex commercial work but excellent on standard files.', src:'Senior Associate, property practice', stars:4}]},
+    {id:'aaron-chen', name:'Aaron Chen, LLB, CLP', initials:'AC', gradient:'linear-gradient(135deg,#3F77AB,#2A5A85)', title:'Senior paralegal · Commercial / Banking · 6 yrs', practiceAreas:['commercial','corporate'], tags:['Banking docs','Facility agreements','Security packages'], rating:4.9, reviewCount:24, rate:210, capacityHours:0, languages:['English','Mandarin','Cantonese'], timesWorkedWithFirm:5, bio:"Six years' commercial and banking documentation. Handles facility agreements, security packages and conditions precedent suites.", sampleWork:[{label:'Term loan facility & security suite',date:'May 2026'},{label:'CP checklist for syndicated facility',date:'Apr 2026'}], reviews:[{quote:'Banking documentation is meticulous. Knows our lender clients’ expectations.', src:'Partner, banking & finance', stars:5}]},
+    {id:'farah-aziz', name:'Farah Aziz, LLM', initials:'FA', gradient:'linear-gradient(135deg,#C73E3E,#9B2D2D)', title:'Senior paralegal · Regulatory & IP · 7 yrs', practiceAreas:['regulatory','research'], tags:['Regulatory filings','IP registration','Compliance memos'], rating:4.9, reviewCount:16, rate:230, capacityHours:6, languages:['English','Bahasa Malaysia','Arabic'], timesWorkedWithFirm:2, bio:"Seven years' regulatory and IP work. Strong on financial-services compliance memos, MyIPO filings and submissions to regulator.", sampleWork:[{label:'Regulator submission (BNM consultation)',date:'May 2026'},{label:'IP registration suite (8 marks)',date:'Apr 2026'}], reviews:[{quote:'Considered, well-researched compliance memos. Pushes back appropriately on aggressive deadlines.', src:'Partner, regulatory practice', stars:5}]}
+  ];
+
+  // ===== CAPACITY HELPERS =====
+  function capBand(h){
+    if (h === 0) return {key:'none', label:'Fully booked', pct:0};
+    if (h <= 6) return {key:'low', label:'Limited capacity', pct:Math.max(8, h*4)};
+    if (h <= 15) return {key:'med', label:'Some capacity', pct:Math.max(35, h*3.5)};
+    return {key:'high', label:'Mostly available', pct:Math.min(100, h*4)};
+  }
+
+  function rateMatchesBand(rate, band){
+    if (band === 'all') return true;
+    if (band === 'lt150') return rate < 150;
+    if (band === '150-200') return rate >= 150 && rate < 200;
+    if (band === '200-250') return rate >= 200 && rate < 250;
+    if (band === 'gt250') return rate >= 250;
+    return true;
+  }
+
+  // ===== RENDER CARDS =====
+  function renderCard(p, opts={}){
+    const cap = capBand(p.capacityHours);
+    const isFav = p.favourited;
+    const histLine = p.timesWorkedWithFirm > 0
+      ? `<div class="p-history"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Worked with you ${p.timesWorkedWithFirm} time${p.timesWorkedWithFirm===1?'':'s'}</div>`
+      : `<div class="p-history never"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> First engagement with your firm</div>`;
+    const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+    return `
+      <article class="p-card" data-id="${p.id}">
+        <button class="fav ${isFav?'on':''}" onclick="event.stopPropagation();toggleFav('${p.id}', this)" aria-label="Favourite">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div onclick="openParalegal('${p.id}')" style="display:flex;flex-direction:column;flex:1;cursor:pointer">
+          <div class="p-card-head">
+            <div class="p-card-ava" style="background:${p.gradient}">${p.initials}</div>
+            <div>
+              <div class="p-card-name"><h3>${p.name}</h3><span class="verified" title="Credentials verified"></span></div>
+              <div class="p-card-title">${p.title}</div>
+            </div>
+          </div>
+          <div class="p-rating">
+            <span class="stars">${'★'.repeat(5)}</span>
+            <span class="num">${p.rating.toFixed(1)}</span>
+            <span class="count">· ${p.reviewCount} firm references</span>
+          </div>
+          <div class="p-tags">${p.tags.map(t => `<span class="p-tag">${t}</span>`).join('')}</div>
+          <div class="p-meta">
+            <div class="p-meta-block">
+              <div class="lbl">Rate</div>
+              <div class="val">RM ${p.rate}<small>/hr</small></div>
+            </div>
+            <div class="p-meta-block">
+              <div class="lbl">Capacity</div>
+              <div class="val">${p.capacityHours}<small>h/wk</small></div>
+            </div>
+          </div>
+          <div class="p-capacity">
+            <div class="row1">
+              <span class="label-cap">Availability</span>
+              <span class="pill-cap ${cap.key}">${cap.label}</span>
+            </div>
+            <div class="track"><div class="fill ${cap.key}" style="width:${cap.pct}%"></div></div>
+          </div>
+          ${histLine}
+        </div>
+        <div class="p-actions">
+          <button class="btn btn-ghost" onclick="event.stopPropagation();openParalegal('${p.id}')">View profile</button>
+          <button class="btn btn-accent" onclick="event.stopPropagation();openBrief('${p.id}')">Brief →</button>
+        </div>
+      </article>
+    `;
+  }
+
+  // ===== DIRECTORY FILTER + SORT =====
+  function getFilters(){
+    return {
+      areas: [...document.querySelectorAll('input[name="area"]:checked')].map(i => i.value),
+      avail: document.querySelector('input[name="avail"]:checked')?.value || 'all',
+      rate: document.querySelector('input[name="rate"]:checked')?.value || 'all',
+      history: [...document.querySelectorAll('input[name="history"]:checked')].map(i => i.value),
+      sort: document.getElementById('sortBy').value
+    };
+  }
+
+  function applyFilters(){
+    const f = getFilters();
+    let list = [...PARALEGALS];
+    if (f.areas.length) list = list.filter(p => p.practiceAreas.some(a => f.areas.includes(a)));
+    if (f.avail !== 'all') list = list.filter(p => capBand(p.capacityHours).key === f.avail);
+    if (f.rate !== 'all') list = list.filter(p => rateMatchesBand(p.rate, f.rate));
+    if (f.history.includes('worked')) list = list.filter(p => p.timesWorkedWithFirm > 0);
+    if (f.history.includes('favourites')) list = list.filter(p => p.favourited);
+
+    // sort
+    if (f.sort === 'rating') list.sort((a,b) => b.rating - a.rating);
+    else if (f.sort === 'capacity') list.sort((a,b) => b.capacityHours - a.capacityHours);
+    else if (f.sort === 'rate-low') list.sort((a,b) => a.rate - b.rate);
+    else if (f.sort === 'rate-high') list.sort((a,b) => b.rate - a.rate);
+    else list.sort((a,b) => (b.timesWorkedWithFirm - a.timesWorkedWithFirm) || (b.rating - a.rating));
+
+    document.getElementById('resultCount').textContent = list.length;
+
+    const recent = list.filter(p => p.timesWorkedWithFirm > 0);
+    const others = list.filter(p => p.timesWorkedWithFirm === 0);
+    const recentSec = document.getElementById('recentlyEngaged');
+    document.getElementById('recentGrid').innerHTML = recent.length ? recent.map(p => renderCard(p)).join('') : '';
+    recentSec.style.display = recent.length ? '' : 'none';
+
+    const allGrid = document.getElementById('allGrid');
+    const allLabel = document.querySelector('#view-paralegals .section-label:last-of-type');
+    if (allLabel) allLabel.textContent = recent.length ? 'New to your firm' : 'All paralegals';
+    if (list.length === 0){
+      allGrid.innerHTML = `<div class="empty-state"><strong>No paralegals match your filters</strong>Try widening the practice-area selection or removing the availability filter.</div>`;
+    } else if (others.length === 0){
+      allGrid.innerHTML = '';
+      if (allLabel) allLabel.style.display = 'none';
+    } else {
+      if (allLabel) allLabel.style.display = '';
+      allGrid.innerHTML = others.map(p => renderCard(p)).join('');
+    }
+  }
+
+  function toggleFav(id, btnEl){
+    const p = PARALEGALS.find(x => x.id === id);
+    if (!p) return;
+    p.favourited = !p.favourited;
+    document.querySelectorAll(`.p-card[data-id="${id}"] .fav`).forEach(b => b.classList.toggle('on', p.favourited));
+    if (currentParalegalId === id) updateFavBtn();
+  }
+
+  function toggleFavCurrent(){ toggleFav(currentParalegalId); }
+  function updateFavBtn(){
+    const p = PARALEGALS.find(x => x.id === currentParalegalId);
+    document.getElementById('favBtn').textContent = p?.favourited ? '★ Favourited' : 'Add to favourites';
+  }
+
+  // ===== DRAWER =====
+  let currentParalegalId = null;
+  let currentDrawerTab = 'about';
+
+  function openParalegal(id){
+    const p = PARALEGALS.find(x => x.id === id);
+    if (!p) return;
+    currentParalegalId = id;
+    document.getElementById('drawerHead').innerHTML = `
+      <div class="ava" style="background:${p.gradient}">${p.initials}</div>
+      <div>
+        <div class="name"><h2>${p.name}</h2><span class="verified"></span></div>
+        <div class="title">${p.title}</div>
+        <div class="stars"><span style="color:var(--accent);letter-spacing:1px">★★★★★</span><span class="num">${p.rating.toFixed(1)}</span><span class="count">· ${p.reviewCount} firm references</span></div>
+      </div>
+    `;
+    currentDrawerTab = 'about';
+    renderDrawerTab();
+    document.querySelectorAll('.drawer-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'about'));
+    document.getElementById('drawerOverlay').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    updateFavBtn();
+  }
+
+  function closeDrawer(){
+    document.getElementById('drawerOverlay').classList.remove('open');
+    document.getElementById('drawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderDrawerTab(){
+    const p = PARALEGALS.find(x => x.id === currentParalegalId);
+    if (!p) return;
+    const body = document.getElementById('drawerBody');
+    const cap = capBand(p.capacityHours);
+    let html = '';
+    if (currentDrawerTab === 'about'){
+      html = `
+        <div class="dr-section">
+          <div class="dr-quick">
+            <div class="item"><div class="lbl">Hourly rate</div><div class="val">RM ${p.rate}<small>/hr</small></div></div>
+            <div class="item"><div class="lbl">Availability</div><div class="val">${p.capacityHours}h<small>/wk</small></div></div>
+            <div class="item"><div class="lbl">Experience</div><div class="val">${p.title.match(/(\d+)\s*yrs?/)?.[1] || '—'}<small> yrs</small></div></div>
+            <div class="item"><div class="lbl">Rating</div><div class="val">${p.rating.toFixed(1)}<small> / 5</small></div></div>
+          </div>
+        </div>
+        <div class="dr-section">
+          <h4>About</h4>
+          <p class="dr-bio">${p.bio}</p>
+        </div>
+        <div class="dr-section">
+          <h4>Practice areas</h4>
+          <div class="dr-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="dr-section">
+          <h4>Languages</h4>
+          <div class="dr-tags">${p.languages.map(l => `<span class="tag">${l}</span>`).join('')}</div>
+        </div>
+      `;
+    } else if (currentDrawerTab === 'reviews'){
+      html = `<div class="dr-section">
+        ${p.reviews.map(r => `
+          <div class="dr-review">
+            <span class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
+            <p>"${r.quote}"</p>
+            <div class="src">— ${r.src}</div>
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (currentDrawerTab === 'work'){
+      html = `<div class="dr-section"><h4>Recent deliverables</h4>
+        <ul class="dr-list">
+          ${p.sampleWork.map(w => `<li>${w.label}<span class="date">${w.date}</span></li>`).join('')}
+        </ul>
+        <p style="font-size:12px;color:var(--muted);margin-top:14px">Full samples available on request under NDA.</p>
+      </div>`;
+    } else if (currentDrawerTab === 'history'){
+      if (p.timesWorkedWithFirm > 0){
+        html = `<div class="dr-section">
+          <p style="font-size:14px;color:var(--ink-soft);margin-bottom:16px"><strong style="color:var(--ink)">${p.timesWorkedWithFirm}</strong> previous engagements with your firm.</p>
+          <ul class="dr-list">
+            <li>Court bundle — IP Holdings v Mahkota<span class="date">May 2026</span></li>
+            <li>Witness chronology — Tan v Tan<span class="date">Apr 2026</span></li>
+            <li>Research memo — Companies Act s 218<span class="date">Mar 2026</span></li>
+            ${p.timesWorkedWithFirm >= 4 ? '<li>Court bundle (interlocutory)<span class="date">Feb 2026</span></li>' : ''}
+          </ul>
+        </div>`;
+      } else {
+        html = `<div class="dr-section"><div class="placeholder" style="margin:8px 0"><h3>No previous engagements</h3><p>This would be ${p.name.split(',')[0].split(' ')[0]}'s first brief with your firm.</p></div></div>`;
+      }
+    }
+    body.innerHTML = html;
+  }
+
+  document.querySelectorAll('.drawer-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      currentDrawerTab = tab.dataset.tab;
+      document.querySelectorAll('.drawer-tab').forEach(t => t.classList.toggle('active', t === tab));
+      renderDrawerTab();
+    });
+  });
+
+  // ===== BRIEF MODAL =====
+  function openBrief(id){
+    const overlay = document.getElementById('briefOverlay');
+    const target = document.getElementById('briefTarget');
+    if (id){
+      const p = PARALEGALS.find(x => x.id === id);
+      target.style.display = 'flex';
+      target.innerHTML = `
+        <div class="ava" style="background:${p.gradient}">${p.initials}</div>
+        <div class="info">
+          <strong>Brief is for ${p.name}</strong>
+          <span>${p.title} · RM ${p.rate}/hr · ${p.capacityHours}h/wk capacity</span>
+        </div>
+      `;
+    } else {
+      target.style.display = 'none';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBrief(){
+    document.getElementById('briefOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function submitBrief(e){
+    e.preventDefault();
+    closeDrawer();
+    closeBrief();
+    setTimeout(() => alert('Brief submitted. A senior consultant will respond with a proposal within 4 working hours.'), 200);
+  }
+
+  // ===== VIEW SWITCHING =====
+  const VIEW_TITLES = {overview:'Overview', paralegals:'Paralegals', briefs:'My briefs', messages:'Messages', deliverables:'Deliverables', billing:'Billing'};
+  function showView(name){
+    document.querySelectorAll('.sb-link').forEach(l => l.classList.toggle('active', l.dataset.view === name));
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
+    document.getElementById('pageTitle').textContent = VIEW_TITLES[name] || name;
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+  document.querySelectorAll('.sb-link').forEach(link => {
+    link.addEventListener('click', e => { e.preventDefault(); showView(link.dataset.view); });
+  });
+
+  // ===== FILTER LISTENERS =====
+  document.querySelectorAll('.filters input').forEach(i => i.addEventListener('change', applyFilters));
+  document.getElementById('sortBy').addEventListener('change', applyFilters);
+
+  // ===== INITIAL RENDER =====
+  applyFilters();
+  // Render recommended panel on overview (top 3 litigation-strong with capacity)
+  // Recommended = litigation/commercial-strong with current capacity (typical for Tan & Partners profile)
+  const recs = [...PARALEGALS]
+    .filter(p => (p.practiceAreas.includes('litigation') || p.practiceAreas.includes('commercial')) && p.capacityHours > 0)
+    .sort((a,b) => (b.timesWorkedWithFirm - a.timesWorkedWithFirm) || (b.rating - a.rating))
+    .slice(0,3);
+  document.getElementById('recommendedGrid').innerHTML = recs.map(p => renderCard(p)).join('');
+
+  // Close drawer/modal on ESC
+  document.addEventListener('keydown', e => { if (e.key === 'Escape'){ closeDrawer(); closeBrief(); } });
+</script>
+
+</body>
+</html>

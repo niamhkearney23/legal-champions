@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Legal Champions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EFE3; --surface:#FFFFFF; --ink:#0B121C; --ink-soft:#2A3242;
+  --muted:#6E6A60; --line:#DDD4BF; --accent:#B5894A; --bg-warm:#EAE3D3; --sage:#3A554B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-0.01em;color:var(--ink)}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:36px 28px 60px}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:32px}
+.brand .mark{width:32px;height:32px;border-radius:8px;background:var(--ink);display:grid;place-items:center;color:var(--bg);font-family:'Fraunces',serif;font-weight:600;font-size:16px}
+.brand .mark::before{content:"L"}
+.brand-name{font-family:'Fraunces',serif;font-weight:600;font-size:20px;line-height:1}
+.brand-sub{font-size:10.5px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:3px;font-weight:600}
+
+.row{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+h1{font-size:30px;letter-spacing:-0.02em}
+.muted{color:var(--muted);font-size:13px}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.stat .label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px}
+.stat .num{font-family:'Fraunces',serif;font-weight:600;font-size:28px;line-height:1;letter-spacing:-0.01em}
+.stat .dl{font-size:12px;color:var(--accent);font-weight:600;text-decoration:none;border:1px solid var(--line);padding:6px 11px;border-radius:7px;transition:background .12s, color .12s, border-color .12s}
+.stat .dl:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 14px;border-radius:8px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all .12s}
+.tab:hover{border-color:var(--ink);color:var(--ink)}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.panel h3{padding:16px 22px;border-bottom:1px solid var(--line);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:.2px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:11px 16px;font-size:10.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg-warm);border-bottom:1px solid var(--line)}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--bg)}
+.email{font-family:'SF Mono',ui-monospace,monospace;font-size:12.5px;color:var(--ink-soft)}
+.when{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.empty{padding:36px 24px;text-align:center;color:var(--muted);font-style:italic}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--bg-warm);color:var(--ink-soft);font-size:11px;font-weight:500}
+details{cursor:pointer}
+details summary{font-weight:500;color:var(--ink);font-size:12.5px;list-style:none}
+details summary::after{content:" expand"; font-size:11px;color:var(--accent);font-weight:600}
+details[open] summary::after{content:" hide"}
+details .full{margin-top:6px;padding:8px 10px;background:var(--bg-warm);border-radius:6px;font-size:12.5px;color:var(--ink-soft);white-space:pre-wrap;line-height:1.55}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="brand">
+    <span class="mark"></span>
+    <div>
+      <div class="brand-name">Legal Champions</div>
+      <div class="brand-sub">Admin · captured leads</div>
+    </div>
+  </header>
+
+  <div class="row">
+    <div>
+      <h1>Leads &amp; submissions</h1>
+      <div class="muted" id="loadedAt">Loading…</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div><div class="label">Waiting list</div><div class="num" id="cWaitlist">—</div></div>
+      <a class="dl" href="/admin/waitlist.csv">Download CSV</a>
+    </div>
+    <div class="stat">
+      <div><div class="label">Briefs</div><div class="num" id="cBriefs">—</div></div>
+      <a class="dl" href="/admin/briefs.csv">Download CSV</a>
+    </div>
+    <div class="stat">
+      <div><div class="label">Contacts</div><div class="num" id="cContacts">—</div></div>
+      <a class="dl" href="/admin/contacts.csv">Download CSV</a>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-view="waitlist">Waiting list</button>
+    <button class="tab" data-view="briefs">Briefs</button>
+    <button class="tab" data-view="contacts">Contacts</button>
+  </div>
+
+  <div class="panel">
+    <h3 id="panelTitle">Waiting list</h3>
+    <div id="tableHost"></div>
+  </div>
+
+</div>
+
+<script>
+const fmtTime = iso => {
+  if (!iso) return '';
+  const d = new Date(iso.replace(' ', 'T') + 'Z');
+  if (isNaN(d)) return iso;
+  return d.toLocaleString('en-GB', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+};
+
+const esc = s => (s == null ? '' : String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])));
+
+function rowWaitlist(r){
+  return `<tr>
+    <td class="when">${fmtTime(r.created_at)}</td>
+    <td><strong>${esc(r.firm)}</strong></td>
+    <td>${esc(r.contact_name)}</td>
+    <td class="email">${esc(r.email)}</td>
+    <td>${r.practice_area ? `<span class="tag">${esc(r.practice_area)}</span>` : ''}</td>
+  </tr>`;
+}
+function rowBrief(r){
+  return `<tr>
+    <td class="when">${fmtTime(r.created_at)}</td>
+    <td><strong>${esc(r.firm)}</strong><div class="when">${esc(r.contact_name)}${r.position ? ' · ' + esc(r.position) : ''}</div></td>
+    <td class="email">${esc(r.email)}<div class="when">${esc(r.phone || '')}</div></td>
+    <td><span class="tag">${esc(r.practice_area)}</span><div class="when">${esc(r.engagement_type)}</div></td>
+    <td><details><summary>${esc((r.outline || '').slice(0,60))}${r.outline && r.outline.length > 60 ? '…' : ''}</summary><div class="full">${esc(r.outline)}${r.timeline ? '\n\nTimeline: ' + esc(r.timeline) : ''}</div></details></td>
+  </tr>`;
+}
+function rowContact(r){
+  return `<tr>
+    <td class="when">${fmtTime(r.created_at)}</td>
+    <td><span class="tag">${esc(r.channel)}</span></td>
+    <td class="email">${esc(r.email || '—')}</td>
+    <td><details><summary>${esc((r.message || '').slice(0,80))}${r.message && r.message.length > 80 ? '…' : ''}</summary><div class="full">${esc(r.message)}</div></details></td>
+  </tr>`;
+}
+
+const VIEWS = {
+  waitlist: { title:'Waiting list', headers:['When','Firm','Contact','Email','Practice area'], render:rowWaitlist },
+  briefs:   { title:'Briefs',       headers:['When','Firm / contact','Email / phone','Area / type','Outline'], render:rowBrief },
+  contacts: { title:'Contacts',     headers:['When','Channel','Email','Message'], render:rowContact }
+};
+
+let data = { waitlist:[], briefs:[], contacts:[], counts:{} };
+let currentView = 'waitlist';
+
+function paint(){
+  const v = VIEWS[currentView];
+  document.getElementById('panelTitle').textContent = v.title;
+  const rows = data[currentView] || [];
+  const host = document.getElementById('tableHost');
+  if (!rows.length){
+    host.innerHTML = `<div class="empty">No ${currentView} entries yet.</div>`;
+    return;
+  }
+  host.innerHTML = `
+    <table>
+      <thead><tr>${v.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(v.render).join('')}</tbody>
+    </table>
+  `;
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    currentView = tab.dataset.view;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+    paint();
+  });
+});
+
+async function load(){
+  const res = await fetch('/admin/data.json', { credentials:'same-origin' });
+  data = await res.json();
+  document.getElementById('cWaitlist').textContent = data.counts.waitlist;
+  document.getElementById('cBriefs').textContent   = data.counts.briefs;
+  document.getElementById('cContacts').textContent = data.counts.contacts;
+  document.getElementById('loadedAt').textContent = 'Refreshed ' + new Date().toLocaleTimeString();
+  paint();
+}
+
+load();
+setInterval(load, 30000); // refresh every 30s
+</script>
+
+</body>
+</html>

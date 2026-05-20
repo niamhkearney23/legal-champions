@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Local data
+data/
+*.db
+*.db-*
+
+# Local config
+.env
+.env.local
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.log

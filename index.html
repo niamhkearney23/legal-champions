@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal Champions — Paralegal capacity for Malaysian law firms</title>
+<meta name="description" content="Senior-supervised paralegal support for Malaysian law firms. Litigation, corporate, real estate, commercial — engaged by the hour, the matter, or on retainer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F4EFE3;
+    --bg-warm:#EAE3D3;
+    --ink:#0B121C;
+    --ink-soft:#2A3242;
+    --muted:#6E6A60;
+    --line:#DDD4BF;
+    --accent:#B5894A;
+    --accent-dark:#8E6932;
+    --sage:#3A554B;
+    --gold:#B5894A;
+    --white:#FFFFFF;
+    --radius:8px;
+    --radius-lg:14px;
+    --shadow-sm:0 1px 2px rgba(11,18,28,.03), 0 2px 8px rgba(11,18,28,.04);
+    --shadow-md:0 6px 24px rgba(11,18,28,.06);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .container{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-0.01em;line-height:1.15;color:var(--ink)}
+  h1{font-size:clamp(44px,6.4vw,76px);line-height:1.02;letter-spacing:-0.028em;font-weight:500}
+  h2{font-size:clamp(30px,3.6vw,46px);letter-spacing:-0.022em;font-weight:500}
+  h3{font-size:22px;font-weight:600}
+  p{color:var(--ink-soft)}
+  a{color:inherit;text-decoration:none}
+
+  /* ===== NAV ===== */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,242,.85);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--ink)}
+  .logo-mark{
+    width:32px;height:32px;border-radius:8px;
+    background:var(--ink);
+    display:grid;place-items:center;color:var(--bg);
+    font-family:'Fraunces',serif;font-weight:700;font-size:18px;
+  }
+  .logo-mark::before{content:"L";line-height:1}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:14.5px;color:var(--ink-soft);font-weight:500;transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:999px;
+    font-family:'Inter',sans-serif;font-size:14.5px;font-weight:600;
+    cursor:pointer;border:none;transition:transform .12s ease, background .15s, box-shadow .15s;
+    line-height:1;letter-spacing:-0.005em;
+  }
+  .btn-primary{background:var(--ink);color:var(--bg);}
+  .btn-primary:hover{background:#1c2a44;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+  .btn-accent{background:var(--accent);color:#fff;}
+  .btn-accent:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(181,137,74,.22)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--white)}
+  .btn-lg{padding:15px 28px;font-size:15.5px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink)}
+
+  /* ===== HERO ===== */
+  .hero{padding:120px 0 140px;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;
+    top:-260px;right:-260px;
+    width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(181,137,74,.10) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--white);border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;
+    font-size:13px;color:var(--ink-soft);font-weight:500;
+    margin-bottom:24px;box-shadow:var(--shadow-sm);
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(233,107,71,.18)}
+  .hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .hero-sub{font-size:19px;line-height:1.55;margin:24px 0 36px;max-width:520px;color:var(--ink-soft)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .hero-meta svg{flex-shrink:0;color:var(--sage)}
+
+  .hero-card{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    padding:32px;
+    box-shadow:var(--shadow-md);
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .hero-card-tag{
+    position:absolute;top:-12px;left:32px;
+    background:var(--ink);color:var(--bg);
+    padding:6px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  }
+  .hero-card h3{font-size:24px;margin-bottom:6px}
+  .hero-card .price{display:flex;align-items:baseline;gap:6px;margin:18px 0 24px}
+  .hero-card .price strong{font-family:'Fraunces',serif;font-size:42px;font-weight:600;color:var(--ink);line-height:1}
+  .hero-card .price span{color:var(--muted);font-size:14px}
+  .feature-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+  .feature-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft)}
+  .check{
+    flex-shrink:0;width:20px;height:20px;border-radius:50%;
+    background:var(--sage);color:#fff;display:grid;place-items:center;
+    font-size:11px;margin-top:1px;
+  }
+  .check::before{content:"✓"}
+  .hero-card .btn{width:100%;justify-content:center}
+  .small-print{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+
+  /* ===== TRUST BAR ===== */
+  .trust{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-warm)}
+  .trust-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .trust-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .trust-stats{display:flex;gap:48px;flex-wrap:wrap}
+  .trust-stat strong{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--ink);display:block;line-height:1}
+  .trust-stat span{font-size:13px;color:var(--ink-soft);margin-top:4px;display:block}
+
+  /* ===== SECTIONS ===== */
+  section{padding:130px 0}
+  .section-head{max-width:680px;margin-bottom:56px}
+  .section-tag{
+    display:inline-block;font-size:11.5px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:18px;
+  }
+  .section-head p{font-size:18px;margin-top:18px;line-height:1.6}
+
+  /* ===== AREAS GRID ===== */
+  .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .area{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s;
+  }
+  .area:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d6cdb9}
+  .area-icon{
+    width:44px;height:44px;border-radius:10px;
+    background:var(--bg-warm);
+    display:grid;place-items:center;
+    margin-bottom:18px;color:var(--accent);
+  }
+  .area h3{font-size:19px;margin-bottom:8px}
+  .area p{font-size:14.5px;line-height:1.55}
+
+  /* ===== HOW IT WORKS ===== */
+  .how{background:var(--ink);color:var(--bg);position:relative;overflow:hidden}
+  .how::before{
+    content:"";position:absolute;
+    bottom:-300px;left:-200px;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(233,107,71,.15) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .how h2,.how h3{color:var(--bg)}
+  .how p{color:rgba(250,247,242,.75)}
+  .how .section-tag{color:var(--accent)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+  .step{position:relative}
+  .step-num{
+    font-family:'Fraunces',serif;font-size:14px;font-weight:600;
+    color:var(--accent);letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .step-num::before{
+    content:"";width:32px;height:1px;background:var(--accent);
+  }
+  .step h3{font-size:24px;margin-bottom:10px}
+  .step p{font-size:15px;line-height:1.6}
+
+  /* ===== WHO WE HELP ===== */
+  .who-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+  .who-list{list-style:none;display:flex;flex-direction:column;gap:18px}
+  .who-list li{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:18px 0;border-bottom:1px solid var(--line);
+  }
+  .who-list li:last-child{border-bottom:none}
+  .who-list strong{display:block;font-family:'Fraunces',serif;font-size:18px;color:var(--ink);margin-bottom:4px}
+  .who-list span{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+  .who-list .ico{
+    flex-shrink:0;width:40px;height:40px;border-radius:10px;
+    background:var(--bg-warm);display:grid;place-items:center;color:var(--sage);
+  }
+  .who-quote{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:36px;position:relative;box-shadow:var(--shadow-sm);
+  }
+  .who-quote::before{
+    content:"\201C";position:absolute;top:-18px;left:24px;
+    font-family:'Fraunces',serif;font-size:80px;color:var(--accent);line-height:1;
+  }
+  .who-quote p{font-family:'Fraunces',serif;font-style:italic;font-size:20px;line-height:1.5;color:var(--ink);margin-bottom:20px}
+  .who-quote .who{display:flex;align-items:center;gap:12px}
+  .avatar{width:44px;height:44px;border-radius:50%;background:var(--bg-warm);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;color:var(--accent)}
+  .who-quote .name{font-weight:600;font-size:14px;color:var(--ink);display:block}
+  .who-quote .role{font-size:13px;color:var(--muted)}
+
+  /* ===== BOOK ===== */
+  .book{background:var(--bg-warm)}
+  .book-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+  .book-info h2{margin-bottom:18px}
+  .book-info p{font-size:16.5px;margin-bottom:28px}
+  .book-info .info-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .book-info .info-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft)}
+  .book-info .info-list svg{flex-shrink:0;color:var(--accent);margin-top:2px}
+
+  .form-card{
+    background:var(--white);border-radius:var(--radius-lg);
+    padding:40px;border:1px solid var(--line);box-shadow:var(--shadow-md);
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .field label{font-size:13px;font-weight:600;color:var(--ink);letter-spacing:.2px}
+  .field label .req{color:var(--accent)}
+  .field input,.field select,.field textarea{
+    background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    padding:13px 14px;font-family:inherit;font-size:15px;color:var(--ink);
+    transition:border-color .15s, box-shadow .15s, background .15s;
+    width:100%;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--accent);background:#fff;
+    box-shadow:0 0 0 3px rgba(233,107,71,.15);
+  }
+  .field textarea{resize:vertical;min-height:110px;font-family:inherit;line-height:1.5}
+  .field .hint{font-size:12.5px;color:var(--muted)}
+  .form-card .btn{width:100%;justify-content:center;margin-top:8px}
+  .form-foot{font-size:12.5px;color:var(--muted);margin-top:14px;text-align:center;line-height:1.5}
+  .form-foot a{color:var(--ink);text-decoration:underline}
+
+  .checkbox-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px}
+  .checkbox-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
+  .checkbox-row label{font-size:13px;color:var(--ink-soft);line-height:1.45;font-weight:400}
+
+  /* ===== FAQ ===== */
+  .faq-list{display:flex;flex-direction:column;gap:12px;max-width:820px}
+  .faq{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .faq summary{
+    padding:22px 26px;font-family:'Fraunces',serif;font-weight:600;font-size:18px;
+    color:var(--ink);cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:"+";font-family:'Inter',sans-serif;font-size:24px;font-weight:400;
+    color:var(--accent);transition:transform .2s;flex-shrink:0;
+  }
+  .faq[open] summary::after{content:"−"}
+  .faq-body{padding:0 26px 24px;color:var(--ink-soft);font-size:15px;line-height:1.65}
+
+  /* ===== CTA STRIP ===== */
+  .cta-strip{padding:80px 0}
+  .cta-card{
+    background:var(--ink);color:var(--bg);
+    border-radius:var(--radius-lg);
+    padding:64px;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .cta-card::before{
+    content:"";position:absolute;top:-100px;right:-100px;
+    width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(233,107,71,.25) 0%,transparent 70%);
+  }
+  .cta-card h2{color:var(--bg);max-width:680px;margin:0 auto 18px;position:relative}
+  .cta-card p{color:rgba(250,247,242,.8);max-width:520px;margin:0 auto 32px;font-size:17px;position:relative}
+  .cta-card .btn{position:relative}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink);color:rgba(250,247,242,.7);padding:60px 0 32px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+  .foot-grid h4{color:var(--bg);font-size:14px;margin-bottom:18px;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+  .foot-grid ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .foot-grid a{font-size:14.5px;color:rgba(250,247,242,.7);transition:color .15s}
+  .foot-grid a:hover{color:var(--bg)}
+  .foot-brand{font-family:'Fraunces',serif;font-size:22px;color:var(--bg);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .foot-brand .logo-mark{background:var(--accent);color:#fff}
+  .foot-brand .logo-mark::before{color:#fff}
+  .foot-brand-text p{color:rgba(250,247,242,.7);font-size:14px;line-height:1.6;max-width:320px}
+  .foot-bottom{
+    border-top:1px solid rgba(250,247,242,.12);
+    padding-top:24px;display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(250,247,242,.55);
+  }
+
+  /* ===== PRINCIPALS ===== */
+  .principals{background:var(--bg-warm);padding:120px 0}
+  .principals-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .principal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .principal-solo{max-width:780px;margin:0 auto}
+  .principal-wide h3{font-size:34px}
+  .principal-wide{padding:40px 36px}
+  .principal{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:32px 28px;display:flex;flex-direction:column;
+    transition:transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .principal:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#cdc1a4}
+  .principal .lc-mark{
+    font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .principal .lc-mark::before{content:"";width:28px;height:1px;background:var(--accent)}
+  .principal h3{font-family:'Fraunces',serif;font-size:26px;font-weight:500;line-height:1.15;letter-spacing:-0.015em;margin-bottom:10px;color:var(--ink)}
+  .principal .credentials{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:20px}
+  .principal .principal-areas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+  .principal .principal-tag{
+    background:var(--bg-warm);color:var(--ink-soft);
+    font-size:11.5px;font-weight:500;padding:5px 11px;border-radius:999px;
+  }
+  .principal .supervises{
+    margin-top:auto;padding-top:18px;border-top:1px solid var(--line);
+    font-size:13px;color:var(--ink-soft);line-height:1.55;
+  }
+  .principal .supervises strong{
+    display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--muted);font-weight:700;margin-bottom:5px;
+  }
+  .principal-foot{
+    text-align:center;margin-top:36px;
+    font-size:13px;color:var(--muted);font-style:italic;letter-spacing:.1px;
+  }
+
+  /* ===== PRE-LAUNCH ===== */
+  .prelaunch{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
+    max-width:1040px;margin:0 auto;align-items:start;
+    background:var(--surface,var(--white));border:1px solid var(--line);
+    border-radius:var(--radius-lg);padding:48px;
+  }
+  .prelaunch-info h3{
+    font-family:'Fraunces',serif;font-size:22px;font-weight:500;
+    letter-spacing:-0.005em;margin-bottom:22px;color:var(--ink);
+  }
+  .prelaunch-info .feature-list{margin-bottom:24px}
+  .prelaunch-info .feature-list li{font-size:14.5px;line-height:1.55}
+  .prelaunch-info .feature-list .check{background:var(--accent)}
+  .prelaunch-note{
+    font-size:13px;color:var(--muted);
+    padding-top:18px;border-top:1px solid var(--line-soft,var(--line));
+  }
+  .prelaunch-note a{color:var(--accent);text-decoration:underline}
+  .prelaunch-form{margin:0;padding:32px 30px}
+  .prelaunch-form h4{
+    font-family:'Fraunces',serif;font-size:20px;font-weight:600;
+    color:var(--ink);margin-bottom:6px;letter-spacing:-0.005em;
+  }
+  .prelaunch-form .waitlist-sub{
+    font-size:13px;color:var(--muted);margin-bottom:18px;
+  }
+  .prelaunch-form .btn{width:100%;justify-content:center;margin-top:8px}
+
+  /* ===== PARALEGALS ===== */
+  .paralegals{padding:100px 0;background:var(--bg)}
+  .filter-bar{
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;justify-content:center;
+  }
+  .filter-chip{
+    padding:9px 16px;border-radius:999px;
+    background:var(--white);border:1px solid var(--line);
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;color:var(--ink-soft);
+    cursor:pointer;transition:all .15s;
+  }
+  .filter-chip:hover{border-color:var(--ink);color:var(--ink)}
+  .filter-chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .paralegal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .paralegal-card{
+    background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius-lg);padding:28px;
+    display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s;
+  }
+  .paralegal-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d6cdb9}
+  .paralegal-card.hidden{display:none}
+  .paralegal-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+  .paralegal-avatar{
+    width:60px;height:60px;border-radius:50%;
+    display:grid;place-items:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:#fff;
+    flex-shrink:0;letter-spacing:-0.5px;
+  }
+  .p-name{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+  .p-name h3{font-size:19px;line-height:1.2;margin:0}
+  .verified{
+    width:18px;height:18px;border-radius:50%;
+    background:var(--sage);color:#fff;display:grid;place-items:center;
+    font-size:11px;line-height:1;
+  }
+  .verified::before{content:"✓"}
+  .p-title{font-size:13px;color:var(--muted)}
+  .paralegal-rating{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .stars{color:var(--accent);font-size:14px;letter-spacing:1px;line-height:1}
+  .paralegal-rating .num{font-weight:600;color:var(--ink);font-size:13.5px}
+  .paralegal-rating .count{font-size:13px;color:var(--muted)}
+  .paralegal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .paralegal-tag{
+    background:var(--bg-warm);color:var(--ink-soft);
+    font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:999px;
+  }
+  .paralegal-bio{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px;flex:1}
+  .p-availability{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:5px 11px 5px 9px;border-radius:999px;
+    margin-bottom:10px;font-size:11.5px;line-height:1.3;font-weight:600;
+  }
+  .p-availability .pill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .p-availability.high{background:rgba(58,85,75,.10);color:#2A4A40}
+  .p-availability.high .pill-dot{background:#3A554B}
+  .p-availability.med{background:rgba(181,137,74,.12);color:#7A5A21}
+  .p-availability.med .pill-dot{background:var(--accent)}
+  .p-availability.low{background:rgba(110,106,96,.12);color:#5A5651}
+  .p-availability.low .pill-dot{background:var(--muted)}
+
+  .p-slots{margin-bottom:14px}
+  .p-slots .slots-label{
+    font-size:10.5px;letter-spacing:.7px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:7px;
+  }
+  .p-slots .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .p-slots .slot{
+    background:#fff;border:1px solid var(--line);
+    padding:6px 11px;border-radius:8px;font-size:12.5px;
+    color:var(--ink);font-family:'Inter',sans-serif;font-weight:500;
+    cursor:pointer;transition:all .12s;
+    font-variant-numeric:tabular-nums;
+  }
+  .p-slots .slot:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .p-slots .slot.more{
+    background:transparent;border:1px dashed var(--line);color:var(--muted);
+  }
+  .p-slots .slot.more:hover{background:var(--bg-warm);color:var(--ink);border-color:var(--ink);border-style:solid}
+
+  .paralegal-sample{
+    background:var(--bg-warm);border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .paralegal-sample .label{
+    display:block;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--muted);font-weight:700;margin-bottom:9px;
+  }
+  .paralegal-sample ul{
+    list-style:none;display:flex;flex-direction:column;gap:7px;margin:0;padding:0;
+  }
+  .paralegal-sample li{
+    font-size:12.5px;line-height:1.5;color:var(--ink-soft);
+    padding-left:13px;position:relative;
+  }
+  .paralegal-sample li::before{
+    content:"";position:absolute;left:0;top:8px;
+    width:4px;height:4px;border-radius:50%;background:var(--accent);
+  }
+  .paralegal-engagements{
+    font-size:12.5px;color:var(--muted);font-weight:500;
+    margin-bottom:14px;letter-spacing:.1px;
+  }
+  .paralegal-engagements strong{color:var(--ink);font-weight:700}
+  .paralegal-card .btn{width:100%;justify-content:center}
+  .empty-state{
+    grid-column:1/-1;text-align:center;padding:48px 24px;
+    color:var(--muted);font-size:15px;
+  }
+
+  /* ===== CHATBOT ===== */
+  .chat-fab{
+    position:fixed;bottom:24px;right:24px;z-index:60;
+    background:var(--accent);color:#fff;
+    border:none;border-radius:999px;padding:14px 22px;
+    display:flex;align-items:center;gap:10px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;
+    box-shadow:0 8px 24px rgba(233,107,71,.35);
+    cursor:pointer;transition:transform .15s, box-shadow .15s;
+  }
+  .chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(233,107,71,.45)}
+  .chat-fab .pulse{width:8px;height:8px;border-radius:50%;background:#fff;position:relative}
+  .chat-fab .pulse::after{
+    content:"";position:absolute;inset:-2px;border-radius:50%;
+    background:#fff;opacity:.5;animation:chatPulse 1.8s ease-out infinite;
+  }
+  @keyframes chatPulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.4);opacity:0}}
+  .chat-fab.hidden{display:none}
+  .chat-panel{
+    position:fixed;bottom:24px;right:24px;z-index:61;
+    width:380px;max-width:calc(100vw - 32px);
+    height:600px;max-height:calc(100vh - 48px);
+    background:var(--white);border-radius:20px;
+    box-shadow:0 20px 60px rgba(15,26,46,.25);
+    display:flex;flex-direction:column;overflow:hidden;
+    transform:translateY(20px) scale(.96);opacity:0;
+    pointer-events:none;transform-origin:bottom right;
+    transition:transform .25s ease, opacity .2s ease;
+    border:1px solid var(--line);
+  }
+  .chat-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+  .chat-header{
+    background:var(--ink);color:var(--bg);
+    padding:18px 20px;display:flex;align-items:center;gap:12px;
+  }
+  .chat-header .h-avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--accent);
+    display:grid;place-items:center;color:#fff;
+    font-family:'Fraunces',serif;font-weight:600;font-size:14px;flex-shrink:0;
+  }
+  .chat-header .info{flex:1;line-height:1.2}
+  .chat-header .info strong{display:block;font-size:14.5px;font-weight:600;color:var(--bg)}
+  .chat-header .info span{font-size:12px;color:rgba(250,247,242,.7);display:flex;align-items:center;gap:6px;margin-top:3px}
+  .chat-header .info span::before{content:"";width:6px;height:6px;border-radius:50%;background:#3fbf80;box-shadow:0 0 0 2px rgba(63,191,128,.3)}
+  .chat-close{
+    background:transparent;border:none;color:rgba(250,247,242,.65);
+    cursor:pointer;padding:6px;line-height:0;border-radius:6px;
+    transition:background .15s, color .15s;
+  }
+  .chat-close:hover{background:rgba(250,247,242,.1);color:var(--bg)}
+  .chat-body{
+    flex:1;overflow-y:auto;padding:20px;
+    display:flex;flex-direction:column;gap:10px;background:var(--bg);
+  }
+  .chat-msg{
+    max-width:82%;padding:11px 14px;border-radius:14px;
+    font-size:14px;line-height:1.5;
+    animation:msgIn .25s ease;
+  }
+  @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .chat-msg.bot{
+    background:var(--white);color:var(--ink);
+    border:1px solid var(--line);
+    border-bottom-left-radius:4px;align-self:flex-start;
+  }
+  .chat-msg.user{
+    background:var(--ink);color:var(--bg);
+    border-bottom-right-radius:4px;align-self:flex-end;
+  }
+  .chat-typing{
+    display:flex;gap:4px;padding:14px 16px;background:var(--white);
+    border:1px solid var(--line);border-radius:14px;
+    border-bottom-left-radius:4px;
+    align-self:flex-start;width:fit-content;
+  }
+  .chat-typing span{
+    width:7px;height:7px;border-radius:50%;background:var(--muted);
+    animation:typing 1.2s infinite;
+  }
+  .chat-typing span:nth-child(2){animation-delay:.15s}
+  .chat-typing span:nth-child(3){animation-delay:.3s}
+  @keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  .chat-quick{
+    padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;background:var(--bg);
+  }
+  .chat-quick button{
+    padding:8px 12px;border-radius:999px;
+    background:var(--white);border:1px solid var(--line);
+    font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);
+    cursor:pointer;transition:all .15s;font-weight:500;
+  }
+  .chat-quick button:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .chat-input{
+    display:flex;gap:8px;padding:14px 16px;
+    border-top:1px solid var(--line);background:var(--white);
+  }
+  .chat-input input{
+    flex:1;background:var(--bg);border:1px solid var(--line);
+    padding:11px 14px;border-radius:999px;
+    font-family:inherit;font-size:14px;color:var(--ink);
+    outline:none;transition:border-color .15s, box-shadow .15s;
+  }
+  .chat-input input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(233,107,71,.15)}
+  .chat-send{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--accent);color:#fff;border:none;
+    display:grid;place-items:center;cursor:pointer;
+    transition:background .15s;flex-shrink:0;
+  }
+  .chat-send:hover{background:var(--accent-dark)}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:980px){
+    .hero{padding:48px 0 64px}
+    .hero-grid,.who-grid,.book-grid{grid-template-columns:1fr;gap:48px}
+    .areas-grid,.paralegal-grid,.principal-grid{grid-template-columns:repeat(2,1fr)}
+    .principals{padding:80px 0}
+    .prelaunch{grid-template-columns:1fr;padding:32px 24px;gap:32px}
+    .steps{grid-template-columns:1fr;gap:36px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+    section{padding:72px 0}
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;
+      background:var(--white);padding:24px;border-bottom:1px solid var(--line);
+      gap:18px;align-items:stretch;
+    }
+    .menu-toggle{display:block}
+    .cta-card{padding:48px 28px}
+  }
+  @media (max-width:640px){
+    .chat-panel{
+      bottom:0;right:0;left:0;
+      width:100vw;max-width:100vw;
+      height:100vh;max-height:100vh;
+      border-radius:0;
+    }
+    .chat-fab{bottom:16px;right:16px;padding:12px 18px;font-size:13.5px}
+  }
+  @media (max-width:560px){
+    .areas-grid,.paralegal-grid,.principal-grid{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr;gap:0;margin-bottom:0}
+    .form-card{padding:28px 22px}
+    .trust-stats{gap:28px}
+    .hero-card{padding:26px 22px}
+    .foot-grid{grid-template-columns:1fr}
+    .paralegal-card{padding:24px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"></span>
+      Legal Champions
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#principals">Principals</a>
+      <a href="#areas">Practice support</a>
+      <a href="#paralegals">Paralegals</a>
+      <a href="#pricing">Engagement</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book" class="btn btn-primary">Brief a paralegal</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Waiting list open · Engagements from Q1 2027</span>
+      <h1>Paralegal capacity, on your firm's terms.</h1>
+      <p class="hero-sub">Vetted, senior-supervised paralegal support for Malaysian law firms — engaged by the hour, by the matter, or as a dedicated resource embedded with your team.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-accent btn-lg">Brief a paralegal</a>
+        <a href="#paralegals" class="btn btn-ghost btn-lg">View our paralegals</a>
+      </div>
+      <div class="hero-meta">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          NDA same business day
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Senior counsel supervision
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Response within 4 hours
+        </span>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <span class="hero-card-tag">Most-requested</span>
+      <h3>Litigation support brief</h3>
+      <p style="font-size:14.5px">Court bundles, document review, written submissions and chronologies — prepared to your firm's house style.</p>
+      <div class="price">
+        <strong>From RM 200</strong>
+        <span>per hour · senior-supervised</span>
+      </div>
+      <ul class="feature-list">
+        <li><span class="check"></span> Conflicts cleared before commencement</li>
+        <li><span class="check"></span> Written scope and fee estimate within 24 hours</li>
+        <li><span class="check"></span> Final review by senior counsel before delivery</li>
+        <li><span class="check"></span> Itemised monthly statement</li>
+      </ul>
+      <a href="#paralegals" class="btn btn-accent btn-lg">Join the waiting list</a>
+      <p class="small-print">Larger or ongoing engagement? <a href="#pricing" style="color:var(--accent);text-decoration:underline">See retainer options</a></p>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== PRINCIPALS ===== -->
+<section class="principals" id="principals">
+  <div class="container">
+    <div class="section-head principals-head">
+      <span class="section-tag">Under the supervision of</span>
+      <h2>Principals &amp; supervising counsel.</h2>
+      <p>Every brief is supervised end-to-end by an admitted Advocate &amp; Solicitor of the High Court of Malaya. Members of the Malaysian Bar; carrying professional indemnity cover applicable to the engagement.</p>
+    </div>
+
+    <div class="principal-solo">
+      <article class="principal principal-wide">
+        <div class="lc-mark">Founding principal &amp; supervising counsel</div>
+        <h3>Thomas Philip</h3>
+        <div class="credentials">Advocate &amp; Solicitor of the High Court of Malaya · Founding Partner, Messrs Thomas Philip, Advocates &amp; Solicitors · LLB (Hons)</div>
+        <div class="principal-areas">
+          <span class="principal-tag">Civil litigation</span>
+          <span class="principal-tag">Commercial dispute resolution</span>
+          <span class="principal-tag">Constitutional &amp; public-interest matters</span>
+        </div>
+        <div class="supervises">
+          <strong>Direct supervision of all paralegal work</strong>
+          Every brief is reviewed by Mr Philip or by a senior solicitor at Messrs Thomas Philip nominated by him, before it is delivered to the engaging firm. Engagement letters name the reviewing solicitor and the cover applicable to the matter.
+        </div>
+      </article>
+    </div>
+
+    <p class="principal-foot">As the practice grows, additional supervising counsel will be named here.</p>
+  </div>
+</section>
+
+<!-- ===== AREAS ===== -->
+<section id="areas">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Practice support</span>
+      <h2>The work your associates shouldn't be doing.</h2>
+      <p>We handle the leverage-heavy paralegal work — research, drafting, due diligence, bundles — so your fee-earners can focus on counsel, client and court.</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Legal research &amp; memoranda</h3>
+        <p>Case law, statutory interpretation and comparative analysis, structured into memos written to your house style.</p>
+      </div>
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+        <h3>Document review &amp; disclosure</h3>
+        <p>Data-room reviews, e-disclosure, privilege review and structured findings — discreet teams scaled to your matter.</p>
+      </div>
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Court bundles &amp; litigation support</h3>
+        <p>Pleadings, indexed bundles to court directions, chronologies and witness statements — to filing standards.</p>
+      </div>
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <h3>Due diligence</h3>
+        <p>Legal, corporate, IP and real-estate DD for M&amp;A and financing transactions — reports your partners can sign off.</p>
+      </div>
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Drafting &amp; redlines</h3>
+        <p>Contracts, agreements, SPAs, NDAs and comparative redlines, prepared in your precedent format with a final senior review.</p>
+      </div>
+      <div class="area">
+        <div class="area-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <h3>Corporate secretarial &amp; SSM</h3>
+        <p>Resolutions, statutory registers, SSM filings, AGM &amp; EGM preparation — quietly handled to deadline.</p>
+      </div>
+    </div>
+    <p style="margin-top:32px;font-size:14.5px;color:var(--muted);text-align:center">Have an unusual brief? <a href="#book" style="color:var(--accent);text-decoration:underline">Submit it anyway</a> — we'll tell you within four hours if it's something we can scope.</p>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how" id="how-it-works">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">How it works</span>
+      <h2>From brief to delivery, on professional terms.</h2>
+      <p>Every engagement follows the same disciplined process — confidentiality first, scope agreed in writing, work supervised end to end.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Step 01</div>
+        <h3>Submit your brief</h3>
+        <p>Scope, timeline and key parties. Our standard NDA is countersigned and conflicts cleared within the same business day.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 02</div>
+        <h3>We propose, you approve</h3>
+        <p>Within 24 hours: a matched paralegal, written scope, deliverables and fee estimate — issued under engagement letter.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 03</div>
+        <h3>Work delivered, supervised</h3>
+        <p>To your house style and your timeline. Every deliverable is reviewed by senior counsel before it reaches your inbox.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO ===== -->
+<section>
+  <div class="container who-grid">
+    <div>
+      <span class="section-tag">Who we work with</span>
+      <h2>Built for firms doing serious work.</h2>
+      <p style="font-size:17px;margin:18px 0 32px">A managed paralegal team — supervised, confidentiality-bound, and trained on the workflows Malaysian firms already use. We extend your bench; we don't replace it.</p>
+      <ul class="who-list">
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+          <div><strong>Boutique &amp; mid-size firms</strong><span>Augment your bench for peak periods and large matters. Free your associates from low-leverage work.</span></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><strong>Solo practitioners</strong><span>Take on larger matters with research, drafting and bundles fully handled. Bill for your time, not your typing.</span></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div><strong>In-house counsel</strong><span>Outsource contract review, DD and routine drafting on an hourly or retainer basis — your data stays inside an NDA.</span></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div><strong>Litigation teams</strong><span>Court bundles, witness chronologies and disclosure handled to court directions — no last-minute scrambles.</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="who-quote">
+      <p>Quietly indispensable. Their team has become an extension of ours during three significant matters this year, including a contested winding-up petition delivered to filing standard on a four-day turnaround.</p>
+      <div class="who">
+        <div class="avatar">M</div>
+        <div>
+          <span class="name">Managing Partner</span>
+          <span class="role">KL commercial dispute resolution firm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing" style="background:var(--bg-warm)">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin:0 auto 56px">
+      <span class="section-tag">Engagement &amp; fees</span>
+      <h2>Three ways to engage. All transparent.</h2>
+      <p>Every brief is preceded by a written scope and engagement letter. No surprises on the invoice — itemised monthly statements as standard.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:980px;margin:0 auto" class="pricing-grid">
+      <div class="hero-card" style="position:relative">
+        <h3>Hourly engagement</h3>
+        <p style="font-size:14px;margin-top:6px">For ad-hoc briefs and ongoing low-volume support.</p>
+        <div class="price"><strong>From RM 200</strong><span>per hour</span></div>
+        <ul class="feature-list">
+          <li><span class="check"></span> Senior-supervised paralegal time</li>
+          <li><span class="check"></span> Written scope per brief</li>
+          <li><span class="check"></span> Conflicts cleared before commencement</li>
+          <li><span class="check"></span> Itemised monthly statement</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost btn-lg" style="border:1px solid var(--ink)">Discuss hourly</a>
+      </div>
+      <div class="hero-card" style="border:2px solid var(--accent);position:relative">
+        <span class="hero-card-tag" style="background:var(--accent)">Most-requested</span>
+        <h3>Per-matter quote</h3>
+        <p style="font-size:14px;margin-top:6px">Fixed fee against a defined scope. Ideal for DD, bundles, and drafting projects.</p>
+        <div class="price"><strong>Fixed fee</strong><span>scoped per brief</span></div>
+        <ul class="feature-list">
+          <li><span class="check"></span> Detailed scope and deliverables agreed</li>
+          <li><span class="check"></span> Fixed fee — no overrun risk</li>
+          <li><span class="check"></span> Defined SLAs and milestones</li>
+          <li><span class="check"></span> Final QA by senior counsel</li>
+        </ul>
+        <a href="#book" class="btn btn-accent btn-lg">Request a quote</a>
+      </div>
+      <div class="hero-card">
+        <h3>Dedicated paralegal</h3>
+        <p style="font-size:14px;margin-top:6px">A paralegal embedded with your team on retainer.</p>
+        <div class="price"><strong>From RM 15,000</strong><span>per month</span></div>
+        <ul class="feature-list">
+          <li><span class="check"></span> Dedicated paralegal, named to your firm</li>
+          <li><span class="check"></span> Up to 160 hours per month</li>
+          <li><span class="check"></span> Direct access; works your file system</li>
+          <li><span class="check"></span> 30-day notice; replacement on request</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost btn-lg" style="border:1px solid var(--ink)">Discuss retainer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARALEGALS ===== -->
+<section class="paralegals" id="paralegals">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin:0 auto 40px">
+      <span class="section-tag">Pre-launch · Q1 2027</span>
+      <h2>A founding paralegal team, being assembled.</h2>
+      <p>We are recruiting our founding paralegal cohort now and accepting engagements from Q1 2027. Waiting-list firms will be the first briefed.</p>
+    </div>
+
+    <div class="prelaunch">
+      <div class="prelaunch-info">
+        <h3>What founding firms can expect</h3>
+        <ul class="feature-list">
+          <li><span class="check"></span> A small cohort of vetted paralegals across litigation, corporate, real estate and commercial</li>
+          <li><span class="check"></span> Direct supervision by Mr Thomas Philip, Advocate &amp; Solicitor of the High Court of Malaya</li>
+          <li><span class="check"></span> NDA, conflicts and engagement-letter framework in place from day one</li>
+          <li><span class="check"></span> Hourly (from RM 200/hr), per-matter and retainer engagements available at launch</li>
+          <li><span class="check"></span> Priority intake and a pricing concession on your first three briefs</li>
+        </ul>
+        <p class="prelaunch-note">Quiet correspondence in the meantime: <a href="mailto:engage@legalchampions.my">engage@legalchampions.my</a></p>
+      </div>
+
+      <form class="form-card prelaunch-form" id="waitlistForm" onsubmit="return submitWaitlist(event)">
+        <h4>Join the founding waiting list</h4>
+        <p class="waitlist-sub">We will write when engagements open. No marketing in between.</p>
+
+        <div class="field">
+          <label for="wlFirm">Firm name <span class="req">*</span></label>
+          <input type="text" id="wlFirm" name="firm" required placeholder="e.g. Tan &amp; Partners">
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="wlName">Your name <span class="req">*</span></label>
+            <input type="text" id="wlName" name="name" required>
+          </div>
+          <div class="field">
+            <label for="wlEmail">Email <span class="req">*</span></label>
+            <input type="email" id="wlEmail" name="email" required placeholder="you@firm.com">
+          </div>
+        </div>
+        <div class="field">
+          <label for="wlArea">Practice area you'd most likely brief <span class="req">*</span></label>
+          <select id="wlArea" name="area" required>
+            <option value="">Select…</option>
+            <option>Litigation &amp; dispute resolution</option>
+            <option>Corporate / M&amp;A</option>
+            <option>Real estate &amp; conveyancing</option>
+            <option>Commercial &amp; contracts</option>
+            <option>Regulatory</option>
+            <option>Research</option>
+            <option>A mix of the above</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-accent btn-lg">Join the waiting list</button>
+        <p class="form-foot">Held in strict confidence. We will write once, when engagements open.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== BOOK ===== -->
+<section class="book" id="book">
+  <div class="container book-grid">
+    <div class="book-info">
+      <span class="section-tag">Brief a paralegal</span>
+      <h2>Submit your brief.</h2>
+      <p>Our senior consultant will respond within four working hours with a proposed paralegal, written scope and fee estimate. Please keep this brief at a general level — privileged detail follows the countersigned NDA.</p>
+      <ul class="info-list">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div><strong style="color:var(--ink);display:block;margin-bottom:2px">Direct contact</strong>
+          <a href="mailto:engage@legalchampions.my" style="color:var(--accent);text-decoration:underline">engage@legalchampions.my</a></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div><strong style="color:var(--ink);display:block;margin-bottom:2px">Response time</strong>
+          Within four working hours, Mon–Fri.</div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div><strong style="color:var(--ink);display:block;margin-bottom:2px">Confidentiality &amp; conflicts</strong>
+          Standard NDA and conflicts check completed same business day, before any matter detail is shared.</div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="form-card" id="bookForm" onsubmit="return submitBooking(event)">
+      <div class="field">
+        <label for="firmName">Firm name <span class="req">*</span></label>
+        <input type="text" id="firmName" name="firmName" required placeholder="e.g. Tan &amp; Partners">
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="firstName">Your name <span class="req">*</span></label>
+          <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="lastName">Position</label>
+          <input type="text" id="lastName" name="lastName" autocomplete="organization-title" placeholder="e.g. Senior Associate">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@firm.com">
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+60 …">
+        </div>
+      </div>
+      <div class="field">
+        <label for="area">Practice area <span class="req">*</span></label>
+        <select id="area" name="area" required>
+          <option value="">Select practice area…</option>
+          <option>Litigation &amp; dispute resolution</option>
+          <option>Corporate / M&amp;A</option>
+          <option>Real estate &amp; conveyancing</option>
+          <option>Commercial &amp; contracts</option>
+          <option>Regulatory</option>
+          <option>Legal research</option>
+          <option>Corporate secretarial / SSM</option>
+          <option>Other — please specify in scope</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="session">Engagement type <span class="req">*</span></label>
+        <select id="session" name="session" required>
+          <option value="">Select engagement…</option>
+          <option>Hourly engagement (from RM 200/hr)</option>
+          <option>Per-matter quote (fixed fee)</option>
+          <option>Dedicated paralegal / retainer (from RM 15,000/mo)</option>
+          <option>Capability discussion — recommend an approach</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Outline of brief <span class="req">*</span></label>
+        <textarea id="message" name="message" required placeholder="Indicative scope, deliverables and known timelines. Please keep this at a general level until NDA is in place — no privileged detail or party names."></textarea>
+        <span class="hint">A few lines is sufficient. We will propose a scope and request specifics once the NDA is signed.</span>
+      </div>
+      <div class="field">
+        <label for="when">Timeline / urgency</label>
+        <input type="text" id="when" name="when" placeholder="e.g. filing by 30 May; non-urgent; rolling retainer">
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="consent" required>
+        <label for="consent">I am authorised to engage external paralegal support on behalf of my firm and consent to email correspondence regarding this brief.</label>
+      </div>
+      <button type="submit" class="btn btn-accent btn-lg">Submit brief</button>
+      <p class="form-foot">Subject to our <a href="#">engagement terms</a> and <a href="#">privacy notice</a>. This form opens your email client with the brief pre-populated — production deployment will route directly to our intake.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Frequently asked</span>
+      <h2>Questions firms usually ask first.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary>How do you handle confidentiality and conflicts?</summary>
+        <div class="faq-body">Our standard NDA is countersigned within the same business day and precedes any disclosure of matter detail. Conflicts checks are run against our active engagement register before a paralegal is assigned. Privileged work is isolated to the assigned paralegal and supervising solicitor only.</div>
+      </details>
+      <details class="faq">
+        <summary>Who supervises the work?</summary>
+        <div class="faq-body">All deliverables pass through a senior Malaysian solicitor before they reach your firm. Your engagement letter names the supervising solicitor for the matter. Where a brief involves specialist subject matter, an additional senior reviewer with that expertise may be assigned.</div>
+      </details>
+      <details class="faq">
+        <summary>What engagement models do you offer?</summary>
+        <div class="faq-body">Three: hourly engagement (from RM 200/hr) for ad-hoc work; per-matter fixed-fee quotes for defined scopes such as DD reports or bundles; and dedicated retainer (from RM 15,000/month) for a paralegal embedded with your team. All models begin with an engagement letter and written scope.</div>
+      </details>
+      <details class="faq">
+        <summary>How quickly can you commence work?</summary>
+        <div class="faq-body">Most briefs are scoped and a paralegal proposed within 24 hours. For firms on existing retainer, urgent briefs can commence the same day. Court-driven deadlines are flagged on intake and prioritised accordingly.</div>
+      </details>
+      <details class="faq">
+        <summary>What are your paralegals' qualifications?</summary>
+        <div class="faq-body">All hold an LLB or equivalent law degree. Many have completed the Certificate of Legal Practice (CLP) or are pursuing chambering. Several hold LLM specialisations. CVs and writing samples are made available to engaging firms under NDA.</div>
+      </details>
+      <details class="faq">
+        <summary>Do you carry professional indemnity cover?</summary>
+        <div class="faq-body">Yes — our supervising solicitors carry professional indemnity insurance to standards required of Malaysian Bar members. Cover applicable to your matter is specified in the engagement letter. Certificates of currency are available on request.</div>
+      </details>
+      <details class="faq">
+        <summary>How is billing handled?</summary>
+        <div class="faq-body">Hourly engagements are billed monthly with itemised time records. Per-matter fixed fees are invoiced 50% on engagement and 50% on delivery, unless otherwise agreed. Retainers are billed monthly in advance. All invoices issued in Ringgit Malaysia (MYR); other terms can be agreed for international firms.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-strip">
+  <div class="container">
+    <div class="cta-card">
+      <h2>Be among the first firms briefed.</h2>
+      <p>We open engagements in Q1 2027. Founding waiting-list firms receive priority intake and a pricing concession on their first three briefs.</p>
+      <a href="#paralegals" class="btn btn-accent btn-lg">Join the waiting list</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="logo-mark"></span>
+          Legal Champions
+        </div>
+        <div class="foot-brand-text">
+          <p>Senior-supervised paralegal support for Malaysian law firms. Discreet, vetted, billable on your firm's terms.</p>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#areas">Practice support</a></li>
+          <li><a href="#pricing">Engagement &amp; fees</a></li>
+          <li><a href="#book">Brief a paralegal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="#">About Legal Champions</a></li>
+          <li><a href="#paralegals">Our paralegals</a></li>
+          <li><a href="#">Capability deck</a></li>
+          <li><a href="mailto:engage@legalchampions.my">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Governance</h4>
+        <ul>
+          <li><a href="#">Engagement terms</a></li>
+          <li><a href="#">Confidentiality policy</a></li>
+          <li><a href="#">Conflicts policy</a></li>
+          <li><a href="#">Professional indemnity</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Legal Champions Sdn Bhd. Paralegal services.</span>
+      <span>Solicitor supervision by Messrs Thomas Philip, Advocates &amp; Solicitors. · <a href="firm.html" style="color:rgba(250,247,242,.55);text-decoration:underline">Firm sign in</a> · <a href="dashboard.html" style="color:rgba(250,247,242,.55);text-decoration:underline">Paralegal sign in</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== CHATBOT ===== -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open chat">
+  <span class="pulse"></span>
+  Chat with us
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat assistant">
+  <div class="chat-header">
+    <div class="h-avatar">LC</div>
+    <div class="info">
+      <strong>Legal Champions · Concierge</strong>
+      <span>Senior consultant typically responds within minutes</span>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="chatQuick"></div>
+  <form class="chat-input" onsubmit="return sendChat(event)" autocomplete="off">
+    <input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off">
+    <button type="submit" class="chat-send" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  // Booking form → opens user's mail client with everything pre-filled.
+  // Swap this for a real backend submission later (Formspree, Netlify Forms, your own endpoint).
+  async function submitBooking(e){
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      firm:            f.firmName.value,
+      name:            f.firstName.value,
+      position:        f.lastName.value,
+      email:           f.email.value,
+      phone:           f.phone.value,
+      practice_area:   f.area.value,
+      engagement_type: f.session.value,
+      outline:         f.message.value,
+      timeline:        f.when.value
+    };
+
+    try {
+      const res = await fetch('/api/brief', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok){
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || `Request failed (${res.status})`);
+      }
+      f.innerHTML = `
+        <div style="text-align:center;padding:24px 8px">
+          <div style="width:64px;height:64px;border-radius:50%;background:var(--sage);color:#fff;display:grid;place-items:center;font-size:28px;margin:0 auto 18px">✓</div>
+          <h3 style="font-family:'Fraunces',serif;font-size:24px;color:var(--ink);margin-bottom:10px">Brief received</h3>
+          <p style="color:var(--ink-soft);font-size:15px;line-height:1.55;max-width:380px;margin:0 auto 24px">
+            A senior consultant will respond within one working day. NDA and conflicts check complete before any matter detail is exchanged.
+          </p>
+          <p style="font-size:13px;color:var(--muted)">For anything urgent, write to <a href="mailto:engage@legalchampions.my" style="color:var(--accent);text-decoration:underline">engage@legalchampions.my</a> directly.</p>
+        </div>
+      `;
+    } catch (err){
+      btn.disabled = false;
+      btn.textContent = 'Submit brief';
+      const existing = f.querySelector('.form-error');
+      if (existing) existing.remove();
+      const errEl = document.createElement('p');
+      errEl.className = 'form-error';
+      errEl.style.cssText = 'color:var(--red,#C73E3E);font-size:13px;margin-top:10px;text-align:center';
+      errEl.textContent = `Couldn't submit — ${err.message}. You can also write directly to engage@legalchampions.my.`;
+      btn.insertAdjacentElement('afterend', errEl);
+    }
+    return false;
+  }
+
+  // ===== WAITING LIST =====
+  async function submitWaitlist(e){
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      firm:  f.firm.value,
+      name:  f.name.value,
+      email: f.email.value,
+      area:  f.area.value
+    };
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok){
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || `Request failed (${res.status})`);
+      }
+      f.innerHTML = `
+        <div style="text-align:center;padding:32px 8px">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--sage);color:#fff;display:grid;place-items:center;font-size:24px;margin:0 auto 16px">✓</div>
+          <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--ink);margin-bottom:8px">You're on the list</h4>
+          <p style="color:var(--muted);font-size:14px;line-height:1.55;max-width:300px;margin:0 auto">We'll write once, when engagements open in Q1 2027.</p>
+        </div>
+      `;
+    } catch (err){
+      btn.disabled = false;
+      btn.textContent = 'Join the waiting list';
+      const existing = f.querySelector('.form-error');
+      if (existing) existing.remove();
+      const errEl = document.createElement('p');
+      errEl.className = 'form-error';
+      errEl.style.cssText = 'color:var(--red,#C73E3E);font-size:13px;margin-top:10px;text-align:center';
+      errEl.textContent = `Couldn't save — ${err.message}. You can also write directly to engage@legalchampions.my.`;
+      btn.insertAdjacentElement('afterend', errEl);
+    }
+    return false;
+  }
+
+  // ===== PARALEGAL FILTER =====
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c === chip));
+      const grid = document.getElementById('paralegalGrid');
+      grid.querySelectorAll('.empty-state').forEach(el => el.remove());
+      let visible = 0;
+      grid.querySelectorAll('.paralegal-card').forEach(card => {
+        const specs = (card.dataset.specs || '').split(' ');
+        const show = filter === 'all' || specs.includes(filter);
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      if (visible === 0){
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.innerHTML = `No paralegal in this specialism right now. <a href="#book" style="color:var(--accent);text-decoration:underline">Tell us what you need →</a>`;
+        grid.appendChild(empty);
+      }
+    });
+  });
+
+  // ===== BOOK WITH PARALEGAL =====
+  function bookWith(name, slot){
+    document.getElementById('book').scrollIntoView({behavior:'smooth'});
+    setTimeout(() => {
+      const msg = document.getElementById('message');
+      const when = document.getElementById('when');
+      if (msg){
+        const existing = msg.value.trim();
+        const prefix = slot
+          ? `I would like to book an intake call with ${name} for ${slot}. `
+          : `I would like to book an intake call with ${name}. `;
+        if (!existing.startsWith(prefix)) msg.value = prefix + existing;
+        msg.focus();
+        msg.setSelectionRange(msg.value.length, msg.value.length);
+      }
+      if (when && slot && !when.value.trim()){
+        when.value = slot;
+      }
+    }, 700);
+  }
+
+  function showParalegalsFiltered(filter){
+    document.getElementById('paralegals').scrollIntoView({behavior:'smooth'});
+    setTimeout(() => {
+      const chip = document.querySelector(`.filter-chip[data-filter="${filter}"]`);
+      if (chip) chip.click();
+    }, 700);
+  }
+
+  // ===== CHATBOT =====
+  const chatFlows = {
+    intro: {
+      bot: "Good day. I can connect your firm with the right paralegal. How may I assist?",
+      quick: [
+        {t:'Brief a litigation matter', go:'litigation'},
+        {t:'Corporate / M&A support', go:'corporate'},
+        {t:'Real estate / conveyancing', go:'real-estate'},
+        {t:'Commercial drafting', go:'commercial'},
+        {t:'Legal research', go:'research'},
+        {t:'Regulatory work', go:'regulatory'},
+        {t:'Request capability deck', go:'deck'},
+        {t:'Speak to a consultant', go:'consult'}
+      ]
+    },
+    litigation: {bot:"Understood — litigation support. We routinely handle pleadings, court bundles, witness chronologies and written submissions to filing standard. How would you like to proceed?", filter:'litigation', route:true},
+    corporate: {bot:"Noted — corporate and M&A. Our team handles DD data-room reviews, closing checklists and signing pack preparation. How would you like to proceed?", filter:'corporate', route:true},
+    'real-estate': {bot:"Real estate and conveyancing — SPA drafting, completion accounts and land-office filings are core for our team. How would you like to proceed?", filter:'real-estate', route:true},
+    commercial: {bot:"Commercial drafting and review — contracts, SPAs, NDAs and comparative redlines prepared to your house style. How would you like to proceed?", filter:'commercial', route:true},
+    research: {bot:"Legal research — case law, statutory analysis or comparative jurisdictions. Memoranda are issued in your preferred format. How would you like to proceed?", filter:'research', route:true},
+    regulatory: {bot:"Regulatory work — statutory interpretation, regulatory filings and submissions to authority. How would you like to proceed?", filter:'regulatory', route:true},
+    deck: {bot:"Of course. Our capability deck includes practice areas, paralegal credentials, sample deliverables and engagement terms. Shall I have it sent to you?", route:true},
+    consult: {bot:"A senior consultant can be in touch the same business day. Would you prefer email correspondence or a scheduled call?", route:true}
+  };
+
+  const routeOptions = [
+    {t:'Join the waiting list', go:'_paralegals'},
+    {t:'View paralegal profiles', go:'_paralegals'},
+    {t:'Email our consultant', go:'_email'},
+    {t:'Restart enquiry', go:'intro'}
+  ];
+
+  let chatOpen = false;
+  let chatLastNode = 'intro';
+
+  function toggleChat(){
+    const panel = document.getElementById('chatPanel');
+    const fab = document.getElementById('chatFab');
+    chatOpen = !chatOpen;
+    panel.classList.toggle('open', chatOpen);
+    fab.classList.toggle('hidden', chatOpen);
+    if (chatOpen && document.getElementById('chatBody').children.length === 0){
+      renderNode('intro');
+    }
+    if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 250);
+  }
+
+  function addMessage(who, text){
+    const body = document.getElementById('chatBody');
+    const msg = document.createElement('div');
+    msg.className = 'chat-msg ' + who;
+    msg.textContent = text;
+    body.appendChild(msg);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function showTyping(){
+    const body = document.getElementById('chatBody');
+    const t = document.createElement('div');
+    t.className = 'chat-typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    t.id = 'typingIndicator';
+    body.appendChild(t);
+    body.scrollTop = body.scrollHeight;
+  }
+  function hideTyping(){ document.getElementById('typingIndicator')?.remove(); }
+
+  function setQuickReplies(replies){
+    const q = document.getElementById('chatQuick');
+    q.innerHTML = '';
+    replies.forEach(r => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = r.t;
+      b.onclick = () => pickReply(r);
+      q.appendChild(b);
+    });
+  }
+
+  function pickReply(r){
+    addMessage('user', r.t);
+    setQuickReplies([]);
+
+    if (r.go === '_book'){
+      setTimeout(() => {
+        addMessage('bot', "Opening the brief form. We will respond within four working hours.");
+        document.getElementById('book').scrollIntoView({behavior:'smooth'});
+        setTimeout(toggleChat, 900);
+      }, 450);
+      return;
+    }
+    if (r.go === '_paralegals'){
+      setTimeout(() => {
+        addMessage('bot', "Profiles below. Full CVs and writing samples are available under NDA.");
+        const lastFlow = chatFlows[chatLastNode];
+        if (lastFlow?.filter){
+          showParalegalsFiltered(lastFlow.filter);
+        } else {
+          document.getElementById('paralegals').scrollIntoView({behavior:'smooth'});
+        }
+        setTimeout(toggleChat, 1000);
+      }, 450);
+      return;
+    }
+    if (r.go === '_email'){
+      setTimeout(() => {
+        addMessage('bot', "Opening your email client — a senior consultant will respond within four working hours.");
+        window.location.href = 'mailto:engage@legalchampions.my?subject=Enquiry%20from%20the%20site';
+      }, 450);
+      return;
+    }
+    renderNode(r.go);
+  }
+
+  function renderNode(key){
+    chatLastNode = key;
+    const node = chatFlows[key];
+    if (!node) return;
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      addMessage('bot', node.bot);
+      if (node.route) setQuickReplies(routeOptions);
+      else if (node.quick) setQuickReplies(node.quick);
+    }, 650);
+  }
+
+  function sendChat(e){
+    e.preventDefault();
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return false;
+    input.value = '';
+    addMessage('user', text);
+    setQuickReplies([]);
+
+    const lower = text.toLowerCase();
+    let matched = null;
+    if (/litigation|pleading|bundle|witness|trial|writ|summons|injunction|dispute/.test(lower)) matched = 'litigation';
+    else if (/m&a|merger|acquisition|due diligence|\bdd\b|data room|sba|spa|signing|closing/.test(lower)) matched = 'corporate';
+    else if (/conveyanc|land office|spa|developer|tenan|lease|land registr/.test(lower)) matched = 'real-estate';
+    else if (/contract|drafting|redline|nda|t&c|agreement|review/.test(lower)) matched = 'commercial';
+    else if (/research|case law|statute|memo|precedent|jurisdiction/.test(lower)) matched = 'research';
+    else if (/regulat|compliance|authority|enforcement|licen[cs]e/.test(lower)) matched = 'regulatory';
+    else if (/deck|capability|profile|brochure|overview/.test(lower)) matched = 'deck';
+    else if (/speak|call|discuss|consult|meeting/.test(lower)) matched = 'consult';
+
+    if (matched){
+      renderNode(matched);
+    } else {
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        addMessage('bot', "Thank you. To direct your enquiry to the right consultant, please select an option below.");
+        setQuickReplies(chatFlows.intro.quick);
+      }, 750);
+    }
+    return false;
+  }
+</script>
+
+</body>
+</html>
