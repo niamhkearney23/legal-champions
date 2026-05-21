@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-MY">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paralegal · Legal Champions</title>
+<meta name="description" content="Paralegal dashboard · Legal Champions">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F2EDE2;
+  --navy:#1B2A4E;
+  --red:#A5331F;
+  --red-dark:#841F0E;
+  --line:rgba(27,42,78,.15);
+  --line-soft:rgba(27,42,78,.08);
+  --muted:rgba(27,42,78,.6);
+  --muted-soft:rgba(27,42,78,.4);
+  --muted-strong:rgba(27,42,78,.75);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--navy);
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input[type=checkbox]{accent-color:var(--red)}
+
+.top-rule{height:1px;background:rgba(27,42,78,.3)}
+
+/* NAV */
+.nav-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 32px;border-bottom:.5px solid var(--line);
+}
+.brand-wordmark{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:20px;letter-spacing:.22em;color:var(--navy);
+}
+.brand-sub{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.28em;color:var(--muted);margin-left:14px;
+  padding-left:14px;border-left:.5px solid var(--line);
+}
+.nav-right{display:flex;align-items:center;gap:28px}
+.nav-link{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:13px;letter-spacing:.22em;color:var(--muted);
+  transition:color .15s ease;cursor:pointer;
+}
+.nav-link:hover{color:var(--navy)}
+.nav-link.active{color:var(--navy);border-bottom:.5px solid var(--red);padding-bottom:4px}
+.nav-user{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.22em;color:var(--navy);
+}
+
+/* MAIN */
+.shell{max-width:1280px;margin:0 auto;padding:64px 32px 96px}
+
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:64px;flex-wrap:wrap}
+.greeting-eyebrow{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:13px;letter-spacing:.28em;color:var(--red);margin-bottom:18px;
+}
+.greeting{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(40px,5.5vw,72px);line-height:.95;letter-spacing:-.025em;
+  color:var(--navy);
+}
+.greeting-meta{
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--muted-strong);
+  margin-top:20px;max-width:520px;line-height:1.65;
+}
+
+/* STATS STRIP */
+.stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+  padding:32px 0;border-top:.5px solid var(--line);border-bottom:.5px solid var(--line);
+  margin-bottom:80px;
+}
+.stat .label{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.28em;color:var(--muted);margin-bottom:8px;
+}
+.stat .value{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:42px;line-height:1;letter-spacing:-.025em;color:var(--navy);
+  font-variant-numeric:tabular-nums;
+}
+.stat .value small{font-family:'Inter',sans-serif;font-weight:400;font-size:13px;color:var(--muted);margin-left:4px;letter-spacing:0}
+.stat .trend{
+  font-family:'Inter',sans-serif;font-size:12px;color:var(--muted-strong);
+  margin-top:6px;
+}
+
+.section-label{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.28em;color:var(--muted);
+  margin-bottom:22px;
+}
+.section-block{margin-bottom:80px}
+
+/* FOCUS TASKS */
+.focus-rows{border-top:.5px solid var(--line)}
+.focus-row{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:18px 0;border-bottom:.5px solid var(--line);
+  cursor:pointer;
+}
+.focus-row input[type=checkbox]{
+  appearance:none;width:14px;height:14px;border:.5px solid var(--muted);border-radius:0;
+  margin-top:6px;flex-shrink:0;background:transparent;position:relative;
+}
+.focus-row input[type=checkbox]:checked{background:var(--navy);border-color:var(--navy)}
+.focus-row input[type=checkbox]:checked::after{content:"";position:absolute;top:2px;left:4px;width:3px;height:7px;border:solid var(--bg);border-width:0 1px 1px 0;transform:rotate(45deg)}
+.focus-body{flex:1;min-width:0}
+.focus-body .title{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:19px;color:var(--navy);letter-spacing:-.01em;line-height:1.3;
+}
+.focus-row input:checked ~ .focus-body .title{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted-soft)}
+.focus-body .meta{
+  font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);
+  margin-top:4px;
+}
+.focus-tag{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11px;letter-spacing:.22em;color:var(--red);flex-shrink:0;padding-top:8px;
+}
+
+/* MATTERS */
+.matters-rows{border-top:.5px solid var(--line)}
+.matter-row{
+  display:grid;grid-template-columns:auto 1fr auto auto auto;gap:32px;
+  align-items:center;padding:24px 0;border-bottom:.5px solid var(--line);
+  cursor:pointer;transition:background .15s ease;
+}
+.matter-row:hover{background:rgba(27,42,78,.02)}
+.matter-num{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:17px;color:var(--muted-soft);width:36px;
+}
+.matter-info strong{
+  display:block;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:22px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;
+}
+.matter-info .meta{
+  font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);
+  margin-top:4px;
+}
+.matter-status{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.22em;
+}
+.matter-status.in-progress{color:var(--red)}
+.matter-status.in-review{color:var(--navy)}
+.matter-status.drafting{color:rgba(27,42,78,.7)}
+.matter-status.on-hold{color:var(--muted-soft)}
+.matter-hours{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:20px;color:var(--navy);font-variant-numeric:tabular-nums;
+}
+.matter-hours small{font-family:'Inter',sans-serif;font-weight:400;font-size:12px;color:var(--muted);margin-left:2px}
+.matter-deadline{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.22em;color:var(--muted-strong);text-align:right;min-width:120px;
+}
+.matter-deadline.urgent{color:var(--red)}
+
+/* TWO-COL: time + activity */
+.two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;margin-bottom:80px}
+
+.week-bars{display:flex;flex-direction:column;gap:14px}
+.week-bar{display:grid;grid-template-columns:48px 1fr 60px;gap:18px;align-items:center}
+.week-bar .day{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.22em;color:var(--muted);
+}
+.week-bar .track{height:1px;background:var(--line);position:relative}
+.week-bar .fill{height:1px;background:var(--navy);transition:width .3s ease}
+.week-bar .fill.today{background:var(--red);height:3px;margin-top:-1px}
+.week-bar .hrs{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:17px;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
+}
+.week-bar.empty .hrs{color:var(--muted-soft);font-style:italic;font-size:14px}
+
+.feed{display:flex;flex-direction:column;gap:0;border-top:.5px solid var(--line)}
+.feed-item{
+  display:flex;justify-content:space-between;gap:16px;align-items:flex-start;
+  padding:14px 0;border-bottom:.5px solid var(--line);
+}
+.feed-text{
+  font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted-strong);line-height:1.5;flex:1;
+}
+.feed-text strong{color:var(--navy);font-weight:600}
+.feed-time{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:10.5px;letter-spacing:.22em;color:var(--muted-soft);flex-shrink:0;padding-top:2px;
+}
+
+.footer-strip{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  padding:32px;border-top:.5px solid var(--line);margin-top:96px;
+}
+.footer-line{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.22em;color:var(--muted);
+}
+.footer-back{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.22em;color:var(--muted);
+}
+.footer-back:hover{color:var(--red)}
+
+@media (max-width:900px){
+  .nav-bar{padding:16px 20px;flex-wrap:wrap;gap:16px}
+  .brand-sub{margin-left:0;padding-left:0;border-left:0}
+  .nav-right{width:100%;justify-content:flex-start;gap:18px;flex-wrap:wrap}
+  .shell{padding:40px 20px 60px}
+  .greeting{font-size:42px}
+  .stats-strip{grid-template-columns:repeat(2,1fr);gap:32px}
+  .two-col{grid-template-columns:1fr;gap:48px}
+  .matter-row{grid-template-columns:auto 1fr;gap:16px}
+  .matter-row .matter-status, .matter-row .matter-hours, .matter-row .matter-deadline{grid-column:2;justify-self:start;text-align:left;min-width:0}
+}
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<nav class="nav-bar">
+  <div style="display:flex;align-items:center">
+    <a class="brand-wordmark" href="/">LEGAL CHAMPIONS</a>
+    <span class="brand-sub">PARALEGAL</span>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link active">TODAY</a>
+    <a class="nav-link">MATTERS</a>
+    <a class="nav-link">TIME</a>
+    <a class="nav-link">MESSAGES</a>
+    <a class="nav-user">PRIYA S. · LITIGATION</a>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <header class="page-head">
+    <div>
+      <div class="greeting-eyebrow">DASHBOARD · PRE-LAUNCH PREVIEW</div>
+      <h1 class="greeting">Selamat pagi, Priya.</h1>
+      <p class="greeting-meta">Thursday, 21 May 2026 · six active matters across three firms · three deadlines this week, one tomorrow.</p>
+    </div>
+  </header>
+
+  <section class="stats-strip">
+    <div class="stat">
+      <div class="label">HOURS THIS WEEK</div>
+      <div class="value">32<small>/40h</small></div>
+      <div class="trend">↑ 4h vs last week</div>
+    </div>
+    <div class="stat">
+      <div class="label">ACTIVE MATTERS</div>
+      <div class="value">6</div>
+      <div class="trend">Across 3 firms</div>
+    </div>
+    <div class="stat">
+      <div class="label">DUE THIS WEEK</div>
+      <div class="value">3</div>
+      <div class="trend">1 tomorrow · Tan &amp; Partners</div>
+    </div>
+    <div class="stat">
+      <div class="label">IN SENIOR REVIEW</div>
+      <div class="value">2</div>
+      <div class="trend">With supervising counsel</div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-label">TODAY'S FOCUS</div>
+    <div class="focus-rows">
+
+      <label class="focus-row">
+        <input type="checkbox">
+        <div class="focus-body">
+          <div class="title">Finalise indexed bundle &amp; send to senior review</div>
+          <div class="meta">Tan &amp; Partners · Estimated 2h · Due tomorrow 5pm</div>
+        </div>
+        <span class="focus-tag">URGENT</span>
+      </label>
+
+      <label class="focus-row">
+        <input type="checkbox">
+        <div class="focus-body">
+          <div class="title">Apply senior review notes to witness chronology</div>
+          <div class="meta">Wong Chambers · Estimated 1h</div>
+        </div>
+      </label>
+
+      <label class="focus-row">
+        <input type="checkbox">
+        <div class="focus-body">
+          <div class="title">Draft Section 3 of pleadings — Rahman v Federal Govt</div>
+          <div class="meta">Lim Chooi &amp; Associates · Estimated 3h</div>
+        </div>
+      </label>
+
+      <label class="focus-row">
+        <input type="checkbox" checked>
+        <div class="focus-body">
+          <div class="title">Reply to Tan &amp; Partners re tranche 3 disclosure status</div>
+          <div class="meta">Tan &amp; Partners · Estimated 15m · Done</div>
+        </div>
+      </label>
+
+      <label class="focus-row">
+        <input type="checkbox">
+        <div class="focus-body">
+          <div class="title">Submit time log for week 19</div>
+          <div class="meta">Internal · Estimated 10m</div>
+        </div>
+      </label>
+
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-label">ACTIVE MATTERS · 6</div>
+    <div class="matters-rows">
+
+      <div class="matter-row">
+        <span class="matter-num">01.</span>
+        <div class="matter-info">
+          <strong>Court bundle — IP Holdings Sdn Bhd v Mahkota Mall</strong>
+          <div class="meta">Tan &amp; Partners · Litigation</div>
+        </div>
+        <div class="matter-status in-progress">IN PROGRESS</div>
+        <div class="matter-hours">8.5<small>/12h</small></div>
+        <div class="matter-deadline urgent">DUE TOMORROW · 5PM</div>
+      </div>
+
+      <div class="matter-row">
+        <span class="matter-num">02.</span>
+        <div class="matter-info">
+          <strong>Witness chronology — Liew v Liew (Family)</strong>
+          <div class="meta">Wong Chambers · Litigation</div>
+        </div>
+        <div class="matter-status in-review">IN REVIEW</div>
+        <div class="matter-hours">6.0<small>/6h</small></div>
+        <div class="matter-deadline">FRI 22 MAY</div>
+      </div>
+
+      <div class="matter-row">
+        <span class="matter-num">03.</span>
+        <div class="matter-info">
+          <strong>Pleadings draft — Rahman v Federal Govt</strong>
+          <div class="meta">Lim Chooi &amp; Associates · Litigation</div>
+        </div>
+        <div class="matter-status in-progress">IN PROGRESS</div>
+        <div class="matter-hours">4.0<small>/14h</small></div>
+        <div class="matter-deadline">MON 25 MAY</div>
+      </div>
+
+      <div class="matter-row">
+        <span class="matter-num">04.</span>
+        <div class="matter-info">
+          <strong>Research memo — limitation period in tort</strong>
+          <div class="meta">KL Bar Solicitors · Research</div>
+        </div>
+        <div class="matter-status drafting">DRAFTING</div>
+        <div class="matter-hours">2.0<small>/8h</small></div>
+        <div class="matter-deadline">WED 21 MAY</div>
+      </div>
+
+      <div class="matter-row">
+        <span class="matter-num">05.</span>
+        <div class="matter-info">
+          <strong>Disclosure review — tranche 3 documents</strong>
+          <div class="meta">Tan &amp; Partners · Litigation</div>
+        </div>
+        <div class="matter-status on-hold">ON HOLD</div>
+        <div class="matter-hours">18.0<small>/25h</small></div>
+        <div class="matter-deadline">AWAITING FIRM</div>
+      </div>
+
+      <div class="matter-row">
+        <span class="matter-num">06.</span>
+        <div class="matter-info">
+          <strong>Court bundle update — pre-trial conference</strong>
+          <div class="meta">Choo &amp; Partners · Litigation</div>
+        </div>
+        <div class="matter-status in-progress">IN PROGRESS</div>
+        <div class="matter-hours">1.5<small>/10h</small></div>
+        <div class="matter-deadline">THU 28 MAY</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="two-col">
+
+    <div>
+      <div class="section-label">THIS WEEK · WEEK 19</div>
+      <div class="week-bars">
+        <div class="week-bar"><span class="day">MON</span><div class="track"><div class="fill" style="width:81%"></div></div><span class="hrs">6.5h</span></div>
+        <div class="week-bar"><span class="day">TUE</span><div class="track"><div class="fill" style="width:88%"></div></div><span class="hrs">7.0h</span></div>
+        <div class="week-bar"><span class="day">WED</span><div class="track"><div class="fill" style="width:94%"></div></div><span class="hrs">7.5h</span></div>
+        <div class="week-bar"><span class="day">THU</span><div class="track"><div class="fill today" style="width:64%"></div></div><span class="hrs">5.0h</span></div>
+        <div class="week-bar"><span class="day">FRI</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="hrs">—</span></div>
+        <div class="week-bar empty"><span class="day">SAT</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="hrs">—</span></div>
+        <div class="week-bar empty"><span class="day">SUN</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="hrs">—</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">RECENT ACTIVITY</div>
+      <div class="feed">
+        <div class="feed-item">
+          <div class="feed-text"><strong>Bahari T.</strong> approved your witness chronology for Wong Chambers</div>
+          <div class="feed-time">09:42</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">New message from <strong>Tan &amp; Partners</strong> on the IP Holdings bundle</div>
+          <div class="feed-time">08:15</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text"><strong>Marcus B.</strong> delivered the DD report to Lim Chooi &amp; Associates</div>
+          <div class="feed-time">07:58</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">You logged <strong>7.5h</strong> across three matters yesterday</div>
+          <div class="feed-time">WED</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">New brief assigned: <strong>Choo &amp; Partners</strong> — court bundle update for trial</div>
+          <div class="feed-time">MON</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer-strip">
+  <div class="footer-line">© 2026 · LEGAL CHAMPIONS SDN BHD · PRE-LAUNCH PREVIEW</div>
+  <a class="footer-back" href="/">← BACK TO PUBLIC SITE</a>
+</footer>
+
+</body>
+</html>
