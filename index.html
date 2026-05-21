@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link rel="preload" as="image" href="/hero-image.webp" fetchpriority="high">
 
@@ -36,9 +36,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 img{display:block;max-width:100%}
 
 /* ===== FONT HELPERS ===== */
-.font-anton{font-family:'Anton',Impact,sans-serif;text-transform:uppercase;letter-spacing:.14em;line-height:1}
-.font-serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.025em;line-height:.9}
-.font-source{font-family:'Source Serif 4','Source Serif Pro',Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.font-roman{font-family:'Cormorant SC',Georgia,serif;font-weight:500;letter-spacing:.18em;line-height:1.1}
+.font-serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.025em;line-height:.95}
 
 /* ===== LAYOUT ===== */
 .top-rule{height:1px;background:rgba(27,42,78,.3)}
@@ -48,14 +47,14 @@ img{display:block;max-width:100%}
   padding:20px 24px;border-bottom:.5px solid var(--line);
 }
 .brand-wordmark{
-  font-family:'Anton',Impact,sans-serif;
-  text-transform:uppercase;font-size:18px;letter-spacing:.14em;line-height:1;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:20px;letter-spacing:.22em;line-height:1;
   color:var(--navy);
 }
-.nav-right{display:flex;align-items:center;gap:22px}
+.nav-right{display:flex;align-items:center;gap:28px}
 .brand-contact{
-  font-family:'Anton',Impact,sans-serif;
-  text-transform:uppercase;font-size:12px;letter-spacing:.18em;line-height:1;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:13px;letter-spacing:.22em;line-height:1;
   color:var(--navy);
 }
 
@@ -66,9 +65,9 @@ img{display:block;max-width:100%}
 .hero-left{display:flex;align-items:center;padding:64px 24px 64px 64px}
 .hero-left-inner{max-width:560px;width:100%}
 .hero-eyebrow{
-  font-family:'Anton',Impact,sans-serif;
-  text-transform:uppercase;font-size:13px;letter-spacing:.18em;line-height:1;
-  color:var(--red);margin-bottom:24px;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:14px;letter-spacing:.28em;line-height:1;
+  color:var(--red);margin-bottom:28px;
 }
 .h1-editorial{
   font-family:'Cormorant Garamond',Georgia,serif;
@@ -78,12 +77,12 @@ img{display:block;max-width:100%}
 }
 
 .btn-red{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:16px 28px;background:var(--red);color:var(--bg);
-  font-family:'Anton',Impact,sans-serif;
-  font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:18px 32px;background:var(--red);color:var(--bg);
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:14px;letter-spacing:.28em;
   border:0;border-radius:0;cursor:pointer;
-  transition:background .15s ease;min-height:48px;
+  transition:background .15s ease;min-height:50px;
 }
 .btn-red:hover{background:var(--red-dark)}
 .btn-red span{display:inline-block}
@@ -102,17 +101,17 @@ img{display:block;max-width:100%}
 .section-inner{max-width:1200px;margin:0 auto}
 
 .label-anton{
-  font-family:'Anton',Impact,sans-serif;
-  text-transform:uppercase;font-size:12px;letter-spacing:.22em;line-height:1;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:13px;letter-spacing:.28em;line-height:1;
   color:var(--muted);
 }
 
 /* ===== SERVICES ===== */
 .services{padding:56px 64px}
 .services-label{
-  font-family:'Anton',Impact,sans-serif;
-  text-transform:uppercase;font-size:12px;letter-spacing:.22em;line-height:1;
-  color:var(--muted);margin-bottom:24px;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:13px;letter-spacing:.28em;line-height:1;
+  color:var(--muted);margin-bottom:28px;
 }
 .services-rows{border-top:.5px solid var(--line)}
 .service-row{
@@ -121,24 +120,25 @@ img{display:block;max-width:100%}
 }
 .service-text{display:flex;gap:16px;flex:1;min-width:0}
 .service-num{
-  font-family:'Anton',Impact,sans-serif;
-  font-size:13px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted-soft);flex-shrink:0;line-height:1;padding-top:6px;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:500;font-style:italic;
+  font-size:18px;color:var(--muted-soft);
+  flex-shrink:0;line-height:1;padding-top:8px;letter-spacing:0;
 }
 .service-body{flex:1;min-width:0}
 .service-name{
-  font-family:'Source Serif 4','Source Serif Pro',Georgia,serif;
-  font-weight:400;color:var(--navy);
-  font-size:22px;letter-spacing:-.01em;line-height:1.2;margin-bottom:8px;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:500;color:var(--navy);
+  font-size:28px;letter-spacing:-.012em;line-height:1.15;margin-bottom:10px;
 }
 .service-desc{
   font-family:'Inter',sans-serif;
   font-size:14px;line-height:1.55;color:var(--muted-strong);max-width:460px;
 }
 .service-cta{
-  font-family:'Anton',Impact,sans-serif;
-  font-size:13px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--navy);text-decoration:none;flex-shrink:0;align-self:flex-start;padding-top:6px;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:13px;letter-spacing:.28em;
+  color:var(--navy);text-decoration:none;flex-shrink:0;align-self:flex-start;padding-top:8px;
   transition:color .15s ease;
 }
 .service-cta:hover{color:var(--red)}
@@ -176,8 +176,9 @@ img{display:block;max-width:100%}
 .book-form{display:flex;flex-direction:column;gap:18px}
 .field{display:flex;flex-direction:column;gap:6px}
 .field-label{
-  font-family:'Anton',Impact,sans-serif;font-size:11px;letter-spacing:.22em;
-  text-transform:uppercase;color:rgba(27,42,78,.5);line-height:1;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:12px;letter-spacing:.28em;
+  color:rgba(27,42,78,.5);line-height:1;
 }
 .field input, .field select, .field textarea{
   width:100%;background:transparent;border:0;
@@ -216,12 +217,13 @@ img{display:block;max-width:100%}
   padding:32px 64px;margin-top:96px;border-top:.5px solid var(--line);
 }
 .footer-line{
-  font-family:'Anton',Impact,sans-serif;font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--muted);line-height:1;
+  font-family:'Cormorant SC',Georgia,serif;
+  font-weight:500;font-size:12px;letter-spacing:.22em;
+  color:var(--muted);line-height:1;
 }
 .footer-line a{color:inherit}
-.footer-portals{font-size:11px;letter-spacing:.18em}
-.footer-portals a{margin-left:14px;color:var(--muted-soft);text-decoration:none}
+.footer-portals{font-size:12px;letter-spacing:.22em}
+.footer-portals a{margin-left:16px;color:var(--muted-soft);text-decoration:none}
 .footer-portals a:hover{color:var(--red)}
 
 /* ===== RESPONSIVE ===== */
