@@ -37,66 +37,70 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 /* NAV */
 .nav-bar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:20px 32px;border-bottom:.5px solid var(--line);
+  padding:24px 40px;border-bottom:.5px solid var(--line);
 }
 .brand-wordmark{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:20px;letter-spacing:.22em;color:var(--navy);
+  font-size:22px;letter-spacing:.24em;color:var(--navy);
 }
 .brand-sub{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:12px;letter-spacing:.28em;color:var(--muted);margin-left:14px;
-  padding-left:14px;border-left:.5px solid var(--line);
+  font-size:12px;letter-spacing:.3em;color:var(--muted);margin-left:18px;
+  padding-left:18px;border-left:.5px solid var(--line);
 }
-.nav-right{display:flex;align-items:center;gap:28px}
+.nav-right{display:flex;align-items:center;gap:36px}
 .nav-link{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:13px;letter-spacing:.22em;color:var(--muted);
-  transition:color .15s ease;cursor:pointer;
+  font-size:13px;letter-spacing:.24em;color:var(--muted);
+  transition:color .15s ease;cursor:pointer;position:relative;padding:6px 0;
 }
 .nav-link:hover{color:var(--navy)}
-.nav-link.active{color:var(--navy);border-bottom:.5px solid var(--red);padding-bottom:4px}
+.nav-link.active{color:var(--navy)}
+.nav-link.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:.5px;background:var(--red);
+}
 .nav-user{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:12px;letter-spacing:.22em;color:var(--navy);
+  font-size:12px;letter-spacing:.24em;color:var(--navy);
 }
 
 /* MAIN */
-.shell{max-width:1280px;margin:0 auto;padding:64px 32px 96px}
+.shell{max-width:1280px;margin:0 auto;padding:88px 40px 128px}
 
-.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:64px;flex-wrap:wrap}
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:88px;flex-wrap:wrap}
 .greeting-eyebrow{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:13px;letter-spacing:.28em;color:var(--red);margin-bottom:18px;
+  font-size:13px;letter-spacing:.32em;color:var(--red);margin-bottom:22px;
 }
 .greeting{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:clamp(40px,5.5vw,72px);line-height:.95;letter-spacing:-.025em;
+  font-size:clamp(48px,6.5vw,88px);line-height:.95;letter-spacing:-.028em;
   color:var(--navy);
 }
 .greeting-meta{
-  font-family:'Inter',sans-serif;font-size:14px;color:var(--muted-strong);
-  margin-top:20px;max-width:520px;line-height:1.65;
+  font-family:'Inter',sans-serif;font-size:15px;color:var(--muted-strong);
+  margin-top:24px;max-width:560px;line-height:1.7;
 }
 .page-action{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:13px;letter-spacing:.28em;color:var(--red);
-  border-bottom:.5px solid var(--red);padding-bottom:4px;
+  font-size:13px;letter-spacing:.32em;color:var(--red);
+  border-bottom:.5px solid var(--red);padding-bottom:5px;
+  transition:color .15s ease, border-color .15s ease;
 }
 .page-action:hover{color:var(--red-dark);border-color:var(--red-dark)}
 
 /* ACTIVE ENGAGEMENTS */
 .section-label{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:12px;letter-spacing:.28em;color:var(--muted);
-  margin-bottom:22px;
+  font-size:12px;letter-spacing:.32em;color:var(--muted);
+  margin-bottom:28px;
 }
-.section-block{margin-bottom:80px}
+.section-block{margin-bottom:104px}
 
 .engagement-rows{border-top:.5px solid var(--line)}
 .engagement-row{
-  display:grid;grid-template-columns:auto 1fr auto auto;gap:32px;
-  align-items:center;padding:24px 0;border-bottom:.5px solid var(--line);
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:36px;
+  align-items:center;padding:28px 0;border-bottom:.5px solid var(--line);
   cursor:pointer;transition:background .15s ease;
 }
 .engagement-row:hover{background:rgba(27,42,78,.02)}
@@ -107,18 +111,24 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .eng-info strong{
   display:block;
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:22px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;
+  font-size:24px;color:var(--navy);letter-spacing:-.012em;line-height:1.2;
 }
 .eng-info .meta{
   font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);
-  margin-top:4px;
+  margin-top:6px;
 }
 .eng-status{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
   font-size:11.5px;letter-spacing:.22em;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.eng-status::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:currentColor;
 }
 .eng-status.in-progress{color:var(--red)}
+.eng-status.in-progress::before{box-shadow:0 0 0 3px rgba(165,51,31,.12)}
 .eng-status.in-review{color:var(--navy)}
+.eng-status.in-review::before{box-shadow:0 0 0 3px rgba(27,42,78,.1)}
 .eng-status.delivered{color:rgba(27,42,78,.55)}
 .eng-hours{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
@@ -129,43 +139,51 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 /* PARALEGAL DIRECTORY */
 .paralegal-rows{border-top:.5px solid var(--line)}
 .paralegal-row{
-  display:grid;grid-template-columns:48px 1fr auto auto auto;gap:32px;
-  align-items:center;padding:32px 0;border-bottom:.5px solid var(--line);
+  display:grid;grid-template-columns:56px 1fr auto auto auto;gap:36px;
+  align-items:center;padding:40px 0;border-bottom:.5px solid var(--line);
+  transition:background .2s ease;
 }
+.paralegal-row:hover{background:rgba(27,42,78,.015)}
 .p-mono{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:22px;color:var(--navy);letter-spacing:.05em;
+  font-size:26px;color:var(--navy);letter-spacing:.04em;
 }
 .p-info{min-width:0}
 .p-info .name{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:24px;color:var(--navy);letter-spacing:-.012em;line-height:1.15;
+  font-size:28px;color:var(--navy);letter-spacing:-.014em;line-height:1.15;
 }
 .p-info .specialism{
-  font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted-strong);
-  margin-top:6px;max-width:520px;line-height:1.55;
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--muted-strong);
+  margin-top:10px;max-width:560px;line-height:1.6;
 }
 .p-info .areas{
-  margin-top:10px;
+  margin-top:14px;
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:11.5px;letter-spacing:.22em;color:var(--muted);
+  font-size:11.5px;letter-spacing:.24em;color:var(--muted);
 }
 .p-rate{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:20px;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
+  font-size:22px;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
 }
-.p-rate small{font-family:'Inter',sans-serif;font-weight:400;font-size:12px;color:var(--muted);display:block;margin-top:3px;letter-spacing:.01em}
+.p-rate small{font-family:'Inter',sans-serif;font-weight:400;font-size:12px;color:var(--muted);display:block;margin-top:4px;letter-spacing:.01em}
 .p-availability{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
   font-size:11.5px;letter-spacing:.22em;text-align:right;
+  display:inline-flex;align-items:center;gap:9px;justify-content:flex-end;
+}
+.p-availability::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:currentColor;
 }
 .p-availability.high{color:var(--red)}
+.p-availability.high::before{box-shadow:0 0 0 3px rgba(165,51,31,.12)}
 .p-availability.med{color:var(--navy)}
+.p-availability.med::before{box-shadow:0 0 0 3px rgba(27,42,78,.1)}
 .p-availability.low{color:var(--muted-soft)}
 .p-cta{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
-  font-size:13px;letter-spacing:.28em;color:var(--navy);
-  border-bottom:.5px solid transparent;padding-bottom:4px;
+  font-size:13px;letter-spacing:.32em;color:var(--navy);
+  border-bottom:.5px solid transparent;padding-bottom:5px;
   transition:color .15s ease, border-color .15s ease;cursor:pointer;
 }
 .paralegal-row:hover .p-cta{color:var(--red);border-color:var(--red)}
@@ -184,17 +202,60 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 }
 .footer-back:hover{color:var(--red)}
 
+/* VIEW SWITCHING */
+.view{display:block}
+.view.hidden{display:none}
+.nav-link[data-view]{cursor:pointer}
+
+/* BRIEFS / BILLING tables */
+.list-table{border-top:.5px solid var(--line)}
+.list-row{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:36px;
+  align-items:center;padding:26px 0;border-bottom:.5px solid var(--line);
+  transition:background .15s ease;
+}
+.list-row:hover{background:rgba(27,42,78,.02)}
+.list-row .ln{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:17px;color:var(--muted-soft);width:36px}
+.list-row .what strong{
+  display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:22px;color:var(--navy);letter-spacing:-.012em;line-height:1.2;
+}
+.list-row .what .meta{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-top:6px}
+.list-row .pill{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;font-size:11.5px;letter-spacing:.22em;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.list-row .pill::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:currentColor;
+}
+.list-row .pill.in-progress{color:var(--red)}
+.list-row .pill.in-progress::before{box-shadow:0 0 0 3px rgba(165,51,31,.12)}
+.list-row .pill.in-review{color:var(--navy)}
+.list-row .pill.in-review::before{box-shadow:0 0 0 3px rgba(27,42,78,.1)}
+.list-row .pill.delivered{color:rgba(27,42,78,.55)}
+.list-row .pill.proposed{color:var(--muted-strong)}
+.list-row .pill.paid{color:rgba(27,42,78,.55)}
+.list-row .pill.due{color:var(--red)}
+.list-row .pill.due::before{box-shadow:0 0 0 3px rgba(165,51,31,.12)}
+.list-row .amt{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:19px;
+  color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
+}
+
 @media (max-width:900px){
   .nav-bar{padding:16px 20px;flex-wrap:wrap;gap:16px}
   .brand-sub{margin-left:0;padding-left:0;border-left:0}
   .nav-right{width:100%;justify-content:flex-start;gap:18px;flex-wrap:wrap}
-  .shell{padding:40px 20px 60px}
-  .greeting{font-size:42px}
-  .engagement-row{grid-template-columns:auto 1fr;gap:16px}
+  .shell{padding:48px 20px 72px}
+  .greeting{font-size:44px}
+  .page-head{margin-bottom:48px;gap:24px}
+  .section-block{margin-bottom:64px}
+  .engagement-row{grid-template-columns:auto 1fr;gap:16px;padding:22px 0}
   .engagement-row .eng-status, .engagement-row .eng-hours{grid-column:2;justify-self:start}
-  .paralegal-row{grid-template-columns:auto 1fr;gap:16px}
-  .paralegal-row .p-rate, .paralegal-row .p-availability, .paralegal-row .p-cta{grid-column:2;justify-self:start;text-align:left}
+  .paralegal-row{grid-template-columns:auto 1fr;gap:16px;padding:28px 0}
+  .paralegal-row .p-rate, .paralegal-row .p-availability, .paralegal-row .p-cta{grid-column:2;justify-self:start;text-align:left;justify-content:flex-start}
   .p-rate small{display:inline-block;margin-left:6px;margin-top:0}
+  .p-info .name{font-size:24px}
 }
 </style>
 </head>
@@ -208,15 +269,18 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     <span class="brand-sub">FIRM PORTAL</span>
   </div>
   <div class="nav-right">
-    <a class="nav-link active">PARALEGALS</a>
-    <a class="nav-link">ENGAGEMENTS</a>
-    <a class="nav-link">BRIEFS</a>
-    <a class="nav-link">BILLING</a>
-    <a class="nav-user">AISHAH K. · TAN &amp; PARTNERS</a>
+    <a class="nav-link active" data-view="paralegals">PARALEGALS</a>
+    <a class="nav-link" data-view="engagements">ENGAGEMENTS</a>
+    <a class="nav-link" data-view="briefs">BRIEFS</a>
+    <a class="nav-link" data-view="billing">BILLING</a>
+    <a class="nav-user" onclick="alert('Proof-of-concept · would open firm profile menu (settings, members, sign out).')" style="cursor:pointer">AISHAH K. · TAN &amp; PARTNERS</a>
   </div>
 </nav>
 
 <main class="shell">
+
+<!-- ===== PARALEGALS VIEW (default) ===== -->
+<div class="view" id="view-paralegals">
 
   <header class="page-head">
     <div>
@@ -224,45 +288,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
       <h1 class="greeting">Engage a paralegal.</h1>
       <p class="greeting-meta">Browse the founding cohort. Each profile shows current availability, hourly rate, and recent matter types. Engage a paralegal directly or speak with our senior consultant first.</p>
     </div>
-    <a class="page-action" href="#">SPEAK WITH CONSULTANT →</a>
+    <a class="page-action" href="#" onclick="alert('Proof-of-concept · would open a call with the senior consultant.');return false">SPEAK WITH CONSULTANT →</a>
   </header>
-
-  <section class="section-block">
-    <div class="section-label">ACTIVE ENGAGEMENTS</div>
-    <div class="engagement-rows">
-
-      <div class="engagement-row">
-        <span class="eng-num">01.</span>
-        <div class="eng-info">
-          <strong>Court bundle — IP Holdings v Mahkota Mall</strong>
-          <div class="meta">Priya S. · Litigation · Filing 30 May</div>
-        </div>
-        <div class="eng-status in-progress">IN PROGRESS</div>
-        <div class="eng-hours">8.5<small>/12h</small></div>
-      </div>
-
-      <div class="engagement-row">
-        <span class="eng-num">02.</span>
-        <div class="eng-info">
-          <strong>SPA review — Acquisition of NewCo Sdn Bhd</strong>
-          <div class="meta">Jay P. · Corporate · Under senior review</div>
-        </div>
-        <div class="eng-status in-review">IN REVIEW</div>
-        <div class="eng-hours">8.0<small>/10h</small></div>
-      </div>
-
-      <div class="engagement-row">
-        <span class="eng-num">03.</span>
-        <div class="eng-info">
-          <strong>Banking facility — PalmCorp term loan documentation</strong>
-          <div class="meta">Aaron C. · Banking · Delivered 19 May</div>
-        </div>
-        <div class="eng-status delivered">DELIVERED</div>
-        <div class="eng-hours">16.0<small>/16h</small></div>
-      </div>
-
-    </div>
-  </section>
 
   <section class="section-block">
     <div class="section-label">FOUNDING COHORT · 6 PARALEGALS</div>
@@ -343,12 +370,223 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     </div>
   </section>
 
+</div><!-- /view-paralegals -->
+
+
+<!-- ===== ENGAGEMENTS VIEW ===== -->
+<div class="view hidden" id="view-engagements">
+
+  <header class="page-head">
+    <div>
+      <div class="greeting-eyebrow">ENGAGEMENTS · 3 ACTIVE</div>
+      <h1 class="greeting">Active engagements.</h1>
+      <p class="greeting-meta">Live matters with assigned paralegals across litigation, corporate and banking. Each row shows status, hours logged against estimate, and the assigned paralegal.</p>
+    </div>
+    <a class="page-action" href="#" onclick="document.querySelector('[data-view=paralegals]').click();return false">ENGAGE NEW →</a>
+  </header>
+
+  <section class="section-block">
+    <div class="section-label">ACTIVE</div>
+    <div class="engagement-rows">
+
+      <div class="engagement-row">
+        <span class="eng-num">01.</span>
+        <div class="eng-info">
+          <strong>Court bundle — IP Holdings v Mahkota Mall</strong>
+          <div class="meta">Priya S. · Litigation · Filing 30 May · Engaged 12 May</div>
+        </div>
+        <div class="eng-status in-progress">IN PROGRESS</div>
+        <div class="eng-hours">8.5<small>/12h</small></div>
+      </div>
+
+      <div class="engagement-row">
+        <span class="eng-num">02.</span>
+        <div class="eng-info">
+          <strong>SPA review — Acquisition of NewCo Sdn Bhd</strong>
+          <div class="meta">Jay P. · Corporate · Under senior review · Engaged 14 May</div>
+        </div>
+        <div class="eng-status in-review">IN REVIEW</div>
+        <div class="eng-hours">8.0<small>/10h</small></div>
+      </div>
+
+      <div class="engagement-row">
+        <span class="eng-num">03.</span>
+        <div class="eng-info">
+          <strong>Banking facility — PalmCorp term loan documentation</strong>
+          <div class="meta">Aaron C. · Banking · Delivered 19 May · Engaged 8 May</div>
+        </div>
+        <div class="eng-status delivered">DELIVERED</div>
+        <div class="eng-hours">16.0<small>/16h</small></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-label">RECENTLY CLOSED</div>
+    <div class="engagement-rows">
+      <div class="engagement-row">
+        <span class="eng-num">04.</span>
+        <div class="eng-info">
+          <strong>NDA precedent refresh — 12 templates</strong>
+          <div class="meta">Marcus B. · Commercial · Closed 7 May</div>
+        </div>
+        <div class="eng-status delivered">CLOSED</div>
+        <div class="eng-hours">6.5<small>/8h</small></div>
+      </div>
+      <div class="engagement-row">
+        <span class="eng-num">05.</span>
+        <div class="eng-info">
+          <strong>DD report — Mont Kiara acquisition</strong>
+          <div class="meta">Hannah L. · Real estate · Closed 2 May</div>
+        </div>
+        <div class="eng-status delivered">CLOSED</div>
+        <div class="eng-hours">14.0<small>/14h</small></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /view-engagements -->
+
+
+<!-- ===== BRIEFS VIEW ===== -->
+<div class="view hidden" id="view-briefs">
+
+  <header class="page-head">
+    <div>
+      <div class="greeting-eyebrow">BRIEFS · 7 LIFETIME</div>
+      <h1 class="greeting">Briefs.</h1>
+      <p class="greeting-meta">Every brief submitted by your firm, with status and assigned paralegal. Filter, export, or revisit any matter in one place.</p>
+    </div>
+    <a class="page-action" href="#" onclick="alert('Proof-of-concept · would open the new-brief intake form.');return false">SUBMIT NEW BRIEF →</a>
+  </header>
+
+  <section class="section-block">
+    <div class="section-label">ALL BRIEFS</div>
+    <div class="list-table">
+
+      <div class="list-row">
+        <span class="ln">01.</span>
+        <div class="what"><strong>Court bundle — IP Holdings v Mahkota Mall</strong><div class="meta">Priya S. · Litigation · LCB-2026-0512</div></div>
+        <div class="pill in-progress">IN PROGRESS</div>
+        <div class="amt">8.5/12h</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">02.</span>
+        <div class="what"><strong>SPA review — Acquisition of NewCo Sdn Bhd</strong><div class="meta">Jay P. · Corporate · LCB-2026-0508</div></div>
+        <div class="pill in-review">IN REVIEW</div>
+        <div class="amt">8.0/10h</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">03.</span>
+        <div class="what"><strong>Banking facility — PalmCorp term loan</strong><div class="meta">Aaron C. · Banking · LCB-2026-0427</div></div>
+        <div class="pill delivered">DELIVERED</div>
+        <div class="amt">16.0/16h</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">04.</span>
+        <div class="what"><strong>Research memo — Schedule 6 limitation</strong><div class="meta">Awaiting your approval · LCB-2026-0517</div></div>
+        <div class="pill proposed">PROPOSAL RECEIVED</div>
+        <div class="amt">—</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">05.</span>
+        <div class="what"><strong>NDA precedent refresh — 12 templates</strong><div class="meta">Marcus B. · Commercial · LCB-2026-0501</div></div>
+        <div class="pill delivered">DELIVERED</div>
+        <div class="amt">6.5/8h</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">06.</span>
+        <div class="what"><strong>DD report — Mont Kiara acquisition</strong><div class="meta">Hannah L. · Real estate · LCB-2026-0418</div></div>
+        <div class="pill delivered">DELIVERED</div>
+        <div class="amt">14.0/14h</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">07.</span>
+        <div class="what"><strong>Witness chronology — Liew v Liew</strong><div class="meta">Priya S. · Litigation · LCB-2026-0403</div></div>
+        <div class="pill delivered">DELIVERED</div>
+        <div class="amt">6.0/6h</div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /view-briefs -->
+
+
+<!-- ===== BILLING VIEW ===== -->
+<div class="view hidden" id="view-billing">
+
+  <header class="page-head">
+    <div>
+      <div class="greeting-eyebrow">BILLING · MAY 2026</div>
+      <h1 class="greeting">RM 15,700.</h1>
+      <p class="greeting-meta">Spend this month across four engagements. Invoices itemised, payable within 14 days. April invoice paid 12 May.</p>
+    </div>
+    <a class="page-action" href="#" onclick="alert('Proof-of-concept · would download a PDF statement.');return false">DOWNLOAD STATEMENT →</a>
+  </header>
+
+  <section class="section-block">
+    <div class="section-label">INVOICES</div>
+    <div class="list-table">
+
+      <div class="list-row">
+        <span class="ln">May</span>
+        <div class="what"><strong>Invoice LC-2026-05</strong><div class="meta">Issued 19 May · Due 2 June · Court bundle, SPA review, banking docs, NDA refresh</div></div>
+        <div class="pill due">DUE</div>
+        <div class="amt">RM 15,700</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">Apr</span>
+        <div class="what"><strong>Invoice LC-2026-04</strong><div class="meta">Issued 30 April · Paid 12 May · DD report, witness chronology</div></div>
+        <div class="pill paid">PAID</div>
+        <div class="amt">RM 12,400</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">Mar</span>
+        <div class="what"><strong>Invoice LC-2026-03</strong><div class="meta">Issued 31 March · Paid 8 April · Research memos, drafting support</div></div>
+        <div class="pill paid">PAID</div>
+        <div class="amt">RM 8,200</div>
+      </div>
+
+      <div class="list-row">
+        <span class="ln">Feb</span>
+        <div class="what"><strong>Invoice LC-2026-02</strong><div class="meta">Issued 28 February · Paid 5 March · Onboarding engagements</div></div>
+        <div class="pill paid">PAID</div>
+        <div class="amt">RM 4,800</div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /view-billing -->
+
 </main>
 
 <footer class="footer-strip">
   <div class="footer-line">© 2026 · LEGAL CHAMPIONS SDN BHD · PRE-LAUNCH PREVIEW</div>
   <a class="footer-back" href="/">← BACK TO PUBLIC SITE</a>
 </footer>
+
+<script>
+document.querySelectorAll('.nav-link[data-view]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const view = link.dataset.view;
+    document.querySelectorAll('.nav-link[data-view]').forEach(l => l.classList.toggle('active', l === link));
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('hidden', v.id !== 'view-' + view));
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+</script>
 
 </body>
 </html>
