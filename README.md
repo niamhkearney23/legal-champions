@@ -6,10 +6,8 @@ Pre-launch site + backend for **Legal Champions** — a Malaysian paralegal staf
 
 | File / folder | What it is |
 |---|---|
-| `index.html` | Public website (pre-launch positioning + waiting list) |
-| `demo.html` | One-link entry page that connects all three surfaces |
-| `firm.html` | Firm portal — directory of paralegals, brief submission, drawer with full profiles |
-| `dashboard.html` | Paralegal dashboard — matters, time, messages, reviews |
+| `index.html` | Public website — hero, services, book form |
+| `hero-image.webp` | Hero image (notebook + pen) |
 | `api/` | Node + SQLite backend (Express). See [api/README.md](api/README.md) for details |
 | `data/` | SQLite database file (created on first server run, gitignored) |
 
