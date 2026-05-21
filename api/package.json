@@ -1,7 +1,7 @@
 {
   "name": "legal-champions-api",
   "version": "0.1.0",
-  "description": "Backend for the Legal Champions site — captures waiting-list, brief and contact submissions.",
+  "description": "Backend for the Legal Champions site — public form intake, account auth (firms + paralegals), matters, time tracking, and file uploads.",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,8 +9,9 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "express": "^4.21.1",
     "better-sqlite3": "^11.5.0",
+    "express": "^4.21.1",
+    "multer": "^2.1.1",
     "nodemailer": "^6.9.16"
   },
   "engines": {

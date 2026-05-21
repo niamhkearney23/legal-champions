@@ -1,9 +1,11 @@
 // Legal Champions backend.
-// Serves the static site from the parent folder, exposes /api/* for form submissions,
-// and a basic-auth /admin page for viewing captured leads.
+// Serves the static site from the parent folder, exposes /api/* for form
+// submissions, account auth, matters/time/files, and a basic-auth /admin
+// page for viewing captured leads.
 //
 // Run:    npm install && npm start
-// Env:    PORT, ADMIN_USER, ADMIN_PASS, NOTIFY_EMAIL, SMTP_*
+// Env:    PORT, ADMIN_USER, ADMIN_PASS, DB_PATH, UPLOAD_DIR,
+//         NODE_ENV, NOTIFY_EMAIL, SMTP_*
 
 import express from 'express';
 import { readFile } from 'node:fs/promises';
@@ -12,17 +14,26 @@ import { fileURLToPath } from 'node:url';
 
 import { saveWaitlist, saveBrief, saveContact, listAll, csvForTable } from './db.js';
 import { sendNotification } from './mail.js';
+import { loadSession, authRouter, requirePageAuth } from './auth.js';
+import { matterRouter, fileRouter, paralegalRouter } from './matters.js';
+import { seedIfEmpty } from './seed.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const siteRoot  = resolve(__dirname, '..');
 
-const PORT        = parseInt(process.env.PORT || '4040', 10);
-const ADMIN_USER  = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS  = process.env.ADMIN_PASS || 'changeme';
+const PORT       = parseInt(process.env.PORT || '4040', 10);
+const ADMIN_USER = process.env.ADMIN_USER || 'admin';
+const ADMIN_PASS = process.env.ADMIN_PASS || 'changeme';
 
 const app = express();
-app.use(express.json({ limit: '64kb' }));
+app.use(express.json({ limit: '256kb' }));
 app.disable('x-powered-by');
+
+// Trust the first proxy (Railway, Fly, etc.) so req.ip / x-forwarded-for work.
+app.set('trust proxy', 1);
+
+// Attach req.user / refresh session cookie on every request.
+app.use(loadSession);
 
 // ===== HELPERS =====
 const clientIp = req => (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').toString().split(',')[0].trim();
@@ -42,7 +53,8 @@ function basicAuth(req, res, next) {
   res.set('WWW-Authenticate', 'Basic realm="Legal Champions admin"').status(401).end('Authentication required.');
 }
 
-// Tiny rolling rate limit: max 20 writes / IP / 5 min.
+// Tiny rolling rate limit: max 20 writes / IP / 5 min. Only applied to
+// unauthenticated public form posts.
 const buckets = new Map();
 function rateLimit(req, res, next) {
   const ip = clientIp(req);
@@ -56,7 +68,7 @@ function rateLimit(req, res, next) {
   next();
 }
 
-// ===== API =====
+// ===== PUBLIC SITE INTAKE =====
 app.post('/api/waitlist', rateLimit, async (req, res) => {
   const b = req.body || {};
   if (!isStr(b.firm, 1, 200))         return res.status(400).json({ error: 'Firm name required.' });
@@ -126,7 +138,13 @@ app.post('/api/contact', rateLimit, async (req, res) => {
   res.json({ ok: true, id });
 });
 
-// ===== ADMIN =====
+// ===== ACCOUNTS + MATTERS API =====
+app.use('/api/auth',       authRouter);
+app.use('/api/matters',    matterRouter);
+app.use('/api/files',      fileRouter);
+app.use('/api/paralegals', paralegalRouter);
+
+// ===== ADMIN (basic auth, separate from user accounts) =====
 app.get('/admin', basicAuth, async (req, res) => {
   const html = await readFile(resolve(__dirname, 'admin.html'), 'utf8');
   res.type('html').send(html);
@@ -145,9 +163,53 @@ app.get('/admin/:table.csv', basicAuth, (req, res) => {
 // ===== HEALTH =====
 app.get('/api/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
 
+// ===== AUTH-GATED PORTAL PAGES =====
+// Served BEFORE the static middleware so we can require a session cookie.
+// On no-session, redirects to /login?next=<original>.
+app.get('/firm', requirePageAuth, async (req, res) => {
+  if (req.user.role !== 'firm') return res.redirect('/dashboard');
+  res.type('html').send(await readFile(resolve(siteRoot, 'firm.html'), 'utf8'));
+});
+app.get('/firm.html', (req, res) => res.redirect(301, '/firm'));
+
+app.get('/dashboard', requirePageAuth, async (req, res) => {
+  if (req.user.role !== 'paralegal') return res.redirect('/firm');
+  res.type('html').send(await readFile(resolve(siteRoot, 'dashboard.html'), 'utf8'));
+});
+app.get('/dashboard.html', (req, res) => res.redirect(301, '/dashboard'));
+
+// /login serves the static login page (public).
+app.get('/login', async (req, res) => {
+  if (req.user) {
+    return res.redirect(req.user.role === 'firm' ? '/firm' : '/dashboard');
+  }
+  res.type('html').send(await readFile(resolve(siteRoot, 'login.html'), 'utf8'));
+});
+
 // ===== STATIC SITE =====
-// Served last so /api/* and /admin take precedence.
-app.use(express.static(siteRoot, { extensions: ['html'] }));
+// Served last so /api/* and gated routes take precedence.
+// We explicitly *don't* let express.static expose firm.html / dashboard.html.
+app.use(express.static(siteRoot, {
+  extensions: ['html'],
+  index: 'index.html',
+  setHeaders: (res, path) => {
+    if (/\/(firm|dashboard)\.html$/.test(path)) {
+      // Belt-and-braces: if static somehow tries to serve these, 404 instead.
+      res.status(404).end();
+    }
+  }
+}));
+
+// ===== STARTUP =====
+const seedResult = seedIfEmpty();
+if (seedResult.seeded) {
+  console.log('[seed] inserted demo firm, paralegals, and matters.');
+  console.log('[seed] DEMO LOGINS:');
+  console.log('[seed]   FIRM       aishah@tanpartners.my     password: champion');
+  console.log('[seed]   PARALEGAL  priya@legalchampions.my   password: champion');
+} else {
+  console.log(`[seed] skipped — ${seedResult.count} user(s) already in db.`);
+}
 
 app.listen(PORT, () => {
   console.log(`[server] up on http://localhost:${PORT}`);

@@ -12,7 +12,7 @@ FROM node:20-alpine
 WORKDIR /app
 COPY --from=deps /app/api/node_modules ./api/node_modules
 COPY api ./api
-COPY index.html firm.html dashboard.html hero-image.webp ./
+COPY index.html firm.html dashboard.html login.html hero-image.webp ./
 
 ENV NODE_ENV=production
 ENV PORT=4040

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-MY">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in · Legal Champions</title>
+<meta name="description" content="Sign in to your Legal Champions firm portal or paralegal dashboard.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F2EDE2;
+  --navy:#1B2A4E;
+  --red:#A5331F;
+  --red-dark:#841F0E;
+  --line:rgba(27,42,78,.15);
+  --muted:rgba(27,42,78,.6);
+  --muted-strong:rgba(27,42,78,.75);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--navy);
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+.top-rule{height:1px;background:rgba(27,42,78,.3)}
+
+/* NAV */
+.nav-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 40px;border-bottom:.5px solid var(--line);
+}
+.brand-wordmark{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:22px;letter-spacing:.24em;color:var(--navy);
+}
+.brand-sub{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.3em;color:var(--muted);margin-left:18px;
+  padding-left:18px;border-left:.5px solid var(--line);
+}
+.back-link{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.24em;color:var(--muted);
+}
+.back-link:hover{color:var(--navy)}
+
+/* SHELL */
+.shell{
+  max-width:1280px;margin:0 auto;padding:88px 40px 128px;
+  display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;
+}
+
+/* LEFT — editorial intro */
+.intro-eyebrow{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:13px;letter-spacing:.32em;color:var(--red);margin-bottom:22px;
+}
+.intro-h1{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(48px,5.5vw,80px);line-height:.95;letter-spacing:-.028em;
+  color:var(--navy);
+}
+.intro-meta{
+  font-family:'Inter',sans-serif;font-size:15px;color:var(--muted-strong);
+  margin-top:28px;max-width:480px;line-height:1.7;
+}
+.intro-rule{height:.5px;background:var(--line);margin:48px 0}
+.intro-list{display:flex;flex-direction:column;gap:18px}
+.intro-list .row{display:flex;gap:18px;align-items:baseline}
+.intro-list .num{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:16px;color:var(--muted);min-width:28px;
+}
+.intro-list .text{
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--muted-strong);line-height:1.6;
+}
+.intro-list .text strong{color:var(--navy);font-weight:600}
+
+/* RIGHT — form panel */
+.form-panel{
+  border:.5px solid var(--line);padding:56px 48px;background:rgba(255,255,255,.25);
+}
+.form-eyebrow{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.32em;color:var(--muted);margin-bottom:22px;
+}
+.form-h2{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:36px;letter-spacing:-.02em;color:var(--navy);margin-bottom:36px;
+}
+
+.field{margin-bottom:28px}
+.field label{
+  display:block;
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.28em;color:var(--muted);margin-bottom:10px;
+}
+.field input{
+  width:100%;background:transparent;border:0;border-bottom:.5px solid var(--line);
+  padding:8px 0;font-family:'Inter',sans-serif;font-size:16px;color:var(--navy);
+  outline:none;transition:border-color .15s ease;
+}
+.field input:focus{border-bottom-color:var(--navy)}
+.field input::placeholder{color:rgba(27,42,78,.35)}
+
+.submit-btn{
+  margin-top:12px;width:100%;
+  background:var(--navy);color:var(--bg);
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:13px;letter-spacing:.32em;padding:18px;
+  transition:background .15s ease;
+}
+.submit-btn:hover:not(:disabled){background:var(--red)}
+.submit-btn:disabled{opacity:.6;cursor:wait}
+
+.error{
+  margin-top:20px;padding:14px 16px;
+  border-left:2px solid var(--red);background:rgba(165,51,31,.06);
+  font-family:'Inter',sans-serif;font-size:13.5px;color:var(--red-dark);
+  display:none;
+}
+.error.show{display:block}
+
+.demo-box{
+  margin-top:40px;padding-top:28px;border-top:.5px solid var(--line);
+}
+.demo-label{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11px;letter-spacing:.32em;color:var(--muted);margin-bottom:14px;
+}
+.demo-creds{display:flex;flex-direction:column;gap:10px}
+.demo-cred{
+  display:flex;justify-content:space-between;gap:16px;cursor:pointer;
+  padding:10px 0;border-bottom:.5px dashed var(--line);
+  transition:opacity .15s ease;
+}
+.demo-cred:last-child{border-bottom:0}
+.demo-cred:hover{opacity:.7}
+.demo-cred .role{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11px;letter-spacing:.24em;color:var(--red);
+}
+.demo-cred .email{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-style:italic;
+  font-size:14px;color:var(--navy);
+}
+.demo-hint{
+  font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);
+  margin-top:14px;font-style:italic;
+}
+
+.footer-strip{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  padding:32px 40px;border-top:.5px solid var(--line);
+}
+.footer-line{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.22em;color:var(--muted);
+}
+
+@media (max-width:900px){
+  .nav-bar{padding:16px 20px;flex-wrap:wrap;gap:12px}
+  .brand-sub{margin-left:0;padding-left:0;border-left:0}
+  .shell{grid-template-columns:1fr;gap:48px;padding:48px 20px 72px}
+  .form-panel{padding:36px 28px}
+  .intro-rule{margin:32px 0}
+  .footer-strip{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<nav class="nav-bar">
+  <div style="display:flex;align-items:center">
+    <a class="brand-wordmark" href="/">LEGAL CHAMPIONS</a>
+    <span class="brand-sub">SIGN IN</span>
+  </div>
+  <a class="back-link" href="/">← BACK TO SITE</a>
+</nav>
+
+<main class="shell">
+
+  <section>
+    <div class="intro-eyebrow">FIRM PORTAL · PARALEGAL DASHBOARD</div>
+    <h1 class="intro-h1">Welcome back.</h1>
+    <p class="intro-meta">Sign in with your account email. Firm partners land in the firm portal — paralegals land in their dashboard. The same form for both.</p>
+
+    <div class="intro-rule"></div>
+
+    <div class="intro-list">
+      <div class="row">
+        <span class="num">01.</span>
+        <div class="text"><strong>Firm partners</strong> see your engagements, the paralegal directory, briefs and invoices.</div>
+      </div>
+      <div class="row">
+        <span class="num">02.</span>
+        <div class="text"><strong>Paralegals</strong> see today's focus, your active matters, time log and inbox.</div>
+      </div>
+      <div class="row">
+        <span class="num">03.</span>
+        <div class="text"><strong>Lost your password?</strong> Reply to your welcome email and our team will reset it for you.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-panel">
+    <div class="form-eyebrow">SIGN IN</div>
+    <h2 class="form-h2">Your account.</h2>
+
+    <form id="loginForm" autocomplete="on" novalidate>
+      <div class="field">
+        <label for="email">EMAIL</label>
+        <input type="email" id="email" name="email" autocomplete="username" required placeholder="you@firm.com">
+      </div>
+
+      <div class="field">
+        <label for="password">PASSWORD</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">SIGN IN →</button>
+
+      <div class="error" id="error"></div>
+    </form>
+
+    <div class="demo-box">
+      <div class="demo-label">PROOF-OF-CONCEPT · CLICK TO PREFILL</div>
+      <div class="demo-creds">
+        <div class="demo-cred" data-email="aishah@tanpartners.my" data-password="champion">
+          <span class="role">FIRM</span>
+          <span class="email">aishah@tanpartners.my</span>
+        </div>
+        <div class="demo-cred" data-email="priya@legalchampions.my" data-password="champion">
+          <span class="role">PARALEGAL</span>
+          <span class="email">priya@legalchampions.my</span>
+        </div>
+      </div>
+      <div class="demo-hint">Password for both demo accounts: <strong>champion</strong></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer-strip">
+  <div class="footer-line">© 2026 · LEGAL CHAMPIONS SDN BHD · PRE-LAUNCH PREVIEW</div>
+</footer>
+
+<script>
+// Read ?next= from the URL so we can redirect back after sign-in.
+const params = new URLSearchParams(window.location.search);
+const nextPath = params.get('next') || null;
+
+const form     = document.getElementById('loginForm');
+const errorBox = document.getElementById('error');
+const submit   = document.getElementById('submitBtn');
+
+function showError(msg){
+  errorBox.textContent = msg;
+  errorBox.classList.add('show');
+}
+function clearError(){
+  errorBox.classList.remove('show');
+  errorBox.textContent = '';
+}
+
+// Demo cred chips — prefill the form.
+document.querySelectorAll('.demo-cred').forEach(el => {
+  el.addEventListener('click', () => {
+    document.getElementById('email').value    = el.dataset.email;
+    document.getElementById('password').value = el.dataset.password;
+    document.getElementById('email').focus();
+  });
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearError();
+  submit.disabled = true;
+  submit.textContent = 'SIGNING IN…';
+
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  try {
+    const r = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || 'Sign-in failed.');
+
+    // Route to the right portal.
+    const fallback = data.user.role === 'firm' ? '/firm' : '/dashboard';
+    window.location.href = nextPath && nextPath.startsWith('/') ? nextPath : fallback;
+  } catch (err) {
+    showError(err.message || 'Sign-in failed.');
+    submit.disabled = false;
+    submit.textContent = 'SIGN IN →';
+  }
+});
+</script>
+
+</body>
+</html>
