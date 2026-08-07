@@ -32,6 +32,26 @@ app.disable('x-powered-by');
 // Trust the first proxy (Railway, Fly, etc.) so req.ip / x-forwarded-for work.
 app.set('trust proxy', 1);
 
+// ===== CROSS-ORIGIN =====
+// The frontend lives on lawgistics.my; the API is on Railway. All /api/*
+// requests are cross-origin and need CORS with credentials so cookies flow.
+const ALLOWED_ORIGINS = (process.env.PUBLIC_ORIGINS
+  || 'https://www.lawgistics.my,https://lawgistics.my,http://localhost:8455,http://localhost:4040')
+  .split(',').map(s => s.trim()).filter(Boolean);
+
+app.use('/api', (req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  next();
+});
+
 // Attach req.user / refresh session cookie on every request.
 app.use(loadSession);
 
@@ -145,24 +165,13 @@ app.use('/api/files',      fileRouter);
 app.use('/api/paralegals', paralegalRouter);
 app.use('/api/me',         meRouter);
 
-// ===== PUBLIC BOOKING (no auth) =====
-// Enable CORS for the Lawgistics site to POST from a different origin.
-const PUBLIC_ORIGINS = (process.env.PUBLIC_ORIGINS || 'https://www.lawgistics.my,https://lawgistics.my,http://localhost:8455')
-  .split(',').map(s => s.trim()).filter(Boolean);
+// Public booking API (no auth) — CORS handled by the shared /api middleware above.
+app.use('/api/public', publicRouter);
 
-app.use('/api/public', (req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && PUBLIC_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  }
-  if (req.method === 'OPTIONS') return res.status(204).end();
-  next();
-}, publicRouter);
-
-// Public booking page — no auth needed.
+// Legacy: the old /book, /login, /firm, /dashboard pages served from this app
+// still work (they were the original UI). The primary UI now lives on the
+// Lawgistics static site at /paralegals, /paralegal-signin,
+// /paralegal-workspace, /firm-workspace — those pages call this API cross-origin.
 app.get('/book', async (req, res) => {
   res.type('html').send(await readFile(resolve(siteRoot, 'book.html'), 'utf8'));
 });

@@ -105,20 +105,27 @@ function parseCookies(header) {
   return out;
 }
 
+// Cross-origin cookies (lawgistics.my → Railway API) need SameSite=None + Secure.
+// In dev (localhost, plain HTTP) fall back to Lax without Secure so cookies still
+// work when the site + API share an origin.
+function cookieAttrs(){
+  return process.env.NODE_ENV === 'production'
+    ? 'SameSite=None; Secure'
+    : 'SameSite=Lax';
+}
+
 function setSessionCookie(res, value, expiresIso) {
   const expires = new Date(expiresIso).toUTCString();
-  const secure  = process.env.NODE_ENV === 'production' ? '; Secure' : '';
   res.append(
     'Set-Cookie',
-    `${COOKIE_NAME}=${encodeURIComponent(value)}; Path=/; HttpOnly; SameSite=Lax; Expires=${expires}${secure}`
+    `${COOKIE_NAME}=${encodeURIComponent(value)}; Path=/; HttpOnly; ${cookieAttrs()}; Expires=${expires}`
   );
 }
 
 function clearSessionCookie(res) {
-  const secure = process.env.NODE_ENV === 'production' ? '; Secure' : '';
   res.append(
     'Set-Cookie',
-    `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`
+    `${COOKIE_NAME}=; Path=/; HttpOnly; ${cookieAttrs()}; Max-Age=0`
   );
 }
 
