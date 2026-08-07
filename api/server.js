@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { saveWaitlist, saveBrief, saveContact, listAll, csvForTable } from './db.js';
 import { sendNotification } from './mail.js';
 import { loadSession, authRouter, requirePageAuth } from './auth.js';
-import { matterRouter, fileRouter, paralegalRouter } from './matters.js';
+import { matterRouter, fileRouter, paralegalRouter, meRouter, publicRouter } from './matters.js';
 import { seedIfEmpty } from './seed.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -143,6 +143,29 @@ app.use('/api/auth',       authRouter);
 app.use('/api/matters',    matterRouter);
 app.use('/api/files',      fileRouter);
 app.use('/api/paralegals', paralegalRouter);
+app.use('/api/me',         meRouter);
+
+// ===== PUBLIC BOOKING (no auth) =====
+// Enable CORS for the Lawgistics site to POST from a different origin.
+const PUBLIC_ORIGINS = (process.env.PUBLIC_ORIGINS || 'https://www.lawgistics.my,https://lawgistics.my,http://localhost:8455')
+  .split(',').map(s => s.trim()).filter(Boolean);
+
+app.use('/api/public', (req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && PUBLIC_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  next();
+}, publicRouter);
+
+// Public booking page — no auth needed.
+app.get('/book', async (req, res) => {
+  res.type('html').send(await readFile(resolve(siteRoot, 'book.html'), 'utf8'));
+});
 
 // ===== ADMIN (basic auth, separate from user accounts) =====
 app.get('/admin', basicAuth, async (req, res) => {

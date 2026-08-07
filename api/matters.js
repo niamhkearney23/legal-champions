@@ -28,7 +28,7 @@ import crypto from 'node:crypto';
 import { createReadStream, statSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { db } from './db.js';
+import { db, saveBrief } from './db.js';
 import { requireAuth } from './auth.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -332,4 +332,157 @@ fileRouter.get('/:id', requireAuth(), (req, res) => {
 export const paralegalRouter = Router();
 paralegalRouter.get('/', requireAuth(), (req, res) => {
   res.json({ paralegals: listParalegals.all() });
+});
+
+// --- personal stats (dashboard header) ---
+export const meRouter = Router();
+
+const weekHoursForParalegal = db.prepare(`
+  SELECT entry_date, SUM(hours) AS hours
+  FROM time_entries
+  WHERE paralegal_id = ? AND entry_date >= ? AND entry_date <= ?
+  GROUP BY entry_date
+`);
+const paralegalCounts = db.prepare(`
+  SELECT
+    (SELECT COUNT(*) FROM matters WHERE paralegal_id = @id
+       AND status IN ('in-progress','in-review','proposed')) AS active,
+    (SELECT COUNT(*) FROM matters WHERE paralegal_id = @id AND status = 'in-review') AS in_review,
+    (SELECT COUNT(*) FROM matters
+      WHERE paralegal_id = @id
+        AND status IN ('in-progress','in-review','proposed')
+        AND deadline IS NOT NULL
+        AND deadline >= @weekStart
+        AND deadline <= @weekEnd) AS due_this_week
+`);
+const firmCounts = db.prepare(`
+  SELECT
+    (SELECT COUNT(*) FROM matters WHERE firm_id = @firm_id
+       AND status IN ('in-progress','in-review','proposed')) AS active,
+    (SELECT COUNT(*) FROM matters WHERE firm_id = @firm_id AND status = 'in-review') AS in_review,
+    (SELECT COUNT(*) FROM matters
+      WHERE firm_id = @firm_id
+        AND status IN ('in-progress','in-review','proposed')
+        AND deadline IS NOT NULL
+        AND deadline >= @weekStart
+        AND deadline <= @weekEnd) AS due_this_week,
+    (SELECT IFNULL(SUM(hours),0) FROM time_entries te
+       JOIN matters m ON m.id = te.matter_id
+      WHERE m.firm_id = @firm_id AND te.entry_date >= @weekStart AND te.entry_date <= @weekEnd) AS hours_this_week
+`);
+
+function isoDate(d){ return d.toISOString().slice(0,10); }
+function weekBounds(now = new Date()){
+  const d = new Date(now);
+  // Monday start; Sunday end. JS getDay: 0=Sun..6=Sat
+  const day = (d.getDay() + 6) % 7; // Mon=0..Sun=6
+  const start = new Date(d); start.setDate(d.getDate() - day); start.setHours(0,0,0,0);
+  const end = new Date(start); end.setDate(start.getDate() + 6); end.setHours(23,59,59,999);
+  return { start, end };
+}
+
+meRouter.get('/stats', requireAuth(), (req, res) => {
+  const now = new Date();
+  const { start, end } = weekBounds(now);
+  const weekStart = isoDate(start);
+  const weekEnd   = isoDate(end);
+  const todayIso  = isoDate(now);
+
+  if (req.user.role === 'paralegal') {
+    const raw = weekHoursForParalegal.all(req.user.id, weekStart, weekEnd);
+    const byDate = new Map(raw.map(r => [r.entry_date, r.hours]));
+    const days = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    const week = days.map((label, i) => {
+      const d = new Date(start); d.setDate(start.getDate() + i);
+      const iso = isoDate(d);
+      return {
+        day: label,
+        date: iso,
+        hours: byDate.get(iso) || 0,
+        is_today: iso === todayIso,
+        is_future: iso > todayIso
+      };
+    });
+    const totalWeek = week.reduce((s, d) => s + d.hours, 0);
+    const counts = paralegalCounts.get({ id: req.user.id, weekStart, weekEnd });
+    return res.json({
+      role: 'paralegal',
+      week,
+      totals: {
+        hours_week: Math.round(totalWeek * 10) / 10,
+        target_week: 40,
+        active_matters: counts.active,
+        in_review: counts.in_review,
+        due_this_week: counts.due_this_week
+      }
+    });
+  }
+
+  // Firm
+  if (!req.user.firm_id) return res.json({ role: 'firm', totals: { active_matters: 0, in_review: 0, due_this_week: 0, hours_week: 0 } });
+  const counts = firmCounts.get({ firm_id: req.user.firm_id, weekStart, weekEnd });
+  return res.json({
+    role: 'firm',
+    totals: {
+      active_matters: counts.active,
+      in_review: counts.in_review,
+      due_this_week: counts.due_this_week,
+      hours_week: Math.round((counts.hours_this_week || 0) * 10) / 10
+    }
+  });
+});
+
+// ===== PUBLIC BOOKING (no auth) =====
+// Anyone can browse paralegals and submit a booking request. Requests land
+// in the existing `briefs` table so ops see them alongside other leads.
+
+export const publicRouter = Router();
+
+const listPublicParalegals = db.prepare(`
+  SELECT id, name, bio, hourly_rate, specialisms, availability
+  FROM users WHERE role = 'paralegal'
+  ORDER BY availability ASC, name ASC
+`);
+
+publicRouter.get('/paralegals', (req, res) => {
+  // Public: hide email, expose only what a booker needs to see.
+  res.json({ paralegals: listPublicParalegals.all() });
+});
+
+const isEmailPub = v => typeof v === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) && v.length <= 254;
+const isStrPub   = (v, min = 1, max = 2000) => typeof v === 'string' && v.trim().length >= min && v.trim().length <= max;
+
+publicRouter.post('/book', (req, res) => {
+  const b = req.body || {};
+  if (!isStrPub(b.firm, 1, 200))       return res.status(400).json({ error: 'Firm or organisation required.' });
+  if (!isStrPub(b.name, 1, 200))       return res.status(400).json({ error: 'Your name required.' });
+  if (!isEmailPub(b.email))            return res.status(400).json({ error: 'A valid email is required.' });
+  if (!isStrPub(b.outline, 1, 5000))   return res.status(400).json({ error: 'Outline required (1–5000 chars).' });
+
+  // Optional paralegal preference — encode in the outline.
+  let outline = b.outline.trim();
+  if (b.paralegal_id) {
+    const p = db.prepare('SELECT name FROM users WHERE id = ? AND role = ?').get(b.paralegal_id, 'paralegal');
+    if (p) outline = `[REQUESTED PARALEGAL: ${p.name}]\n\n` + outline;
+  }
+  if (b.source) outline = `[SOURCE: ${String(b.source).slice(0,80)}]\n` + outline;
+
+  const clientIp = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').toString().split(',')[0].trim();
+  const clientUa = (req.headers['user-agent'] || '').slice(0, 400);
+
+  const { id } = saveBrief({
+    firm:            b.firm.trim(),
+    contact_name:    b.name.trim(),
+    position:        b.position?.trim() || null,
+    email:           b.email.trim(),
+    phone:           b.phone?.trim() || 'not provided',
+    practice_area:   b.practice_area?.trim() || 'General',
+    engagement_type: 'Per-matter (via public booking)',
+    outline,
+    timeline:        b.timeline?.trim() || null,
+    ip:              clientIp,
+    user_agent:      clientUa
+  });
+
+  res.json({ ok: true, id });
 });

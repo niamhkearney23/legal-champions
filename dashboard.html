@@ -306,27 +306,70 @@ input[type=checkbox]{accent-color:var(--red)}
   color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
 }
 
-/* WORKSPACE (live API) */
-.ws-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;margin-top:0}
+/* ============ WORKSPACE — PREMIUM ============ */
+/* Top stats strip (pulls real numbers from /api/me/stats) */
+.ws-stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:56px;
+  padding:44px 0;border-top:.5px solid var(--line);border-bottom:.5px solid var(--line);
+  margin-bottom:56px;
+}
+.ws-stat-label{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.32em;color:var(--muted);margin-bottom:14px;
+}
+.ws-stat-value{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:60px;line-height:.95;letter-spacing:-.03em;color:var(--navy);
+  font-variant-numeric:tabular-nums;
+}
+.ws-stat-value small{font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:var(--muted);margin-left:5px;letter-spacing:0}
+.ws-stat-trend{
+  font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted-strong);
+  margin-top:12px;letter-spacing:.01em;
+}
+
+/* Weekly bar chart pulled from real time entries */
+.ws-week-block{margin-bottom:80px}
+.ws-week-bars{display:flex;flex-direction:column;gap:14px}
+.ws-week-bar{display:grid;grid-template-columns:52px 1fr 60px;gap:20px;align-items:center}
+.ws-week-bar .day{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:11.5px;letter-spacing:.24em;color:var(--muted);
+}
+.ws-week-bar .track{height:1px;background:var(--line);position:relative}
+.ws-week-bar .fill{height:1px;background:var(--navy);transition:width .5s ease}
+.ws-week-bar .fill.today{background:var(--red);height:3px;margin-top:-1px}
+.ws-week-bar .hrs{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:17px;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
+}
+.ws-week-bar.empty .hrs{color:var(--muted-soft);font-style:italic;font-size:14px}
+.ws-week-bar.future .hrs{color:var(--muted-soft);font-style:italic;font-size:14px}
+
+/* Two-column layout: matter cards left, working panel right */
+.ws-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;margin-top:0}
 .ws-panel{display:flex;flex-direction:column}
 .ws-empty{
   font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
   font-size:16px;color:var(--muted);padding:24px 0;
 }
 .ws-matter{
-  padding:20px 0;border-bottom:.5px solid var(--line);cursor:pointer;
-  transition:background .15s ease;
+  padding:24px 20px 24px 0;border-bottom:.5px solid var(--line);cursor:pointer;
+  transition:background .15s ease;position:relative;
 }
 .ws-matter:first-child{border-top:.5px solid var(--line)}
 .ws-matter:hover{background:rgba(27,42,78,.02)}
 .ws-matter.selected{background:rgba(27,42,78,.04)}
+.ws-matter.selected::before{
+  content:"";position:absolute;left:-24px;top:0;bottom:0;width:2px;background:var(--red);
+}
 .ws-matter .ws-title{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
-  font-size:19px;color:var(--navy);letter-spacing:-.01em;line-height:1.3;
+  font-size:20px;color:var(--navy);letter-spacing:-.012em;line-height:1.3;
 }
 .ws-matter .ws-meta{
   font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);
-  margin-top:6px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+  margin-top:8px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;
 }
 .ws-matter .ws-status{
   font-family:'Cormorant SC',Georgia,serif;font-weight:500;
@@ -336,6 +379,110 @@ input[type=checkbox]{accent-color:var(--red)}
 .ws-matter .ws-status::before{
   content:"";width:5px;height:5px;border-radius:50%;background:currentColor;
 }
+/* Progress bar on matter cards — hours logged vs estimate */
+.ws-matter .ws-progress{
+  margin-top:14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+}
+.ws-matter .ws-progress-track{height:2px;background:var(--line);position:relative;overflow:hidden}
+.ws-matter .ws-progress-fill{height:2px;background:var(--navy);transition:width .5s ease}
+.ws-matter .ws-progress-fill.over{background:var(--red)}
+.ws-matter .ws-progress-num{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:14px;color:var(--muted-strong);font-variant-numeric:tabular-nums;
+  letter-spacing:.01em;
+}
+/* Deadline badge on matter cards */
+.ws-matter .ws-deadline{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:10.5px;letter-spacing:.22em;
+}
+.ws-matter .ws-deadline.urgent{color:var(--red)}
+.ws-matter .ws-deadline.overdue{color:var(--red);font-weight:600}
+.ws-matter .ws-deadline.soon{color:var(--muted-strong)}
+.ws-matter .ws-deadline.calm{color:var(--muted)}
+
+/* Selected matter description */
+.ws-form .ws-desc{
+  font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted-strong);
+  line-height:1.6;margin-bottom:24px;padding-bottom:24px;border-bottom:.5px solid var(--line);
+}
+
+/* Live TIMER */
+.ws-timer{
+  padding:28px 0;margin-bottom:8px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:16px;
+}
+.ws-timer-display{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:64px;line-height:.95;letter-spacing:-.03em;color:var(--navy);
+  font-variant-numeric:tabular-nums;
+}
+.ws-timer-display.running{color:var(--red)}
+.ws-timer-controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.ws-timer-btn{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:12px;letter-spacing:.32em;padding:14px 28px;
+  border:.5px solid var(--navy);background:transparent;color:var(--navy);
+  transition:all .15s ease;
+}
+.ws-timer-btn:hover:not(:disabled){background:var(--navy);color:var(--bg)}
+.ws-timer-btn.stop{border-color:var(--red);color:var(--red)}
+.ws-timer-btn.stop:hover:not(:disabled){background:var(--red);color:var(--bg)}
+.ws-timer-btn:disabled{opacity:.35;cursor:not-allowed}
+.ws-timer-hint{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:14px;color:var(--muted);
+}
+
+/* Recent time entries — mini list under timer/log */
+.ws-entries{margin-top:16px;border-top:.5px solid var(--line)}
+.ws-entry-row{
+  display:grid;grid-template-columns:60px 1fr 50px;gap:16px;align-items:baseline;
+  padding:14px 0;border-bottom:.5px solid var(--line-soft);
+}
+.ws-entry-row .ws-entry-date{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:13px;color:var(--muted);
+}
+.ws-entry-row .ws-entry-desc{
+  font-family:'Inter',sans-serif;font-size:13.5px;color:var(--navy);line-height:1.5;
+}
+.ws-entry-row .ws-entry-hrs{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:16px;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right;
+}
+
+/* Status action buttons */
+.ws-status-actions{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;
+}
+.ws-status-btn{
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:10.5px;letter-spacing:.28em;padding:9px 16px;
+  border:.5px solid var(--line);background:transparent;color:var(--muted-strong);
+  transition:all .15s ease;
+}
+.ws-status-btn:hover:not(:disabled){border-color:var(--navy);color:var(--navy)}
+.ws-status-btn.current{
+  border-color:var(--red);color:var(--red);cursor:default;
+}
+.ws-status-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* File-type badges */
+.ws-file-row{
+  display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;
+  padding:14px 0;border-bottom:.5px solid var(--line);
+}
+.ws-file-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:44px;padding:5px 8px;
+  font-family:'Cormorant SC',Georgia,serif;font-weight:500;
+  font-size:10px;letter-spacing:.16em;
+  border:.5px solid var(--line);color:var(--muted);
+}
+.ws-file-badge.pdf{color:var(--red);border-color:rgba(165,51,31,.3)}
+.ws-file-badge.doc{color:var(--navy);border-color:rgba(27,42,78,.3)}
+.ws-file-badge.img{color:rgba(27,42,78,.7);border-color:rgba(27,42,78,.2)}
 .ws-form{
   border:.5px solid var(--line);padding:32px;background:rgba(255,255,255,.2);
 }
@@ -795,11 +942,43 @@ input[type=checkbox]{accent-color:var(--red)}
 
   <header class="page-head">
     <div>
-      <div class="greeting-eyebrow">WORKSPACE · LIVE API</div>
-      <h1 class="greeting">Real matters.</h1>
-      <p class="greeting-meta">Pick a matter on the left, log time or upload a deliverable on the right. Everything below talks to the live backend — your edits persist.</p>
+      <div class="greeting-eyebrow">WORKSPACE · LIVE</div>
+      <h1 class="greeting" id="wsGreeting">Your week.</h1>
+      <p class="greeting-meta">Real matters, real hours. Start the timer to log time as you work — or type it in manually. Everything below persists.</p>
     </div>
   </header>
+
+  <!-- Real stats strip pulled from /api/me/stats -->
+  <section class="ws-stats-strip">
+    <div>
+      <div class="ws-stat-label">HOURS THIS WEEK</div>
+      <div class="ws-stat-value" id="statHours">—<small>/40h</small></div>
+      <div class="ws-stat-trend" id="statHoursTrend">—</div>
+    </div>
+    <div>
+      <div class="ws-stat-label">ACTIVE MATTERS</div>
+      <div class="ws-stat-value" id="statActive">—</div>
+      <div class="ws-stat-trend" id="statActiveTrend">—</div>
+    </div>
+    <div>
+      <div class="ws-stat-label">DUE THIS WEEK</div>
+      <div class="ws-stat-value" id="statDue">—</div>
+      <div class="ws-stat-trend" id="statDueTrend">—</div>
+    </div>
+    <div>
+      <div class="ws-stat-label">IN SENIOR REVIEW</div>
+      <div class="ws-stat-value" id="statReview">—</div>
+      <div class="ws-stat-trend" id="statReviewTrend">—</div>
+    </div>
+  </section>
+
+  <!-- Weekly bar chart from real time entries -->
+  <section class="ws-week-block">
+    <div class="section-label">HOURS BY DAY · THIS WEEK</div>
+    <div class="ws-week-bars" id="wsWeekBars">
+      <div class="ws-empty">Loading…</div>
+    </div>
+  </section>
 
   <section class="section-block">
     <div class="ws-grid">
@@ -812,15 +991,39 @@ input[type=checkbox]{accent-color:var(--red)}
         </div>
       </div>
 
-      <!-- RIGHT: log time / upload -->
+      <!-- RIGHT: working panel -->
       <div class="ws-panel">
         <div class="ws-form">
           <div class="section-label" style="margin-bottom:8px">SELECTED MATTER</div>
-          <div id="wsSelectedTitle" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:22px;color:var(--navy);letter-spacing:-.012em;margin-bottom:32px">— pick one on the left —</div>
+          <div id="wsSelectedTitle" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:22px;color:var(--navy);letter-spacing:-.012em;margin-bottom:14px">— pick one on the left —</div>
+          <div class="ws-desc" id="wsSelectedDesc" style="display:none"></div>
 
-          <!-- Log time -->
+          <!-- Status controls -->
+          <div style="margin-bottom:32px" id="wsStatusBox">
+            <span class="ws-form-label" style="margin-bottom:14px">STATUS</span>
+            <div class="ws-status-actions" id="wsStatusActions">
+              <button class="ws-status-btn" data-status="in-progress" disabled>IN PROGRESS</button>
+              <button class="ws-status-btn" data-status="in-review" disabled>IN REVIEW</button>
+              <button class="ws-status-btn" data-status="delivered" disabled>DELIVERED</button>
+            </div>
+          </div>
+
+          <!-- LIVE TIMER -->
+          <div>
+            <span class="ws-form-label">LIVE TIMER</span>
+            <div class="ws-timer">
+              <div class="ws-timer-display" id="wsTimerDisplay">00:00:00</div>
+              <div class="ws-timer-controls">
+                <button type="button" class="ws-timer-btn" id="wsTimerStart" disabled>START</button>
+                <button type="button" class="ws-timer-btn stop" id="wsTimerStop" disabled>STOP &amp; LOG</button>
+                <span class="ws-timer-hint" id="wsTimerHint">Pick a matter to start.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ws-divider">— OR — LOG TIME MANUALLY</div>
+
           <form id="wsTimeForm" autocomplete="off">
-            <span class="ws-form-label">LOG TIME</span>
             <div class="ws-row">
               <div>
                 <input type="number" id="wsHours" placeholder="Hours, e.g. 1.5" step="0.25" min="0.25" max="24" required>
@@ -834,9 +1037,14 @@ input[type=checkbox]{accent-color:var(--red)}
             <div class="ws-flash" id="wsTimeFlash"></div>
           </form>
 
+          <!-- Recent entries -->
+          <div class="ws-divider">RECENT TIME ON THIS MATTER</div>
+          <div id="wsEntriesList" class="ws-entries">
+            <div class="ws-empty" style="padding:16px 0">Pick a matter to see recent entries.</div>
+          </div>
+
           <div class="ws-divider">FILE UPLOAD · MAX 25 MB</div>
 
-          <!-- Upload file -->
           <form id="wsFileForm" autocomplete="off">
             <div class="ws-file-input">
               <input type="file" id="wsFile" required>
@@ -847,7 +1055,6 @@ input[type=checkbox]{accent-color:var(--red)}
             <div class="ws-flash" id="wsFileFlash"></div>
           </form>
 
-          <!-- Existing files -->
           <div class="ws-divider">DELIVERABLES ON THIS MATTER</div>
           <div id="wsFilesList">
             <div class="ws-empty">Pick a matter to see its files.</div>
@@ -900,7 +1107,7 @@ document.getElementById('signOutLink').addEventListener('click', async () => {
   window.location.href = '/login';
 });
 
-// ===== WORKSPACE — LIVE API =====
+// ===== WORKSPACE — LIVE =====
 let SELECTED_MATTER = null;
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -915,63 +1122,263 @@ function flash(el, msg, ok = false) {
   el.classList.toggle('ok', !!ok);
   setTimeout(() => el.classList.remove('show'), 5000);
 }
+function daysUntil(iso){
+  if (!iso) return null;
+  const d = new Date(iso + 'T00:00:00');
+  const now = new Date(); now.setHours(0,0,0,0);
+  return Math.round((d - now) / (86400 * 1000));
+}
+function deadlineLabel(iso){
+  const n = daysUntil(iso);
+  if (n === null) return { text: '', cls: '' };
+  if (n < 0)  return { text: `OVERDUE · ${-n}D`, cls: 'overdue' };
+  if (n === 0) return { text: 'DUE TODAY',       cls: 'urgent' };
+  if (n === 1) return { text: 'DUE TOMORROW',    cls: 'urgent' };
+  if (n <= 3)  return { text: `DUE IN ${n} DAYS`, cls: 'urgent' };
+  if (n <= 7)  return { text: `${n} DAYS`,        cls: 'soon' };
+  return { text: `${n} DAYS`, cls: 'calm' };
+}
+function fileBadge(name, mime){
+  const m = (mime || '').toLowerCase();
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  if (m.startsWith('image/') || ['png','jpg','jpeg','gif','webp','svg'].includes(ext)) return { txt: 'IMG', cls: 'img' };
+  if (m === 'application/pdf' || ext === 'pdf') return { txt: 'PDF', cls: 'pdf' };
+  if (['doc','docx'].includes(ext) || m.includes('word')) return { txt: 'DOC', cls: 'doc' };
+  if (['xls','xlsx','csv'].includes(ext) || m.includes('excel') || m === 'text/csv') return { txt: 'XLS', cls: 'doc' };
+  if (['ppt','pptx'].includes(ext) || m.includes('presentation')) return { txt: 'PPT', cls: 'doc' };
+  return { txt: (ext || 'FILE').toUpperCase().slice(0, 4), cls: '' };
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
+// ===== STATS + WEEKLY BAR (from /api/me/stats) =====
+async function wsLoadStats(){
+  try {
+    const r = await fetch('/api/me/stats');
+    if (!r.ok) return;
+    const s = await r.json();
+    if (s.role !== 'paralegal') return;
+
+    document.getElementById('statHours').innerHTML = `${s.totals.hours_week}<small>/${s.totals.target_week}h</small>`;
+    document.getElementById('statActive').textContent = s.totals.active_matters;
+    document.getElementById('statDue').textContent = s.totals.due_this_week;
+    document.getElementById('statReview').textContent = s.totals.in_review;
+
+    const remaining = Math.max(0, s.totals.target_week - s.totals.hours_week);
+    document.getElementById('statHoursTrend').textContent =
+      s.totals.hours_week >= s.totals.target_week
+        ? `Target met · +${(s.totals.hours_week - s.totals.target_week).toFixed(1)}h`
+        : `${remaining.toFixed(1)}h to target`;
+    document.getElementById('statActiveTrend').textContent =
+      s.totals.active_matters === 0 ? 'None assigned yet' : 'Across firms';
+    document.getElementById('statDueTrend').textContent =
+      s.totals.due_this_week === 0 ? 'Nothing due this week' : 'Deadlines ahead';
+    document.getElementById('statReviewTrend').textContent =
+      s.totals.in_review === 0 ? 'None pending' : 'With supervising counsel';
+
+    // Weekly bars
+    const max = Math.max(...s.week.map(d => d.hours), 8);
+    const bars = s.week.map(d => `
+      <div class="ws-week-bar ${d.hours === 0 && !d.is_future ? 'empty' : ''} ${d.is_future ? 'future' : ''}">
+        <span class="day">${d.day}</span>
+        <div class="track"><div class="fill ${d.is_today ? 'today' : ''}" style="width:${Math.min(100, (d.hours / max) * 100)}%"></div></div>
+        <span class="hrs">${d.hours > 0 ? d.hours.toFixed(1) + 'h' : (d.is_future ? '—' : '—')}</span>
+      </div>
+    `).join('');
+    document.getElementById('wsWeekBars').innerHTML = bars;
+  } catch {}
+}
+
+// ===== MATTERS =====
 async function wsLoadMatters(){
   const box = document.getElementById('wsMatters');
+  wsLoadStats();
   try {
     const r = await fetch('/api/matters');
     if (!r.ok) throw new Error('Failed to load matters.');
     const { matters } = await r.json();
     if (!matters.length) { box.innerHTML = '<div class="ws-empty">No matters assigned yet.</div>'; return; }
-    box.innerHTML = matters.map(m => `
-      <div class="ws-matter" data-id="${m.id}" data-title="${m.title.replace(/"/g, '&quot;')}">
-        <div class="ws-title">${m.title}</div>
-        <div class="ws-meta">
-          <span class="ws-status">${(m.status || '').toUpperCase()}</span>
-          <span>${m.firm_name || '—'}</span>
-          <span>${m.hours_logged?.toFixed(1) || '0.0'}h / ${m.estimated_hours || '—'}h</span>
+    box.innerHTML = matters.map(m => {
+      const logged = m.hours_logged || 0;
+      const est = m.estimated_hours || 0;
+      const pct = est > 0 ? Math.min(100, (logged / est) * 100) : 0;
+      const over = est > 0 && logged > est;
+      const dl = deadlineLabel(m.deadline);
+      return `
+        <div class="ws-matter" data-id="${m.id}" data-title="${escapeHtml(m.title)}">
+          <div class="ws-title">${escapeHtml(m.title)}</div>
+          <div class="ws-meta">
+            <span class="ws-status">${(m.status || '').toUpperCase()}</span>
+            <span>${escapeHtml(m.firm_name || '—')}</span>
+            ${m.deadline ? `<span class="ws-deadline ${dl.cls}">${dl.text}</span>` : ''}
+          </div>
+          <div class="ws-progress">
+            <div class="ws-progress-track"><div class="ws-progress-fill ${over ? 'over' : ''}" style="width:${pct}%"></div></div>
+            <div class="ws-progress-num">${logged.toFixed(1)}h ${est ? '/ ' + est + 'h' : ''}</div>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
     box.querySelectorAll('.ws-matter').forEach(el => {
       el.addEventListener('click', () => wsSelect(el));
     });
-    // Auto-select first.
-    const first = box.querySelector('.ws-matter');
-    if (first) wsSelect(first);
+    // Restore previous selection or pick first.
+    const preferId = SELECTED_MATTER?.id;
+    const preserve = preferId ? box.querySelector(`.ws-matter[data-id="${preferId}"]`) : null;
+    if (preserve) wsSelect(preserve);
+    else {
+      const first = box.querySelector('.ws-matter');
+      if (first) wsSelect(first);
+    }
   } catch (e) {
     box.innerHTML = `<div class="ws-empty">Couldn't load matters. ${e.message}</div>`;
   }
 }
 
-function wsSelect(el){
+async function wsSelect(el){
   document.querySelectorAll('.ws-matter').forEach(e => e.classList.toggle('selected', e === el));
   SELECTED_MATTER = { id: parseInt(el.dataset.id, 10), title: el.dataset.title };
   document.getElementById('wsSelectedTitle').textContent = SELECTED_MATTER.title;
   document.getElementById('wsDate').value = today();
-  wsLoadFiles();
-}
 
-async function wsLoadFiles(){
-  const box = document.getElementById('wsFilesList');
-  if (!SELECTED_MATTER) { box.innerHTML = '<div class="ws-empty">Pick a matter to see its files.</div>'; return; }
-  try {
-    const r = await fetch(`/api/matters/${SELECTED_MATTER.id}/files`);
-    if (!r.ok) throw new Error('Failed to load files.');
-    const { files } = await r.json();
-    if (!files.length) { box.innerHTML = '<div class="ws-empty">No deliverables uploaded yet.</div>'; return; }
-    box.innerHTML = '<div class="ws-files-list">' + files.map(f => `
-      <div class="ws-file-row">
-        <a href="/api/files/${f.id}" target="_blank">${f.original_name}</a>
-        <span class="ws-file-meta">${fmtBytes(f.size_bytes)} · ${(f.created_at || '').slice(0,10)}</span>
+  // Enable timer + status buttons
+  document.getElementById('wsTimerStart').disabled = timerRunning;
+  document.getElementById('wsTimerStop').disabled = !timerRunning;
+  document.getElementById('wsTimerHint').textContent = timerRunning ? 'Timer running…' : 'Ready to start.';
+
+  // Fetch detail (description + status) and time entries + files in parallel.
+  const [dRes, tRes, fRes] = await Promise.all([
+    fetch(`/api/matters/${SELECTED_MATTER.id}`),
+    fetch(`/api/matters/${SELECTED_MATTER.id}/time`),
+    fetch(`/api/matters/${SELECTED_MATTER.id}/files`)
+  ]);
+
+  if (dRes.ok) {
+    const { matter } = await dRes.json();
+    // Description
+    const descEl = document.getElementById('wsSelectedDesc');
+    if (matter.description) { descEl.textContent = matter.description; descEl.style.display = 'block'; }
+    else { descEl.style.display = 'none'; }
+    // Status buttons
+    document.querySelectorAll('.ws-status-btn').forEach(b => {
+      b.disabled = false;
+      b.classList.toggle('current', b.dataset.status === matter.status);
+    });
+  }
+
+  if (tRes.ok) {
+    const { entries } = await tRes.json();
+    const box = document.getElementById('wsEntriesList');
+    if (!entries.length) box.innerHTML = '<div class="ws-empty" style="padding:16px 0">No time logged yet on this matter.</div>';
+    else box.innerHTML = entries.slice(0, 6).map(e => `
+      <div class="ws-entry-row">
+        <span class="ws-entry-date">${(e.entry_date || '').slice(5)}</span>
+        <span class="ws-entry-desc">${escapeHtml(e.description)}</span>
+        <span class="ws-entry-hrs">${(e.hours).toFixed(1)}h</span>
       </div>
-    `).join('') + '</div>';
-  } catch (e) {
-    box.innerHTML = `<div class="ws-empty">${e.message}</div>`;
+    `).join('');
+  }
+
+  if (fRes.ok) {
+    const { files } = await fRes.json();
+    const box = document.getElementById('wsFilesList');
+    if (!files.length) box.innerHTML = '<div class="ws-empty">No deliverables uploaded yet.</div>';
+    else box.innerHTML = files.map(f => {
+      const b = fileBadge(f.original_name, f.mime_type);
+      return `
+        <div class="ws-file-row">
+          <span class="ws-file-badge ${b.cls}">${b.txt}</span>
+          <a href="/api/files/${f.id}" target="_blank">${escapeHtml(f.original_name)}</a>
+          <span class="ws-file-meta">${fmtBytes(f.size_bytes)} · ${(f.created_at || '').slice(0,10)}</span>
+        </div>
+      `;
+    }).join('');
   }
 }
 
-// Log time
+// ===== LIVE TIMER =====
+let timerRunning = false;
+let timerStartMs = 0;
+let timerInterval = null;
+
+function fmtElapsed(ms){
+  const s = Math.floor(ms / 1000);
+  const hh = String(Math.floor(s / 3600)).padStart(2, '0');
+  const mm = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+  const ss = String(s % 60).padStart(2, '0');
+  return `${hh}:${mm}:${ss}`;
+}
+function tickTimer(){
+  document.getElementById('wsTimerDisplay').textContent = fmtElapsed(Date.now() - timerStartMs);
+}
+
+document.getElementById('wsTimerStart').addEventListener('click', () => {
+  if (!SELECTED_MATTER || timerRunning) return;
+  timerRunning = true;
+  timerStartMs = Date.now();
+  document.getElementById('wsTimerStart').disabled = true;
+  document.getElementById('wsTimerStop').disabled = false;
+  document.getElementById('wsTimerDisplay').classList.add('running');
+  document.getElementById('wsTimerHint').textContent = `Tracking "${SELECTED_MATTER.title}"…`;
+  tickTimer();
+  timerInterval = setInterval(tickTimer, 1000);
+});
+
+document.getElementById('wsTimerStop').addEventListener('click', async () => {
+  if (!timerRunning) return;
+  clearInterval(timerInterval);
+  const elapsedMs = Date.now() - timerStartMs;
+  const hours = Math.max(0.05, Math.round((elapsedMs / 3600000) * 100) / 100); // round to 0.01h, min 3min
+  timerRunning = false;
+  document.getElementById('wsTimerDisplay').classList.remove('running');
+  document.getElementById('wsTimerStart').disabled = false;
+  document.getElementById('wsTimerStop').disabled = true;
+
+  const desc = prompt(`Logging ${hours.toFixed(2)}h to "${SELECTED_MATTER.title}".\n\nWhat did you work on?`);
+  if (!desc || !desc.trim()) {
+    document.getElementById('wsTimerHint').textContent = 'Timer cleared — nothing logged.';
+    document.getElementById('wsTimerDisplay').textContent = '00:00:00';
+    return;
+  }
+  try {
+    const r = await fetch(`/api/matters/${SELECTED_MATTER.id}/time`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hours, description: desc.trim() })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Failed to log.');
+    document.getElementById('wsTimerHint').textContent = `Logged ${hours.toFixed(2)}h. Matter now at ${data.hours_logged.toFixed(1)}h.`;
+    document.getElementById('wsTimerDisplay').textContent = '00:00:00';
+    wsLoadMatters();
+  } catch (err) {
+    document.getElementById('wsTimerHint').textContent = 'Error: ' + err.message;
+  }
+});
+
+// ===== STATUS BUTTONS =====
+document.querySelectorAll('.ws-status-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    if (!SELECTED_MATTER || btn.disabled || btn.classList.contains('current')) return;
+    btn.disabled = true;
+    try {
+      const r = await fetch(`/api/matters/${SELECTED_MATTER.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: btn.dataset.status })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Failed.');
+      wsLoadMatters();
+    } catch (err) {
+      alert('Failed to update status: ' + err.message);
+      btn.disabled = false;
+    }
+  });
+});
+
+// ===== MANUAL LOG TIME =====
 document.getElementById('wsTimeForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!SELECTED_MATTER) { flash(document.getElementById('wsTimeFlash'), 'Pick a matter first.'); return; }
@@ -1000,13 +1407,12 @@ document.getElementById('wsTimeForm').addEventListener('submit', async (e) => {
   }
 });
 
-// File chooser display
+// ===== FILE UPLOAD =====
 document.getElementById('wsFile').addEventListener('change', (e) => {
   const f = e.target.files[0];
   document.getElementById('wsFileName').textContent = f ? `${f.name} (${fmtBytes(f.size)})` : 'No file selected.';
 });
 
-// Upload
 document.getElementById('wsFileForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!SELECTED_MATTER) { flash(document.getElementById('wsFileFlash'), 'Pick a matter first.'); return; }
@@ -1025,7 +1431,7 @@ document.getElementById('wsFileForm').addEventListener('submit', async (e) => {
     flash(document.getElementById('wsFileFlash'), `Uploaded: ${data.file.original_name}`, true);
     document.getElementById('wsFile').value = '';
     document.getElementById('wsFileName').textContent = 'No file selected.';
-    wsLoadFiles();
+    wsLoadMatters();
   } catch (err) {
     flash(document.getElementById('wsFileFlash'), err.message);
   } finally {
