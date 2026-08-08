@@ -158,6 +158,18 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_files_matter ON files(matter_id);
 `);
 
+// ===== ONE-TIME MIGRATIONS =====
+// Rebrand: paralegal accounts move from @legalchampions.my to @lawgistics.my.
+// Idempotent — no rows match after the first successful run.
+try {
+  const changed = db.prepare(`
+    UPDATE users
+    SET email = REPLACE(email, '@legalchampions.my', '@lawgistics.my')
+    WHERE email LIKE '%@legalchampions.my'
+  `).run().changes;
+  if (changed > 0) console.log(`[migrate] renamed ${changed} paralegal email(s) → @lawgistics.my`);
+} catch (e) { console.error('[migrate] email rename failed', e); }
+
 // ===== PREPARED STATEMENTS — public intake =====
 const insertWaitlist = db.prepare(`
   INSERT INTO waitlist (firm, contact_name, email, practice_area, notes, ip, user_agent)

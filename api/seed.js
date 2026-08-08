@@ -6,7 +6,7 @@
 //
 // Demo credentials (printed at startup so the user can sign in):
 //   FIRM       aishah@tanpartners.my       password: champion
-//   PARALEGAL  priya@legalchampions.my     password: champion
+//   PARALEGAL  priya@lawgistics.my     password: champion
 
 import { db } from './db.js';
 import { hashPassword } from './auth.js';
@@ -32,22 +32,22 @@ export function seedIfEmpty() {
 
     // ----- founding cohort of paralegals -----
     const paralegals = [
-      { email: 'priya@legalchampions.my',  name: 'Priya Shah',     rate: 200, avail: 'available',
+      { email: 'priya@lawgistics.my',  name: 'Priya Shah',     rate: 200, avail: 'available',
         specialisms: 'Civil litigation, court bundles, research',
         bio: 'Six years of litigation support across dispute resolution practices in KL.' },
-      { email: 'marcus@legalchampions.my', name: 'Marcus Boateng', rate: 220, avail: 'limited',
+      { email: 'marcus@lawgistics.my', name: 'Marcus Boateng', rate: 220, avail: 'limited',
         specialisms: 'M&A due diligence, data-room review, closings',
         bio: 'Five years of transactional support across mid-market M&A.' },
-      { email: 'hannah@legalchampions.my', name: 'Hannah Lim',     rate: 200, avail: 'available',
+      { email: 'hannah@lawgistics.my', name: 'Hannah Lim',     rate: 200, avail: 'available',
         specialisms: 'Conveyancing, SPA drafting, land registration',
         bio: 'Four years of conveyancing and real-estate support.' },
-      { email: 'jay@legalchampions.my',    name: 'Jay Patel',      rate: 240, avail: 'capacity',
+      { email: 'jay@lawgistics.my',    name: 'Jay Patel',      rate: 240, avail: 'capacity',
         specialisms: 'Contract drafting, comparative redlines, SPAs & NDAs',
         bio: 'Eight years of commercial drafting and review. Quietly the person we hand precedent libraries to.' },
-      { email: 'sofia@legalchampions.my',  name: 'Sofia Reyes',    rate: 200, avail: 'available',
+      { email: 'sofia@lawgistics.my',  name: 'Sofia Reyes',    rate: 200, avail: 'available',
         specialisms: 'Legal research, statutory analysis, comparative jurisdictions',
         bio: 'LLM with academic research background.' },
-      { email: 'tom@legalchampions.my',    name: "Tom O'Brien",    rate: 200, avail: 'limited',
+      { email: 'tom@lawgistics.my',    name: "Tom O'Brien",    rate: 200, avail: 'limited',
         specialisms: 'Pleadings, written submissions, witness statements',
         bio: 'Five years of commercial litigation support.' }
     ];
